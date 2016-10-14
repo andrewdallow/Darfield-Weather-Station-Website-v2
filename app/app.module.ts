@@ -1,11 +1,54 @@
-import { NgModule }      from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CollapseModule, DropdownModule } from 'ng2-bootstrap/ng2-bootstrap';
+// import { ChartModule } from 'angular2-highcharts';
+import { HttpModule } from '@angular/http';
 
-import { AppComponent }  from './app.component';
+import {
+    WeatherAppComponent, HomeComponent, DashboardComponent, TemperatureComponent, WindComponent,
+    RainComponent, BarometerComponent, WeatherDataService, ExtremesComponent,
+    Graphs24HrComponent, WebcamComponent, MapComponent, RecentGraphsComponent,
+    HistoricGraphsComponent, RecordsComponent, NoaaReportsComponent,
+    ForecastComponent, AboutComponent
+} from './components';
+import { HighlighterDirective } from './shared/directives/highlighter.directive';
+import { TimeService } from './shared/time.service';
+import { routing } from './app.routing';
 
 @NgModule({
-  imports: [ BrowserModule ],
-  declarations: [ AppComponent ],
-  bootstrap: [ AppComponent ]
+    imports: [
+        HttpModule,
+        BrowserModule,
+        CollapseModule,
+        DropdownModule,
+        routing
+    ],
+    declarations: [
+        WeatherAppComponent,
+        HomeComponent,
+        DashboardComponent,
+        TemperatureComponent,
+        WindComponent,
+        BarometerComponent,
+        RainComponent,
+        ExtremesComponent,
+        Graphs24HrComponent,
+        WebcamComponent,
+        MapComponent,
+        RecentGraphsComponent,
+        HistoricGraphsComponent,
+        RecordsComponent,
+        NoaaReportsComponent,
+        ForecastComponent,
+        AboutComponent,
+        HighlighterDirective
+    ],
+    bootstrap: [
+        WeatherAppComponent
+    ],
+    providers: [
+        TimeService,
+        WeatherDataService
+    ]
 })
 export class AppModule { }

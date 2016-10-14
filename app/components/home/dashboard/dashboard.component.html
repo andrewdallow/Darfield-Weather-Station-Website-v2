@@ -1,0 +1,49 @@
+<!-- dashboard.html handles the layout of the dashboard panes -->
+<div class="container data-panel" id="curr-conditions">
+    <div class="row">
+
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-body ajaxTimmer">
+                    <div class="col-xs-3 col-md-2">
+                        <div class="btn-group btn-group-xs" role="group">
+                            <button *ngFor="let unit of getUnits()" ng-click="convertUnits(unit)" type="button" ng-disabled="unit === selectedUnit" class="btn btn-default">{{ unit }}</button>
+                        </div>
+
+                    </div>
+                    <div class="col-xs-3 col-md-2">
+                        <span class="label label-success" *ngIf="!isOffline">Online</span>
+                        <span class="label label-danger" *ngIf="isOffline">Offline</span>
+                    </div>
+                    <div class="col-xs-6 col-sm-5">
+                        <span>Updated: {{ weatherDataService.getRealtimeData()?.time }} <span class=" ng-hide">({{ secondsAgo }} sec ago)</span></span>
+                    </div>
+
+                    <div class="col-md-2 col-xs-12">
+                        <div class="btn-group btn-group-xs" role="group" *ngIf="isPaused">
+                            <button type="button" class="btn btn-default" (click)="startTimers()">Updates Stopped. Click to Restart</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <temperature></temperature>
+        <wind></wind>
+
+
+        <div class="col-xs-12 col-sm-12 col-md-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <rain></rain>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <barometer></barometer>
+                </div>
+
+            </div>
+        </div>
+    </div>

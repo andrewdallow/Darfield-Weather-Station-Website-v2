@@ -1,0 +1,32 @@
+{
+	"today": [	
+		{"name": "High Temperature", "value": "21.4", "time": "08:05", "unit": "&degC"},
+		{"name": "Low Temperature", "value": "14.9", "time": "23:13", "unit": "&degC"},
+		{"name": "High Wind Gust", "value": "61", "time": "18:38", "unit": " km/h"},
+		{"name": "High Avg. Wind Speed", "value": "61", "time": "18:38", "unit": " km/h"},
+		{"name": "Wind Run", "value": "443.7", "time": "", "unit": " km"},
+		{"name": "Total Rainfall", "value": "0.0", "time": "", "unit": " mm"},
+		{"name": "High Hourly Rain", "value": "0.0", "time": "00:00", "unit": " mm/hr"},
+		{"name": "High Humidity", "value": "80", "time": "23:05", "unit": "%"},
+		{"name": "Low Humidity", "value": "44", "time": "19:35", "unit": "%"},
+		{"name": "High Dewpoint", "value": "14.0", "time": "14:35", "unit": "&degC"},
+		{"name": "Low Dewpoint", "value": "7.3", "time": "19:35", "unit": "&degC"},
+		{"name": "High Pressure", "value": "1002.2", "time": "00:00", "unit": " hPa"},
+		{"name": "Low Pressure", "value": "984.7", "time": "18:31", "unit": " hPa"}
+		],
+	"yesterday": [
+		{"name": "High Temperature", "value": "18.6", "time": "13:27", "unit": "&degC"},
+		{"name": "Low Temperature", "value": "9.5", "time": "08:36", "unit": "&degC"},
+		{"name": "High Wind Gust", "value": "31", "time": "15:02", "unit": " km/h"},
+		{"name": "High Avg. Wind Speed", "value": "31", "time": "19:09", "unit": " km/h"},
+		{"name": "Wind Run", "value": "247.6", "time": "", "unit": " km"},
+		{"name": "Total Rainfall", "value": "0.0", "time": "", "unit": " mm"},
+		{"name": "High Hourly Rain", "value": "0.0", "time": "00:00", "unit": " mm/hr"},
+		{"name": "High Humidity", "value": "95", "time": "00:00", "unit": "%"},
+		{"name": "Low Humidity", "value": "51", "time": "23:33", "unit": "%"},
+		{"name": "High Dewpoint", "value": "11.8", "time": "12:44", "unit": "&degC"},
+		{"name": "Low Dewpoint", "value": "7.6", "time": "23:33", "unit": "&degC"},
+		{"name": "High Pressure", "value": "1019.7", "time": "00:00", "unit": " hPa"},
+		{"name": "Low Pressure", "value": "1002.1", "time": "23:54", "unit": " hPa"}
+	]
+ }  

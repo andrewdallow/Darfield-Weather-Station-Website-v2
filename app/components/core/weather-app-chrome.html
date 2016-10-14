@@ -1,0 +1,64 @@
+<header>
+    <div class="container">
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="navbar-header" role="navigation">
+                <button type="button" class="navbar-toggle" (click)="isCollapsed = !isCollapsed">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+                <a class="navbar-brand" href="/">Darfield Weather Station</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar" [collapse]="isCollapsed">
+                <ul class="nav navbar-nav">
+                    <li><a routerLink="/" routerLinkActive="active" (click)="isCollapsed = !isCollapsed">Home</a></li>
+                    <li><a routerLink="/webcam" routerLinkActive="active" (click)="isCollapsed = !isCollapsed">Webcam</a></li>
+                    <li><a routerLink="/map" routerLinkActive="active" (click)="isCollapsed = !isCollapsed">Map</a></li>
+
+                    <!--<li><a href="gauges" ng-click="navbarCollapsed = !navbarCollapsed">Gauges</a></li> -->
+                    <li><a routerLink="/graphs" routerLinkActive="active" (click)="isCollapsed = !isCollapsed">Graphs</a></li>
+
+                    <li dropdown [(isOpen)]="status.isopen">
+                        <a class="simple-dropdown" dropdownToggle>History <b class="caret"></b></a>
+                        <ul dropdownMenu aria-labelledby="simple-dropdown">
+                            <li><a routerLink="/historicGraphs" routerLinkActive="active" (click)="isCollapsed = !isCollapsed">Historic Graphs</a></li>
+                            <li><a routerLink="/records" routerLinkActive="active" (click)="isCollapsed = !isCollapsed">Records</a></li>
+                            <li><a routerLink="/noaa-style-reports" routerLinkActive="active" (click)="isCollapsed = !isCollapsed">NOAA-style Reports</a></li>
+                        </ul>
+                    </li>
+
+
+                    <li><a routerLink="/forecast" routerLinkActive="active" (click)="isCollapsed = !isCollapsed">Forecast</a></li>
+                    <li><a routerLink="/about" routerLinkActive="active" (click)="isCollapsed = !isCollapsed">About</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+<router-outlet></router-outlet>
+<footer>
+    <div class="container" id="footer">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12 footer">
+                                <a href="http://www.computecnetworks.com/topsites/index.php?a=in&amp;u=spaceman8815"><img src="http://www.computecnetworks.com/topsites/button.php?u=spaceman8815" alt="New Zealand Weather Station Top Sites" border="0" /></a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 footer">
+                                <p>Never base important decisions on this or any weather information obtained from the Internet.</p>
+                                <p>Copyright &copy; 2016, darfield-weather.co.nz | Designed by <a href="https://cosmicwebdesigns.nz/">Cosmic Web Designs</a></p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

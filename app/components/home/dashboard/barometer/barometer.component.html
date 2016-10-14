@@ -1,0 +1,14 @@
+<div class="panel panel-default">
+    <div class="panel-heading">Barometric Pressure</div>
+    <div class="panel-body data-panel-pressure">
+
+        <div class="row">
+            <div class="col-xs-8 baroText">
+                <span highlighter="weatherDataService.getRealtimeData()?.barometer.value">{{ weatherDataService.getRealtimeData()?.barometer.value }} <span class="unitsBig" [innerHTML]="weatherDataService.getRealtimeData()?.barometer.unit">hPa</span></span>
+            </div>
+            <div class="col-xs-4 baroTrendText">
+                <span highlighter="weatherDataService.getRealtimeData()?.barometerTrendData.value"><span class="glyphicon glyphicon-arrow-{{ weatherDataService.getRealtimeData()?.baroTrend }} {{ weatherDataService.getRealtimeData()?.baroTrend }}"></span> {{ weatherDataService.getRealtimeData()?.barometerTrendData.value }} <span [innerHTML]="weatherDataService.getRealtimeData()?.barometerTrendData.unit"></span></span>
+            </div>
+        </div>
+    </div>
+</div>
