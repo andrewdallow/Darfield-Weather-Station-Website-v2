@@ -3,6 +3,7 @@
 export * from './home/weather-data/weather-data.service';
 export * from './home/dashboard/barometer/barometer.component';
 export * from './home/dashboard/rain/rain.component';
+export * from './home/dashboard/temperature/thermometer.component';
 export * from './home/dashboard/temperature/temperature.component';
 export * from './home/dashboard/wind/wind.component';
 export * from './home/extremes/extremes.component';

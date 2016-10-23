@@ -1,7 +1,11 @@
 import { Directive, ElementRef, Input, Renderer, OnChanges, SimpleChange } from '@angular/core';
 
 import { AppSettings } from '../../config/settings';
-
+/**
+ * Directive: Adds 'highlight' the class of an element when a value changes
+ * and is then removed after a specified time later. 'highlight' can be
+ * specified in css to style this highlight.
+ */
 @Directive({ selector: '[highlighter]' })
 export class HighlighterDirective implements OnChanges {
 

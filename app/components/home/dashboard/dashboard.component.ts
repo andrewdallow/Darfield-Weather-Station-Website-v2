@@ -51,7 +51,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.stopTimer(this.rapidTimer);
         this.stopTimer(this.lastUpdateTimer);
     }
-
+    /**
+     * Get the available units of measurement from the settings file.
+     * @returns {Array<string>}
+     */
     private getUnits(): Array<string> {
         return AppSettings.UNIT_TYPES;
     }

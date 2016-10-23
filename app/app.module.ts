@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { CollapseModule, DropdownModule } from 'ng2-bootstrap/ng2-bootstrap';
-// import { ChartModule } from 'angular2-highcharts';
+import { CollapseModule, DropdownModule } from 'ng2-bootstrap';
+import { ChartModule } from 'angular2-highcharts';
 import { HttpModule } from '@angular/http';
 
 import {
-    WeatherAppComponent, HomeComponent, DashboardComponent, TemperatureComponent, WindComponent,
+    WeatherAppComponent, HomeComponent, DashboardComponent, TemperatureComponent, ThermometerComponent, WindComponent,
     RainComponent, BarometerComponent, WeatherDataService, ExtremesComponent,
     Graphs24HrComponent, WebcamComponent, MapComponent, RecentGraphsComponent,
     HistoricGraphsComponent, RecordsComponent, NoaaReportsComponent,
@@ -21,6 +21,7 @@ import { routing } from './app.routing';
         BrowserModule,
         CollapseModule,
         DropdownModule,
+        ChartModule,
         routing
     ],
     declarations: [
@@ -28,6 +29,7 @@ import { routing } from './app.routing';
         HomeComponent,
         DashboardComponent,
         TemperatureComponent,
+        ThermometerComponent,
         WindComponent,
         BarometerComponent,
         RainComponent,

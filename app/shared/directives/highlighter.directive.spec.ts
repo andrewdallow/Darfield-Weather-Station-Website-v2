@@ -39,6 +39,14 @@ describe('Highlighter Directive', () => {
         tick(2000);
     }));
 
+    it('unchanged value should not be highlighted', fakeAsync(() => {
+        component.value = 1;
+        fixture.detectChanges();
+        de = fixture.debugElement.query(By.css('h1'));
+        expect(de.nativeElement.className === 'highlight').toBe(true, 'should contain highlight class');
+        tick(2000);
+    }));
+
     it('highlighted value should revert', fakeAsync(() => {
 
         component.value = 2;

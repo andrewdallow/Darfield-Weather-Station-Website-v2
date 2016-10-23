@@ -35,11 +35,17 @@ export class WeatherDataService {
             data => {
                 if (this.realtimeData === undefined) {
                     this.realtimeData = data;
+                    this.realtimeData.time = this.timeService
+                        .unixTimeConverter(
+                        (new Date(this.realtimeData.time)).getTime());
                 } else {
                     let currentTime = new Date(this.realtimeData.time);
                     let latestTime = new Date(data.time);
                     if (latestTime > currentTime) {
                         this.realtimeData = data;
+                        this.realtimeData.time = this.timeService
+                            .unixTimeConverter(
+                            (new Date(this.realtimeData.time)).getTime());
                         this.isUpdated = true;
                     } else {
                         this.isUpdated = false;

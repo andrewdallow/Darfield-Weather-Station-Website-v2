@@ -13,8 +13,8 @@ export class TimeService {
         let months = AppSettings.MONTH_NAMES;
         let date = new Date(time);
         let dateString =
-            this.addZero(date.getDate()) + '/' +
-            months[date.getMonth()] + '/' +
+            this.addZero(date.getDate()) + '-' +
+            months[date.getMonth()] + '-' +
             date.getFullYear() + ' ' +
             this.addZero(date.getHours()) + ':' +
             this.addZero(date.getMinutes()) + ':' +

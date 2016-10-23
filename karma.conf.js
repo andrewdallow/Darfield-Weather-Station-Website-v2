@@ -16,7 +16,9 @@ module.exports = function (config) {
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'), // click "Debug" in browser to see it
       require('karma-htmlfile-reporter'), // crashing w/ strange socket error
-        require('karma-spec-reporter')
+        require('karma-spec-reporter'),
+            require('karma-coverage'),
+        require('karma-sourcemap-loader')
     ],
 
         customLaunchers: {
@@ -147,10 +149,13 @@ module.exports = function (config) {
             "/app/": appAssets
         },
 
-        exclude: [],
-        preprocessors: {},
+        exclude: ['node_modules/angular2/**/*_spec.js'],
+        preprocessors: {
+            'app/**/!(*.spec).js': ['coverage'],
+            'app/**/*.js': ['sourcemap']
+        },
         // disabled HtmlReporter; suddenly crashing w/ strange socket error
-        reporters: ['progress', 'kjhtml', 'spec'], //'html'],
+        reporters: ['progress', 'kjhtml', 'spec', 'coverage'], //'html'],
 
         // HtmlReporter configuration
         htmlReporter: {
@@ -160,6 +165,15 @@ module.exports = function (config) {
             // Optional
             pageTitle: 'Unit Tests',
             subPageTitle: __dirname
+        },
+        coverageReporter: {
+            dir: 'report/',
+            reporters: [
+                {
+                    type: 'json',
+                    subdir: 'coverage'
+                }
+            ]
         },
 
         port: 9876,
