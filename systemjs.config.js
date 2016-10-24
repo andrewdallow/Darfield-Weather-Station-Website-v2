@@ -28,6 +28,7 @@
             'angular-in-memory-web-api': 'npm:angular-in-memory-web-api',
             'angular2-highcharts': 'npm:angular2-highcharts',
             'highcharts/highstock.src': 'npm:highcharts/highstock.src.js',
+            'highcharts/highcharts-more.js': 'npm:highcharts/highcharts-more.js',
             'ng2-bootstrap': 'npm:ng2-bootstrap',
             'moment': 'npm:moment/moment.js',
             //Weather-app barrels

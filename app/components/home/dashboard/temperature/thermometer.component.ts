@@ -12,7 +12,6 @@ export class ThermometerComponent implements OnDestroy {
     private chart: HighchartsChartObject;
     private timer: any;
 
-
     constructor(private weatherDataService: WeatherDataService) {
         this.options = {
             chart: {
@@ -164,7 +163,9 @@ export class ThermometerComponent implements OnDestroy {
      * Destroy timer on exit.
      */
     ngOnDestroy(): void {
-        this.timer.unsubscribe();
+        if (this.timer) {
+            this.timer.unsubscribe();
+        }
     }
     /**
      * Render chart and save an instance of the Highcharts Object.
