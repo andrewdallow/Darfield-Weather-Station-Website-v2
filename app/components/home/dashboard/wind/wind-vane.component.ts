@@ -1,4 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
+
 import { WeatherDataService } from '../../weather-data/weather-data.service';
 import { Highcharts } from 'angular2-highcharts';
 
@@ -17,8 +19,6 @@ export class WindVaneComponent implements OnDestroy {
     private options: Object;
     private chart: HighchartsChartObject;
     private timer: any;
-    private windDirections: Array<string>;
-
 
     constructor(private weatherDataService: WeatherDataService) {
 
@@ -120,9 +120,19 @@ export class WindVaneComponent implements OnDestroy {
             loading: false,
         };
 
-        /*setInterval((count: any) => {
-            this.timer = this.updateGuage();
-        }, 1000);*/
+        this.timer = Observable.interval(1000).subscribe(
+            time => {
+                this.timer = this.updateGuage();
+            }
+        );
+    }
+
+    /**
+     * Save an instance of the Highcharts Object.
+     * @param chartInstance - the HighchartsObject instance.
+     */
+    private saveInstance(chartInstance: HighchartsChartObject): void {
+        this.chart = chartInstance;
     }
 
     private updateGuage(): void {
@@ -134,19 +144,7 @@ export class WindVaneComponent implements OnDestroy {
             .getRealtimeData().windDir);
     }
 
-    /**
-     * Save an instance of the Highcharts Object.
-     * @param chartInstance - the HighchartsObject instance.
-     */
-    private saveInstance(chartInstance: HighchartsChartObject): void {
-        this.chart = chartInstance;
-    }
 
-    private windDirectionLabel(direction: any): string {
-        return this.windDirections[
-            Math.floor((direction + 11.25) / 22.5)
-        ];
-    }
     /**
      * Destroy timer on exit.
      */

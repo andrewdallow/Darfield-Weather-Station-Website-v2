@@ -3,12 +3,13 @@ import { Observable } from 'rxjs/Rx';
 
 import { WeatherDataService } from '../../../components';
 import { AppSettings } from '../../../config/settings';
+import { RealtimeGraphDataService } from '../../../shared/realtime-sql-data/realtime-graph-data.service';
 
 @Component({
     moduleId: module.id,
     selector: 'dashboard',
     templateUrl: './dashboard.component.html',
-    providers: []
+    providers: [RealtimeGraphDataService]
 })
 
 export class DashboardComponent implements OnInit, OnDestroy {
@@ -22,7 +23,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private isOffline: boolean;
 
     constructor(
-        private weatherDataService: WeatherDataService) { }
+        private weatherDataService: WeatherDataService,
+        private realtimeGraphDataService: RealtimeGraphDataService) { }
 
 
     ngOnInit(): void {
@@ -55,7 +57,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
      * Get the available units of measurement from the settings file.
      * @returns {Array<string>}
      */
-    private getUnits(): Array<string> {
+    getUnits(): Array<string> {
         return AppSettings.UNIT_TYPES;
     }
 
@@ -65,10 +67,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
      * weather data displayed on the dashboard.
      */
     private startRealtimeTimer(): void {
+        let timespan = 2;
+        this.realtimeGraphDataService.setGraphData(timespan);
         this.realtimeTimer = Observable.interval(
             AppSettings.REALTIME_INTERVAL * 1000).subscribe(
             time => {
                 this.weatherDataService.setRealtimeData();
+                this.realtimeGraphDataService.setGraphData(timespan);
                 this.updateCounter = this.updateCounter + 1;
 
             });

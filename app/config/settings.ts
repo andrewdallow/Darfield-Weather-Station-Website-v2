@@ -3,7 +3,7 @@ export class AppSettings {
      * Realtime Update Configuration
      */
     // Time between realtime.json updates (in seconds)
-    public static get REALTIME_INTERVAL(): number { return 30; }
+    public static get REALTIME_INTERVAL(): number { return 10; }
     // Time between Rapid Updates (in seconds)
     public static get RAPID_INTERVAL(): number { return 2.5; }
     // Maximum time updates can occur until paused (in seconds)
@@ -36,6 +36,10 @@ export class AppSettings {
     public static get GRAPHS24HR_FILE(): string {
         return 'app/data/graphs24Hr.json';
     }
+    public static get REALTIME_SQL_FILE(): string {
+        return 'app/shared/realtime-sql-data/realTimeLogSQL.php';
+    }
+
     /**
      * Main Naviagation
      */

@@ -1,5 +1,8 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
+
 import { WeatherDataService } from '../../weather-data/weather-data.service';
+
 
 @Component({
     moduleId: module.id,
@@ -7,12 +10,17 @@ import { WeatherDataService } from '../../weather-data/weather-data.service';
     template: '<chart [options]="options" (load)="renderChart($event.context)"></chart>'
 })
 
-export class ThermometerComponent implements OnDestroy {
+export class ThermometerComponent implements OnDestroy, OnInit {
     private options: Object;
     private chart: HighchartsChartObject;
     private timer: any;
 
     constructor(private weatherDataService: WeatherDataService) {
+
+
+    }
+
+    ngOnInit(): void {
         this.options = {
             chart: {
                 backgroundColor: 'rgba(0,0,0,0)',
@@ -152,10 +160,11 @@ export class ThermometerComponent implements OnDestroy {
 
         };
 
-        setInterval((count: any) => {
-            this.timer = this.updateChart();
-        }, 1000);
-
+        this.timer = Observable.interval(1000).subscribe(
+            time => {
+                this.timer = this.updateChart();
+            }
+        );
     }
 
 

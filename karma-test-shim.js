@@ -44,7 +44,12 @@ System.config({
             format: 'cjs',
             defaultExtension: 'js',
             main: 'moment.js'
-        }
+        },
+        'angular2-highcharts': {
+            main: './index.js',
+            format: 'cjs',
+            defaultExtension: 'js'
+        },
     },
 
     // Assume npm: is set in `paths` in systemjs.config
@@ -59,7 +64,10 @@ System.config({
         '@angular/router/testing': 'npm:@angular/router/bundles/router-testing.umd.js',
         '@angular/forms/testing': 'npm:@angular/forms/bundles/forms-testing.umd.js',
         "ng2-bootstrap": "node_modules/ng2-bootstrap",
-        'moment': 'node_modules/moment'
+        'moment': 'node_modules/moment',
+        'angular2-highcharts': 'node_modules/angular2-highcharts',
+        'highcharts/highstock.src': 'node_modules/highcharts/highstock.src.js',
+        'highcharts/highcharts-more.js': 'node_modules/highcharts/highcharts-more.js',
     },
 });
 

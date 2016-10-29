@@ -2,6 +2,8 @@ import { async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { ChartModule } from 'angular2-highcharts';
+
 
 import { ThermometerComponent } from './thermometer.component';
 import { WeatherDataService } from '../../weather-data/weather-data.service';
@@ -16,7 +18,7 @@ describe('ThermometerComponent', () => {
             declarations: [
                 ThermometerComponent
             ],
-            imports: [HttpModule],
+            imports: [HttpModule, ChartModule],
             schemas: [NO_ERRORS_SCHEMA],
             providers: [WeatherDataService, TimeService]
         }).compileComponents();

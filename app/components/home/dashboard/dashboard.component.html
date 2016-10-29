@@ -29,8 +29,8 @@
 
             </div>
         </div>
-        <temperature></temperature>
-        <wind></wind>
+        <temperature [data]='realtimeGraphDataService.getGraphData()'></temperature>
+        <wind [data]='realtimeGraphDataService.getGraphData()'></wind>
 
 
         <div class="col-xs-12 col-sm-12 col-md-4">

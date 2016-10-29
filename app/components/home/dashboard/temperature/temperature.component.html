@@ -65,13 +65,13 @@
                     Dewpoint: <span class="extraDataValues" highlighter="weatherDataService.getRealtimeData()?.dewpoint.value">{{weatherDataService.getRealtimeData()?.dewpoint.value}}<span [innerHTML]="weatherDataService.getRealtimeData()?.dewpoint.unit"></span></span>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-12">Live Temperature:</div>
+            <div class="row graph-heading">
+                <div class="col-xs-12">Temperature last hour:</div>
             </div>
 
-            <div class="row">
+            <div class="row graph-body">
                 <div class="col-xs-12">
-                    <!--<highchart id="liveTemp" config="liveTemp"></highchart> -->
+                    <live-temperature-graph [data]='data' [test]='test'></live-temperature-graph>
                 </div>
             </div>
 

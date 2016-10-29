@@ -5,9 +5,11 @@ import { ChartModule } from 'angular2-highcharts';
 import { HttpModule } from '@angular/http';
 
 import {
-    WeatherAppComponent, HomeComponent, DashboardComponent, TemperatureComponent, ThermometerComponent, WindComponent, WindVaneComponent,
-    RainComponent, BarometerComponent, WeatherDataService, ExtremesComponent,
-    Graphs24HrComponent, WebcamComponent, MapComponent, RecentGraphsComponent,
+    WeatherAppComponent, HomeComponent, DashboardComponent,
+    TemperatureComponent, ThermometerComponent, LiveTemperatureGraphComponent, LiveWindGraphComponent,
+    WindComponent, WindVaneComponent, RainComponent, BarometerComponent,
+    WeatherDataService, ExtremesComponent, Graphs24HrComponent,
+    WebcamComponent, MapComponent, RecentGraphsComponent,
     HistoricGraphsComponent, RecordsComponent, NoaaReportsComponent,
     ForecastComponent, AboutComponent
 } from './components';
@@ -31,8 +33,11 @@ import { routing } from './app.routing';
         DashboardComponent,
         TemperatureComponent,
         ThermometerComponent,
+        LiveTemperatureGraphComponent,
+
         WindComponent,
         WindVaneComponent,
+        LiveWindGraphComponent,
         BarometerComponent,
         RainComponent,
 
