@@ -1,5 +1,5 @@
 export class AppSettings {
-    public static get SITE_NAME(): string { return 'Darfield Weather'; }
+    public static get SITE_NAME(): string { return 'Darfield Weather Station'; }
     /**
      * Realtime Update Configuration
      */
@@ -39,6 +39,9 @@ export class AppSettings {
     }
     public static get REALTIME_SQL_FILE(): string {
         return 'app/shared/realtime-sql-data/realTimeLogSQL.php';
+    }
+    public static get WEBCAM_FILENAME(): string {
+        return 'app/components/webcam/webcamFiles.php';
     }
 
     /**

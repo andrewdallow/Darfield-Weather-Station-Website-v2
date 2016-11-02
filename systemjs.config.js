@@ -30,6 +30,7 @@
             'highcharts/highstock.src': 'npm:highcharts/highstock.src.js',
             'highcharts/highcharts-more.js': 'npm:highcharts/highcharts-more.js',
             'ng2-bootstrap': 'npm:ng2-bootstrap',
+            'ng2-pagination': 'npm:ng2-pagination',
             'moment': 'npm:moment/moment.js',
             //Weather-app barrels
             'components': 'app/components',
@@ -59,6 +60,11 @@
             },
             'ng2-bootstrap': {
                 main: './ng2-bootstrap.js',
+                format: 'cjs',
+                defaultExtension: 'js'
+            },
+            'ng2-pagination': {
+                main: './index.js',
                 format: 'cjs',
                 defaultExtension: 'js'
             }

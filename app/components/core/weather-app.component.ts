@@ -12,6 +12,7 @@ export class WeatherAppComponent {
     public isCollapsed: boolean = true;
     public status: { isopen: boolean } = { isopen: false };
     public links: any = AppSettings.MAIN_NAVIGATION_LINKS;
+    public stationName: string = AppSettings.SITE_NAME;
 
     /**
      * Toggles a dropdown menu when a specified link or button

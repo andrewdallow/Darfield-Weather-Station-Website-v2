@@ -4,6 +4,20 @@
     margin: 0 auto;
   }
 
+  .thumbnail {
+    &:hover {
+      border-color: $blue;
+      color: $blue;
+      cursor: pointer;
+    }
+
+  }
+
+  .active {
+    border-color: $blue;
+    color: $blue;
+  }
+
   .date {
     z-index: 2;
   }

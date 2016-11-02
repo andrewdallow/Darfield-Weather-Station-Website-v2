@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { CollapseModule, DropdownModule } from 'ng2-bootstrap';
 import { ChartModule } from 'angular2-highcharts';
+import {Ng2PaginationModule} from 'ng2-pagination';
 import { HttpModule } from '@angular/http';
 
 import {
@@ -27,7 +28,8 @@ import { routing } from './app.routing';
         CollapseModule,
         DropdownModule,
         ChartModule,
-        routing
+        routing,
+        Ng2PaginationModule
     ],
     declarations: [
         WeatherAppComponent,
@@ -67,7 +69,8 @@ import { routing } from './app.routing';
     ],
     providers: [
         TimeService,
-        WeatherDataService
+        WeatherDataService,
+        Title
     ]
 })
 export class AppModule { }

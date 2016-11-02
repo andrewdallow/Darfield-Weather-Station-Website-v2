@@ -1,5 +1,6 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AppSettings } from './config/settings';
 
 import {
     HomeComponent, WebcamComponent, MapComponent, RecentGraphsComponent,
@@ -11,39 +12,39 @@ import {
 const appRoutes: Routes = [
     {
         path: 'home',
-        component: HomeComponent
+        component: HomeComponent,
     },
     {
         path: 'webcam',
-        component: WebcamComponent
+        component: WebcamComponent,
     },
     {
         path: 'map',
-        component: MapComponent
+        component: MapComponent,
     },
     {
         path: 'graphs',
-        component: RecentGraphsComponent
+        component: RecentGraphsComponent,
     },
     {
         path: 'historic-graphs',
-        component: HistoricGraphsComponent
+        component: HistoricGraphsComponent,
     },
     {
         path: 'records',
-        component: RecordsComponent
+        component: RecordsComponent,
     },
     {
         path: 'noaa-style-reports',
-        component: NoaaReportsComponent
+        component: NoaaReportsComponent,
     },
     {
         path: 'forecast',
-        component: ForecastComponent
+        component: ForecastComponent,
     },
     {
         path: 'about',
-        component: AboutComponent
+        component: AboutComponent,
     },
     {
         path: '',
