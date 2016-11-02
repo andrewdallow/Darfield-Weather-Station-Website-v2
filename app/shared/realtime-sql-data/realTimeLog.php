@@ -20,7 +20,7 @@ $param_table = "realtime1";
 $CreateQuery = "CREATE TABLE $param_table (dateTime datetime NOT NULL,"
         . "temp decimal(5,1),hum varchar(3),dew decimal(5,1),"
         . "wind decimal(5,1),windDir varchar(3),gust decimal(5,1),"
-        . "gustDir varchar(3),baro decimal(6,2),rFall decimal(4,1),windChill decimal(5,1),"
+        . "gustDir varchar(3),baro decimal(6,2),rFall decimal(4,1), rRate decimal(4,1), windChill decimal(5,1),"
         . "PRIMARY KEY(dateTime))";
 
 if ($mysqli->connect_errno) {
@@ -76,12 +76,13 @@ if ($jsonData) {
     $gustDir = $data['windGustDir'];
     $baro = $data['barometer']["value"];
     $rFall = $data['rainSumDay']["value"];
+	$rRate = $data['rainRate']["value"];
     $windChill = $data['windchill']["value"];
 
     $sql = "INSERT INTO $param_table (dateTime, temp, hum, dew,"
-            . " wind, windDir, gust, gustDir, baro, rFall, windChill)"
+            . " wind, windDir, gust, gustDir, baro, rFall, rRate, windChill)"
             . " VALUES ('$dateTime', '$temp', '$hum', '$dew', '$wind', '$windDir',"
-            . " $gust, $gustDir, $baro, $rFall, $windChill)";
+            . " $gust, $gustDir, $baro, $rFall, $rRate, $windChill)";
 
     if ($mysqli->query($sql) === TRUE) {
         echo "New record created successfully";

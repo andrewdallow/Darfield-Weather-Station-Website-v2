@@ -173,7 +173,6 @@ export class LiveWindGraphComponent implements OnInit, OnChanges {
 
                 series = this.mapSeries(data.datasets.windDirection, data.datasets.windSpeed);
 
-                console.log(set);
                 for (let entry of series) {
 
                     if (entry[1] < 5) {
@@ -200,9 +199,6 @@ export class LiveWindGraphComponent implements OnInit, OnChanges {
                 for (let i = 0; i < set.length; i++) {
                     this.chart.series[i].setData(this.mapSeries(this.windDirections, set[i]));
                 }
-                //this.chart.series[0].setData(series);
-                console.log(set);
-
             });
     }
 

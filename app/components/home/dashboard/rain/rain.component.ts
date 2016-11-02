@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { WeatherDataService } from '../../weather-data/weather-data.service';
 
 
@@ -9,6 +9,7 @@ import { WeatherDataService } from '../../weather-data/weather-data.service';
 })
 
 export class RainComponent {
+    @Input() data: any;
     constructor(
         private weatherDataService: WeatherDataService) { }
 

@@ -1,0 +1,43 @@
+$site-background-color: $pale-dark-blue;
+$page-background-color: $light-grey;
+// Header and Navigation
+$brand-background-color: $dark-red;
+$brand-text-color: $white;
+$navbar-background-color: $black;
+$navbar-text-color: $white;
+// Panels
+$panel-background-color: $dark-grey;
+$panel-heading-text-color: $white;
+$panel-border-color: $black;
+// Fonts
+$font-very-small: 8px;
+$font-small: 12px;
+$font-medium: 17px;
+$font-large: 25px;
+$font-very-large: 45px;
+$font-units-medium: $font-large * (19 / 25);
+$font-units-big: $font-very-large * (2 / 3);
+// High / Low Temperatures
+$high-temp: $red;
+$low-temp: $blue;
+// Trend Icons
+$color-arrow-down: $red;
+$color-arrow-up: $green;
+$color-minus: $grey;
+// High;ighter
+$highlighter-color: $green;
+// 24 hr temperature graph colors
+$wind-vane-color: $dark-blue;
+$temp-very-cold: $blue;
+$temp-moderately-cold: $light-blue;
+$temp-cold: $cyan;
+$temp-chilly: $green;
+$temp-warm: $yellow-green;
+$temp-very-warm: $yellow;
+$temp-hot: $orange;
+$temp-very-hot: $red;
+// Spinner loader
+$spinner-color-1: $white-red;
+$spinner-color-2: $white-blue;
+$spinner-color-3: $white-green;
+$spinner-color-4: $dark-yellow;

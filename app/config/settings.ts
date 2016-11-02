@@ -1,4 +1,5 @@
 export class AppSettings {
+    public static get SITE_NAME(): string { return 'Darfield Weather'; }
     /**
      * Realtime Update Configuration
      */

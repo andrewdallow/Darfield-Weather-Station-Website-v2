@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Rx';
 
 import { AppSettings } from '../../../config/settings';
 import { TimeService } from '../../../shared/time.service';
@@ -17,7 +17,7 @@ import { RapidUpdateData } from '../../../shared/data-schemes/rapid-update-data'
 export class WeatherDataService {
 
     private realtimeData: RealtimeData;
-    private graph24HrsData: Graph24HrsData;
+    private graph24HrsData: Observable<Graph24HrsData>;
     private extremes: Extremes;
     private isUpdated: boolean = false;
 
@@ -68,11 +68,7 @@ export class WeatherDataService {
      * Set the 24Hr Graphs weather data.
      */
     setGraphs24HrData(): void {
-        this.getData(AppSettings.GRAPHS24HR_FILE).subscribe(
-            data => {
-                this.graph24HrsData = data;
-            }
-        );
+        this.graph24HrsData = this.getData(AppSettings.GRAPHS24HR_FILE);
     }
 
     /**
@@ -94,7 +90,7 @@ export class WeatherDataService {
      * AppSettings.
      * @return {Observable<Graph24HrsData>} - Graphs 24Hr weather data
      */
-    getGraphs24HrData(): Graph24HrsData {
+    getGraphs24HrData(): Observable<Graph24HrsData> {
         return this.graph24HrsData;
     }
 

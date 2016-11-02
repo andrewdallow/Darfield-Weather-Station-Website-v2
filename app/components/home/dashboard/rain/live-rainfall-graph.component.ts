@@ -3,13 +3,12 @@ import { ReplaySubject } from 'rxjs/Rx';
 
 @Component({
     moduleId: module.id,
-    selector: 'live-temperature-graph',
+    selector: 'live-rainfall-graph',
     template: '<chart [options]="options" (load)="saveInstance($event.context)"></chart>'
 })
 
-export class LiveTemperatureGraphComponent implements OnInit, OnChanges {
+export class LiveRainfallGraphComponent implements OnInit, OnChanges {
     @Input() data: ReplaySubject<any>;
-    @Input() test: string;
     private options: Object;
     private chart: HighchartsChartObject;
 
@@ -71,6 +70,7 @@ export class LiveTemperatureGraphComponent implements OnInit, OnChanges {
                 shadow: false,
                 borderWidth: 0,
                 useHTML: true,
+                crosshairs: [true],
                 formatter: function() {
                     let date = new Date(this.x);
                     // Hours part from the timestamp
@@ -81,15 +81,15 @@ export class LiveTemperatureGraphComponent implements OnInit, OnChanges {
                     let seconds = '0' + date.getSeconds();
                     // Will display time in 10:30:23 format
                     let formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-                    return formattedTime + '</br>' + this.y + '&degC';
+                    return formattedTime + '</br>' + this.y + ' mm/hr';
                 }
             },
-            loading: false,
+            loading: true,
             series: [{
                 data: [],
-                type: 'line',
-                color: '#FF0000',
-                lineWidth: 4
+                type: 'areaspline',
+                color: '#4188BA',
+                lineWidth: 1
             }]
         };
     }
@@ -102,7 +102,7 @@ export class LiveTemperatureGraphComponent implements OnInit, OnChanges {
         this.data.subscribe(
             data => {
                 this.chart.series[0].setData(
-                    this.mapSeries(data.xData, data.datasets.temperature)
+                    this.mapSeries(data.xData, data.datasets.rainRate)
                 );
             });
     }

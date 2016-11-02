@@ -46,7 +46,7 @@ System.config({
             main: 'moment.js'
         },
         'angular2-highcharts': {
-            main: './index.js',
+            main: 'index.js',
             format: 'cjs',
             defaultExtension: 'js'
         },
@@ -65,9 +65,9 @@ System.config({
         '@angular/forms/testing': 'npm:@angular/forms/bundles/forms-testing.umd.js',
         "ng2-bootstrap": "node_modules/ng2-bootstrap",
         'moment': 'node_modules/moment',
-        'angular2-highcharts': 'node_modules/angular2-highcharts',
-        'highcharts/highstock.src': 'node_modules/highcharts/highstock.src.js',
-        'highcharts/highcharts-more.js': 'node_modules/highcharts/highcharts-more.js',
+        'angular2-highcharts': 'npm:angular2-highcharts',
+        'highcharts/highstock.src': 'npm:highcharts/highstock.src.js',
+        'highcharts/highcharts-more.js': 'npm:highcharts/highcharts-more.js',
     },
 });
 

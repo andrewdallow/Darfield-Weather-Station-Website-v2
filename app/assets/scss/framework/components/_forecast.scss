@@ -1,0 +1,28 @@
+.forecast {
+  .forecast-row {
+    padding-bottom: 30px;
+  }
+
+  .text {
+    display: inline-block;
+    float: none;
+  }
+
+  .temperature {
+    display: block;
+    width: 100%;
+
+    .high {
+      color: $high-temp;
+    }
+
+    .low {
+      color: $low-temp;
+    }
+  }
+
+  .day {
+    display: block;
+    width: 100%;
+  }
+}

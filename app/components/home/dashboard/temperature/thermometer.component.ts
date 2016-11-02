@@ -15,10 +15,7 @@ export class ThermometerComponent implements OnDestroy, OnInit {
     private chart: HighchartsChartObject;
     private timer: any;
 
-    constructor(private weatherDataService: WeatherDataService) {
-
-
-    }
+    constructor(private weatherDataService: WeatherDataService) { }
 
     ngOnInit(): void {
         this.options = {
@@ -93,60 +90,60 @@ export class ThermometerComponent implements OnDestroy, OnInit {
                 minorTickWidth: 1,
                 offset: -52
             },
-            {
-                min: 0,
-                max: 20,
-                minPadding: 0,
-                maxPadding: 0,
-                startOnTick: false,
-                endOnTick: false,
-                title: {
-                    text: ''
-                },
-                tickPositions: [0],
-                gridLineWidth: 0,
-                minorGridLineWidth: 0,
-                tickWidth: 2,
-                minorTickWidth: 1,
-                offset: -55,
-                opposite: true,
-                tickColor: '#FF0000',
-                labels: {
-                    style: {
-                        color: '#FF0000'
+                {
+                    min: 0,
+                    max: 20,
+                    minPadding: 0,
+                    maxPadding: 0,
+                    startOnTick: false,
+                    endOnTick: false,
+                    title: {
+                        text: ''
                     },
-                    formatter: function() {
-                        return '';
+                    tickPositions: [0],
+                    gridLineWidth: 0,
+                    minorGridLineWidth: 0,
+                    tickWidth: 2,
+                    minorTickWidth: 1,
+                    offset: -55,
+                    opposite: true,
+                    tickColor: '#FF0000',
+                    labels: {
+                        style: {
+                            color: '#FF0000'
+                        },
+                        formatter: function() {
+                            return '';
+                        }
+                    }
+                },
+                {
+                    min: 0,
+                    max: 20,
+                    minPadding: 0,
+                    maxPadding: 0,
+                    startOnTick: false,
+                    endOnTick: false,
+                    title: {
+                        text: ''
+                    },
+                    tickPositions: [0],
+                    gridLineWidth: 0,
+                    minorGridLineWidth: 0,
+                    tickWidth: 2,
+                    minorTickWidth: 1,
+                    offset: -55,
+                    opposite: true,
+                    tickColor: '#0000FF',
+                    labels: {
+                        style: {
+                            color: '#0000FF'
+                        },
+                        formatter: function() {
+                            return '';
+                        }
                     }
                 }
-            },
-            {
-                min: 0,
-                max: 20,
-                minPadding: 0,
-                maxPadding: 0,
-                startOnTick: false,
-                endOnTick: false,
-                title: {
-                    text: ''
-                },
-                tickPositions: [0],
-                gridLineWidth: 0,
-                minorGridLineWidth: 0,
-                tickWidth: 2,
-                minorTickWidth: 1,
-                offset: -55,
-                opposite: true,
-                tickColor: '#0000FF',
-                labels: {
-                    style: {
-                        color: '#0000FF'
-                    },
-                    formatter: function() {
-                        return '';
-                    }
-                }
-            }
             ],
             plotOptions: {
                 series: {
@@ -162,7 +159,7 @@ export class ThermometerComponent implements OnDestroy, OnInit {
 
         this.timer = Observable.interval(1000).subscribe(
             time => {
-                this.timer = this.updateChart();
+                this.updateChart();
             }
         );
     }
@@ -180,7 +177,7 @@ export class ThermometerComponent implements OnDestroy, OnInit {
      * Render chart and save an instance of the Highcharts Object.
      * @param chartInstance - the HighchartsObject instance.
      */
-    private renderChart(chartInstance: HighchartsChartObject): void {
+    renderChart(chartInstance: HighchartsChartObject): void {
         this.chart = chartInstance;
         this.thermometerBase(chartInstance);
     }

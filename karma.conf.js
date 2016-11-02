@@ -41,6 +41,16 @@ module.exports = function (config) {
                 included: false,
                 watched: false
             },
+            {
+                pattern: 'node_modules/angular2-highcharts/**/*.js',
+                included: false,
+                watched: false
+            },
+            {
+                pattern: 'node_modules/highcharts/**/*.js',
+                included: false,
+                watched: false
+            },
       // System.js for module loading
       'node_modules/systemjs/dist/system.src.js',
 

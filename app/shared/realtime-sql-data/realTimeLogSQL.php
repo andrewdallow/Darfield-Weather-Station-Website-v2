@@ -64,6 +64,7 @@ if ($result) {
         $data['datasets']['pressure'][] = (float) $row['baro'];        
 
         $data['datasets']['rainFall'][] = (float) $row['rFall'];
+		$data['datasets']['rainRate'][] = (float) $row['rRate'];
     }
     /* free result set */
     $result->close();

@@ -1,5 +1,5 @@
 <header>
-    <div class="container">
+    <div class="container nav">
         <nav class="navbar navbar-inverse" role="navigation">
             <div class="navbar-header" role="navigation">
                 <button type="button" class="navbar-toggle" (click)="isCollapsed = !isCollapsed">
@@ -11,7 +11,7 @@
                 <a class="navbar-brand" href="/">Darfield Weather Station</a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar" [collapse]="isCollapsed">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav bold">
                     <li><a routerLink="/" routerLinkActive="active" (click)="isCollapsed = !isCollapsed">Home</a></li>
                     <li><a routerLink="/webcam" routerLinkActive="active" (click)="isCollapsed = !isCollapsed">Webcam</a></li>
                     <li><a routerLink="/map" routerLinkActive="active" (click)="isCollapsed = !isCollapsed">Map</a></li>
@@ -38,7 +38,7 @@
 </header>
 <router-outlet></router-outlet>
 <footer>
-    <div class="container" id="footer">
+    <div class="container center" id="footer">
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">

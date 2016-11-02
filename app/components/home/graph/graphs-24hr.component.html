@@ -1,4 +1,4 @@
-<div class="container" id="recent-obs-graph">
+<div class="container recent-observations">
 
     <div class="row">
         <div class="col-md-12">
@@ -8,16 +8,16 @@
                     <div class="row">
                         <div class="col-md-12 hidden-xs">
                             <span class="graphTitles">High Wind Gust & Direction (km/h)</span><br><br>
-                            <table class="wind24Hr" *ngIf="getGraphData()">
+                            <table class="wind24Hr" *ngIf="graphData">
                                 <tr>
-                                    <td class="windSpeed24Hr" *ngFor="let direction of getGraphData().windGustDirText">{{ direction }}</td>
+                                    <td class="small center" *ngFor="let direction of graphData?.windGustDirText">{{ direction }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="windDir24Hr" *ngFor="let point of getGraphData().windGustDir"><i class="wi wi-wind from-{{ point }}-deg"></i></td>
+                                    <td class="wind-direction center" *ngFor="let point of graphData?.windGustDir"><i class="wi wi-wind from-{{ point }}-deg"></i></td>
 
                                 </tr>
                                 <tr>
-                                    <td class="windSpeed24Hr" *ngFor="let speed of getGraphData().windGust">{{ speed }}</td>
+                                    <td class="small center" *ngFor="let speed of graphData?.windGust">{{ speed }}</td>
                                 </tr>
                             </table>
                             <hr>
@@ -25,12 +25,12 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <!--<highchart id="temp24Hr" config="temp24Hr"></highchart>-->
+                            <temperature-24hr></temperature-24hr>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <!--<<highchart id="rainBaro24Hr" config="rainBaro24Hr"></highchart>-->
+                            <rain-baro-24hr></rain-baro-24hr>
                         </div>
                     </div>
 

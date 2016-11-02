@@ -6,14 +6,17 @@ import { HttpModule } from '@angular/http';
 
 import {
     WeatherAppComponent, HomeComponent, DashboardComponent,
-    TemperatureComponent, ThermometerComponent, LiveTemperatureGraphComponent, LiveWindGraphComponent,
-    WindComponent, WindVaneComponent, RainComponent, BarometerComponent,
-    WeatherDataService, ExtremesComponent, Graphs24HrComponent,
-    WebcamComponent, MapComponent, RecentGraphsComponent,
+    TemperatureComponent, ThermometerComponent, LiveTemperatureGraphComponent,
+    LiveWindGraphComponent, WindComponent, WindVaneComponent, RainComponent,
+    LiveRainfallGraphComponent, BarometerComponent, WeatherDataService,
+    ExtremesComponent, Graphs24HrComponent, Temperature24HrComponent,
+    RainBoar24HrComponent, WebcamComponent, MapComponent, RecentGraphsComponent,
     HistoricGraphsComponent, RecordsComponent, NoaaReportsComponent,
     ForecastComponent, AboutComponent
 } from './components';
 import { HighlighterDirective } from './shared/directives/highlighter.directive';
+import { TrendDirective } from './shared/directives/trend.directive';
+
 import { TimeService } from './shared/time.service';
 import { routing } from './app.routing';
 
@@ -40,9 +43,13 @@ import { routing } from './app.routing';
         LiveWindGraphComponent,
         BarometerComponent,
         RainComponent,
+        LiveRainfallGraphComponent,
 
         ExtremesComponent,
+
         Graphs24HrComponent,
+        Temperature24HrComponent,
+        RainBoar24HrComponent,
 
         WebcamComponent,
         MapComponent,
@@ -52,7 +59,8 @@ import { routing } from './app.routing';
         NoaaReportsComponent,
         ForecastComponent,
         AboutComponent,
-        HighlighterDirective
+        HighlighterDirective,
+        TrendDirective
     ],
     bootstrap: [
         WeatherAppComponent

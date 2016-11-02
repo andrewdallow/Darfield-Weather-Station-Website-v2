@@ -1,0 +1,177 @@
+.small {
+  font-size: $font-small;
+}
+
+.medium {
+  font-size: $font-medium;
+}
+
+.large {
+  font-size: $font-large;
+}
+
+.very-large {
+  font-size: $font-very-large;
+}
+
+.units-medium {
+  font-size: $font-units-medium;
+}
+
+.units-big {
+  font-size: $font-units-big;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+.center {
+  text-align: center;
+}
+
+.middle {
+  vertical-align: middle;
+}
+
+.spacing-top-small {
+  margin-top: 5px;
+}
+
+.spacing-top-medium {
+  margin-top: 10px;
+}
+
+.spacing-top-large {
+  margin-top: 30px;
+}
+
+.grey {
+  color: $grey;
+}
+// Colour highlighting upated values
+
+.highlight {
+  color: $highlighter-color;
+}
+// Trend indicators
+
+.glyphicon-arrow-down {
+  color: $color-arrow-down;
+}
+
+.glyphicon-arrow-up {
+  color: $color-arrow-up;
+}
+
+.glyphicon-minus {
+  color: $color-minus;
+}
+
+.weather-app {
+  background: $site-background-color;
+
+  .container {
+    background: $page-background-color;
+  }
+
+  .panel-heading {
+    background: $panel-background-color;
+    color: $panel-heading-text-color;
+  }
+
+  .panel {
+    border-color: $panel-border-color;
+  }
+}
+// Highcharts Styles
+
+chart {
+  display: block;
+}
+// Spinner Loader
+
+.loader {
+  margin: 0 auto;
+  position: relative;
+  width: 100px;
+}
+
+.loader::before {
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
+
+.circular {
+  animation: rotate 2s linear infinite;
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform-origin: center center;
+  width: 100%;
+}
+
+.path {
+  animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+}
+//
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
+}
+@keyframes color {
+  0%,
+  100% {
+    stroke: $spinner-color-1;
+  }
+
+  40% {
+    stroke: $spinner-color-3;
+  }
+
+  66% {
+    stroke: $spinner-color-3;
+  }
+
+  80%,
+  90% {
+    stroke: $spinner-color-4;
+  }
+}

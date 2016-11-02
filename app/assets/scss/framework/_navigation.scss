@@ -1,0 +1,11 @@
+.nav {
+  .navbar-brand,
+  .navbar-header {
+    background: $brand-background-color;
+    color: $brand-text-color;
+  }
+
+  .navbar-nav {
+    color: $navbar-text-color;
+  }
+}

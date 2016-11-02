@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+
 import { WeatherDataService } from '../../../components';
 
 @Component({
@@ -8,12 +9,19 @@ import { WeatherDataService } from '../../../components';
     providers: []
 })
 
-export class Graphs24HrComponent {
+export class Graphs24HrComponent implements OnInit {
+    public graphData: any;
     constructor(
         private weatherDataService: WeatherDataService) { }
 
-    private getGraphData(): any {
-        return this.weatherDataService.getGraphs24HrData();
+    ngOnInit(): void {
+        this.weatherDataService.getGraphs24HrData().subscribe(
+            data => {
+                this.graphData = data;
+            }
+        );
     }
+
+
 
 }
