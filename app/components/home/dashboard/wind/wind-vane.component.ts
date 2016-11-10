@@ -2,14 +2,9 @@ import { Component, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
 import { WeatherDataService } from '../../weather-data/weather-data.service';
-import { Highcharts } from 'angular2-highcharts';
-
-
-require('highcharts/highcharts-more.js')(Highcharts);
 
 
 @Component({
-    moduleId: module.id,
     selector: 'wind-vane',
     template: '<chart [options]="options" (load)="saveInstance($event.context)"></chart>'
 })
@@ -17,7 +12,7 @@ require('highcharts/highcharts-more.js')(Highcharts);
 export class WindVaneComponent implements OnDestroy {
 
     private options: Object;
-    private chart: HighchartsChartObject;
+    private chart: any;
     private timer: any;
 
     constructor(private weatherDataService: WeatherDataService) {
@@ -131,7 +126,7 @@ export class WindVaneComponent implements OnDestroy {
      * Save an instance of the Highcharts Object.
      * @param chartInstance - the HighchartsObject instance.
      */
-    private saveInstance(chartInstance: HighchartsChartObject): void {
+    private saveInstance(chartInstance: any): void {
         this.chart = chartInstance;
     }
 

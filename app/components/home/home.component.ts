@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title }     from '@angular/platform-browser';
 
-import { WeatherDataService } from '../../components';
+import { WeatherDataService } from './weather-data/weather-data.service';
 import { AppSettings } from '../../config/settings';
 
 @Component({

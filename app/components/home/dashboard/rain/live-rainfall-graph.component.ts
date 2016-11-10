@@ -2,7 +2,6 @@ import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { ReplaySubject } from 'rxjs/Rx';
 
 @Component({
-    moduleId: module.id,
     selector: 'live-rainfall-graph',
     template: '<chart [options]="options" (load)="saveInstance($event.context)"></chart>'
 })
@@ -10,7 +9,7 @@ import { ReplaySubject } from 'rxjs/Rx';
 export class LiveRainfallGraphComponent implements OnInit, OnChanges {
     @Input() data: ReplaySubject<any>;
     private options: Object;
-    private chart: HighchartsChartObject;
+    private chart: any;
 
     constructor() {
     }
@@ -107,7 +106,7 @@ export class LiveRainfallGraphComponent implements OnInit, OnChanges {
             });
     }
 
-    saveInstance(chartInstance: HighchartsChartObject): void {
+    saveInstance(chartInstance: any): void {
         this.chart = chartInstance;
     }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
-import { WeatherDataService } from '../../../components';
+import { WeatherDataService } from '../weather-data/weather-data.service';
 import { AppSettings } from '../../../config/settings';
 import { RealtimeGraphDataService } from '../../../shared/realtime-sql-data/realtime-graph-data.service';
 

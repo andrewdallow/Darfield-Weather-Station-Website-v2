@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ReplaySubject } from 'rxjs/Rx';
 import { WeatherDataService } from '../../weather-data/weather-data.service';
 
+
 @Component({
     moduleId: module.id,
     selector: 'wind',

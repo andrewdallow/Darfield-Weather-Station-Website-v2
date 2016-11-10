@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { CollapseModule, DropdownModule } from 'ng2-bootstrap';
 import { ChartModule } from 'angular2-highcharts';
-import {Ng2PaginationModule} from 'ng2-pagination';
+import { Ng2PaginationModule } from 'ng2-pagination';
 import { HttpModule } from '@angular/http';
 
+import { WeatherAppComponent } from './components/core/weather-app.component';
+
 import {
-    WeatherAppComponent, HomeComponent, DashboardComponent,
+    HomeComponent, DashboardComponent,
     TemperatureComponent, ThermometerComponent, LiveTemperatureGraphComponent,
     LiveWindGraphComponent, WindComponent, WindVaneComponent, RainComponent,
     LiveRainfallGraphComponent, BarometerComponent, WeatherDataService,
@@ -14,16 +17,22 @@ import {
     RainBoar24HrComponent, WebcamComponent, MapComponent, RecentGraphsComponent,
     HistoricGraphsComponent, RecordsComponent, NoaaReportsComponent,
     ForecastComponent, AboutComponent
-} from './components';
+} from './components/index';
+
 import { HighlighterDirective } from './shared/directives/highlighter.directive';
 import { TrendDirective } from './shared/directives/trend.directive';
 
 import { TimeService } from './shared/time.service';
 import { routing } from './app.routing';
+declare var require: any;
+const Highcharts = require('highcharts/highstock.src');
+const HighchartsMore = require('highcharts/highcharts-more');
+HighchartsMore(Highcharts);
 
 @NgModule({
     imports: [
         HttpModule,
+        FormsModule,
         BrowserModule,
         CollapseModule,
         DropdownModule,

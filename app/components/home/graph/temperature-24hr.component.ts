@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { WeatherDataService } from '../weather-data/weather-data.service';
 
 @Component({
-    moduleId: module.id,
+    
     selector: 'temperature-24hr',
     template: '<chart [options]="options" (load)="saveInstance($event.context)"></chart>',
     providers: []
@@ -11,7 +11,7 @@ import { WeatherDataService } from '../weather-data/weather-data.service';
 
 export class Temperature24HrComponent implements OnInit {
     private options: Object;
-    private chart: HighchartsChartObject;
+    private chart: any;
     private timeOffset = 24 * 3600 * 1000;
     private timeZone = 12 * 3600 * 1000;
 
@@ -121,7 +121,7 @@ export class Temperature24HrComponent implements OnInit {
         );
     }
 
-    saveInstance(chartInstance: HighchartsChartObject): void {
+    saveInstance(chartInstance: any): void {
         this.chart = chartInstance;
     }
 }

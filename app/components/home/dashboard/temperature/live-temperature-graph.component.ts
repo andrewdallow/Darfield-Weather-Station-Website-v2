@@ -2,16 +2,15 @@ import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { ReplaySubject } from 'rxjs/Rx';
 
 @Component({
-    moduleId: module.id,
+    
     selector: 'live-temperature-graph',
     template: '<chart [options]="options" (load)="saveInstance($event.context)"></chart>'
 })
 
 export class LiveTemperatureGraphComponent implements OnInit, OnChanges {
     @Input() data: ReplaySubject<any>;
-    @Input() test: string;
     private options: Object;
-    private chart: HighchartsChartObject;
+    private chart: any;
 
     constructor() {
     }
@@ -107,7 +106,7 @@ export class LiveTemperatureGraphComponent implements OnInit, OnChanges {
             });
     }
 
-    saveInstance(chartInstance: HighchartsChartObject): void {
+    saveInstance(chartInstance: any): void {
         this.chart = chartInstance;
     }
 

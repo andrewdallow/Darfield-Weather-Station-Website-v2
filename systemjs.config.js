@@ -4,6 +4,8 @@
  */
 (function (global) {
     System.config({
+        baseURL: "./",
+        defaultJSExtensions: true,
         paths: {
             // paths serve as alias
             'npm:': 'node_modules/'
@@ -27,13 +29,10 @@
             'rxjs': 'npm:rxjs',
             'angular-in-memory-web-api': 'npm:angular-in-memory-web-api',
             'angular2-highcharts': 'npm:angular2-highcharts',
-            'highcharts/highstock.src': 'npm:highcharts/highstock.src.js',
-            'highcharts/highcharts-more.js': 'npm:highcharts/highcharts-more.js',
+			      'highcharts': 'npm:highcharts',
             'ng2-bootstrap': 'npm:ng2-bootstrap',
             'ng2-pagination': 'npm:ng2-pagination',
-            'moment': 'npm:moment/moment.js',
-            //Weather-app barrels
-            'components': 'app/components',
+            'moment': 'npm:moment/moment.js'
 
         },
         // packages tells the System loader how to load when no filename and/or no extension
@@ -54,10 +53,6 @@
                 format: 'cjs',
                 defaultExtension: 'js'
             },
-            'components': {
-                main: 'index.js',
-                defaultExtension: 'js'
-            },
             'ng2-bootstrap': {
                 main: './ng2-bootstrap.js',
                 format: 'cjs',
@@ -67,6 +62,13 @@
                 main: './index.js',
                 format: 'cjs',
                 defaultExtension: 'js'
+            },
+            'highcharts': {
+              // NOTE: You should set './highcharts.src.js' here
+              // if you are not going to use <chart type="StockChart"
+              main: './highstock.src.js',
+
+              defaultExtension: 'js'
             }
 
         }

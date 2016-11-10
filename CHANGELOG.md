@@ -1,3 +1,35 @@
+## Angular Documentation QuickStart Changelog
+Upgraders: to be sure of a fresh start, consider running these commands 
+* `git clean -xdf` 
+* `npm install`
+* `npm run webdriver:update`
+
+<a name="0.2.15"></a>
+# 0.2.15 (2016-10-29)
+* Revert to Jasmine 2.4.1 because bug in 2.5.x (see [jasmine issue #1231](https://github.com/jasmine/jasmine/issues/1231))
+
+<a name="0.2.14"></a>
+# 0.2.14 (2016-10-29)
+* Remove bootstrap.css install
+* Angular v2.1.2
+
+<a name="0.2.13"></a>
+# 0.2.13 (2016-10-20)
+* Protractor 4
+* Move from `typings` to `@types`. See `tsconfig.json` changes.
+* Angular v2.1.1
+
+<a name="0.2.12"></a>
+# 0.2.12 (2016-10-06)
+* Angular v2.1.0
+
+<a name="0.2.11"></a>
+# 0.2.11 (2016-10-06)
+* Angular v2.0.2
+* License is MIT
+* Current testing configuration
+* No code changes
+
 <a name="0.2.10"></a>
 # 0.2.10 (2016-09-19)
 * All "Angular 2" references become just "Angular"

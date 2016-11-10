@@ -2,7 +2,6 @@ import { Component, OnInit} from '@angular/core';
 import { WeatherDataService } from '../weather-data/weather-data.service';
 
 @Component({
-    moduleId: module.id,
     selector: 'rain-baro-24hr',
     template: '<chart [options]="options" (load)="saveInstance($event.context)"></chart>',
     providers: []
@@ -10,7 +9,7 @@ import { WeatherDataService } from '../weather-data/weather-data.service';
 
 export class RainBoar24HrComponent implements OnInit {
     private options: Object;
-    private chart: HighchartsChartObject;
+    private chart: any;
     private timeOffset = 24 * 3600 * 1000;
     private timeZone = 12 * 3600 * 1000;
 
@@ -45,8 +44,8 @@ export class RainBoar24HrComponent implements OnInit {
                         useHTML: true,
                         padding: 0,
                         formatter: function() {
-                            let s = [], units = [' mm', ' hPa'], points = this.points,
-                                pointsLength = points.length, index;
+                            let s: string[], units = [' mm', ' hPa'], points = this.points,
+                                pointsLength = points.length, index: number;
 
                             for (index = 0; index < pointsLength; index += 1) {
                                 s.push('<span class="grey"><span style="color:' +
@@ -137,7 +136,7 @@ export class RainBoar24HrComponent implements OnInit {
             });
     }
 
-    saveInstance(chartInstance: HighchartsChartObject): void {
+    saveInstance(chartInstance: any): void {
         this.chart = chartInstance;
     }
 }

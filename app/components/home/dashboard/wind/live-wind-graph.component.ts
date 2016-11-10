@@ -2,7 +2,6 @@ import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { ReplaySubject } from 'rxjs/Rx';
 
 @Component({
-    moduleId: module.id,
     selector: 'live-wind-graph',
     template: '<chart [options]="options" (load)="saveInstance($event.context)"></chart>'
 })
@@ -11,7 +10,7 @@ export class LiveWindGraphComponent implements OnInit, OnChanges {
     @Input() data: ReplaySubject<any>;
     @Input() test: string;
     private options: Object;
-    private chart: HighchartsChartObject;
+    private chart: any;
     private windDirections = [
         0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5,
         180, 202.5, 225, 247.5, 270, 292.5, 315, 337.5
@@ -123,31 +122,31 @@ export class LiveWindGraphComponent implements OnInit, OnChanges {
                 name: '< 5 km/h',
                 color: '#FFA267'
             },
-            {
-                data: [],
-                name: '5 - 15 km/h',
-                color: '#FACA63'
-            },
-            {
-                data: [],
-                name: '15 - 25 km/h',
-                color: '#67B4FF'
-            },
-            {
-                data: [],
-                name: '25 - 35 km/h',
-                color: '#38A560'
-            },
-            {
-                data: [],
-                name: '35 - 45 km/h',
-                color: '#5116F3'
-            },
-            {
-                data: [],
-                name: '> 45 km/h',
-                color: '#141F81'
-            }
+                {
+                    data: [],
+                    name: '5 - 15 km/h',
+                    color: '#FACA63'
+                },
+                {
+                    data: [],
+                    name: '15 - 25 km/h',
+                    color: '#67B4FF'
+                },
+                {
+                    data: [],
+                    name: '25 - 35 km/h',
+                    color: '#38A560'
+                },
+                {
+                    data: [],
+                    name: '35 - 45 km/h',
+                    color: '#5116F3'
+                },
+                {
+                    data: [],
+                    name: '> 45 km/h',
+                    color: '#141F81'
+                }
 
             ]
         };
@@ -211,7 +210,7 @@ export class LiveWindGraphComponent implements OnInit, OnChanges {
         return windDirections[Math.floor(angle / 22.5)];
     }
 
-    private saveInstance(chartInstance: HighchartsChartObject): void {
+    private saveInstance(chartInstance: any): void {
         this.chart = chartInstance;
     }
 

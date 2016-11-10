@@ -1,12 +1,12 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AppSettings } from './config/settings';
+// import { AppSettings } from './config/settings';
 
 import {
     HomeComponent, WebcamComponent, MapComponent, RecentGraphsComponent,
     HistoricGraphsComponent, RecordsComponent, NoaaReportsComponent,
     ForecastComponent, AboutComponent
-} from './components';
+} from './components/index';
 
 
 const appRoutes: Routes = [

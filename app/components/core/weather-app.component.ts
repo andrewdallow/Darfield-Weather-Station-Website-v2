@@ -3,8 +3,9 @@ import { Component } from '@angular/core';
 import { AppSettings } from '../../config/settings';
 
 @Component({
+    moduleId: module.id,
     selector: 'weather-app',
-    templateUrl: 'app/components/core/weather-app-chrome.html'
+    templateUrl: './weather-app-chrome.html'
 })
 
 export class WeatherAppComponent {

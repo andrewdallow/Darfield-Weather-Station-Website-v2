@@ -5,14 +5,13 @@ import { WeatherDataService } from '../../weather-data/weather-data.service';
 
 
 @Component({
-    moduleId: module.id,
     selector: 'thermometer',
     template: '<chart [options]="options" (load)="renderChart($event.context)"></chart>'
 })
 
 export class ThermometerComponent implements OnDestroy, OnInit {
     private options: Object;
-    private chart: HighchartsChartObject;
+    private chart: any;
     private timer: any;
 
     constructor(private weatherDataService: WeatherDataService) { }
@@ -177,7 +176,7 @@ export class ThermometerComponent implements OnDestroy, OnInit {
      * Render chart and save an instance of the Highcharts Object.
      * @param chartInstance - the HighchartsObject instance.
      */
-    renderChart(chartInstance: HighchartsChartObject): void {
+    renderChart(chartInstance: any): void {
         this.chart = chartInstance;
         this.thermometerBase(chartInstance);
     }
@@ -245,7 +244,7 @@ export class ThermometerComponent implements OnDestroy, OnInit {
     /**
      * Draw the circular part of the thermometer below the bar chart.
      */
-    private thermometerBase(chartInstance: HighchartsChartObject): void {
+    private thermometerBase(chartInstance: any): void {
         let posX = 65,
             posY = 112,
             radiusOuterCircle = 17,
