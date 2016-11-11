@@ -6,7 +6,7 @@
 
             <div class="row">
                 <div class="col-xs-6">
-                    <span class="very-large" highlighter="{{weatherDataService.getRealtimeData()?.outTemp.value}}">{{weatherDataService.getRealtimeData()?.outTemp.value}}</span><span [innerHTML]="weatherDataService.getRealtimeData()?.outTemp.unit" class="units-big" highlighter="weatherDataService.getRealtimeData()?.outTemp.value"></span>
+                    <span class="very-large" highlighter="{{weatherDataService.getRealtimeData()?.outTemp.value}}" [innerHTML]="weatherDataService.getRealtimeData()?.outTemp | unitConverter:true:'units-big'"></span>
                 </div>
             </div>
             <div class="row grey center">

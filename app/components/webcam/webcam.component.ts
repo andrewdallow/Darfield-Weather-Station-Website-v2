@@ -9,7 +9,9 @@ interface Image {
     path: string;
     time: number;
 }
-
+/**
+ * [Component description]
+ */
 @Component({
     moduleId: module.id,
     selector: 'webcam',

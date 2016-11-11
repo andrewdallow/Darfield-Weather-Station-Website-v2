@@ -21,6 +21,7 @@ import {
 
 import { HighlighterDirective } from './shared/directives/highlighter.directive';
 import { TrendDirective } from './shared/directives/trend.directive';
+import { UnitConverterPipe } from './shared/pipes/unit-converter.pipe';
 
 import { TimeService } from './shared/time.service';
 import { routing } from './app.routing';
@@ -69,8 +70,10 @@ HighchartsMore(Highcharts);
         NoaaReportsComponent,
         ForecastComponent,
         AboutComponent,
+
         HighlighterDirective,
-        TrendDirective
+        TrendDirective,
+        UnitConverterPipe
     ],
     bootstrap: [
         WeatherAppComponent

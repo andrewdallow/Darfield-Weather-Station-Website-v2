@@ -19,6 +19,4 @@ describe('TimeService', () => {
 
     });
 
-
-
 });
