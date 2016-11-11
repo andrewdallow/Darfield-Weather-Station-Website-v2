@@ -5,13 +5,25 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Webcam, Looking South</div>
                 <div class="panel-body">
-                    <div class="row">
+                  <div class="row spacing-top-medium">
+                      <div class="col-md-12 center">
+                        <span *ngFor="let day of daysAgo">
+                          <a class="btn btn-lg btn-default spacing-top-small"
+                              [class.disabled]="isDisabled(day)"
+                              [class.active]="isSelected(day)"
+                              (click)="selectDay(day)">
+                            {{daysAgoName(day)}}
+                          </a>
+                        </span>
+                      </div>
+                  </div>
+                    <div class="row spacing-top-large">
                         <div class="col-md-12 center">
                             <figure>
                                 <img class="image img-responsive img-rounded" [src]="selectedImage?.path">
-                                <figcaption>
+                                <figcaption class="grey spacing-top-medium">
                                     Images are taken every 5 minutes during daylight hours only.<br>
-                                    Click thumbnail images to enlarge.
+                                    Click a day above and move the slider below to change images.
                                 </figcaption>
 
                             </figure>
@@ -31,6 +43,7 @@
                         >
                       </div>
                     </div>
+
 
 
                     </div>

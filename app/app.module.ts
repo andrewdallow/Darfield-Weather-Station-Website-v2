@@ -14,7 +14,7 @@ import {
     LiveWindGraphComponent, WindComponent, WindVaneComponent, RainComponent,
     LiveRainfallGraphComponent, BarometerComponent, WeatherDataService,
     ExtremesComponent, Graphs24HrComponent, Temperature24HrComponent,
-    RainBoar24HrComponent, WebcamComponent, MapComponent, RecentGraphsComponent,
+    RainBoar24HrComponent, WebcamComponent, RecentGraphsComponent,
     HistoricGraphsComponent, RecordsComponent, NoaaReportsComponent,
     ForecastComponent, AboutComponent
 } from './components/index';
@@ -63,7 +63,6 @@ HighchartsMore(Highcharts);
         RainBoar24HrComponent,
 
         WebcamComponent,
-        MapComponent,
         RecentGraphsComponent,
         HistoricGraphsComponent,
         RecordsComponent,

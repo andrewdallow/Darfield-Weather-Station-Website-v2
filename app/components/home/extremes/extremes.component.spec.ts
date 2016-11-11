@@ -1,10 +1,8 @@
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpModule } from '@angular/http';
 
 import { ExtremesComponent } from './extremes.component';
-import { WeatherDataService } from '../../../components';
+import { WeatherDataService } from '../weather-data/weather-data.service';
 import { TimeService } from '../../../shared/time.service';
 
 describe('ExtremesComponent', () => {

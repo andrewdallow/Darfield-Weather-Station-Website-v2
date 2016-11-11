@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 // import { AppSettings } from './config/settings';
 
 import {
-    HomeComponent, WebcamComponent, MapComponent, RecentGraphsComponent,
+    HomeComponent, WebcamComponent, RecentGraphsComponent,
     HistoricGraphsComponent, RecordsComponent, NoaaReportsComponent,
     ForecastComponent, AboutComponent
 } from './components/index';
@@ -17,10 +17,6 @@ const appRoutes: Routes = [
     {
         path: 'webcam',
         component: WebcamComponent,
-    },
-    {
-        path: 'map',
-        component: MapComponent,
     },
     {
         path: 'graphs',

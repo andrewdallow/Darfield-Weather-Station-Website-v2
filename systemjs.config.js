@@ -4,7 +4,6 @@
  */
 (function (global) {
     System.config({
-        baseURL: "./",
         defaultJSExtensions: true,
         paths: {
             // paths serve as alias

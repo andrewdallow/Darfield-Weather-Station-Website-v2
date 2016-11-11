@@ -21,6 +21,12 @@ export class TimeService {
             this.addZero(date.getSeconds());
         return dateString;
     }
+
+    subtractDays(date: Date, days: number): Date {
+        return new Date(date.setDate(date.getDate() - days));
+    }
+
+
     /**
      * Add a zero to the front of a given number if less than 10
      * @param {number} value - to be altered

@@ -33,9 +33,6 @@ export * from './history/records/records.component';
 // Forecast Components
 export * from './forecast/forecast.component';
 
-// Map Components
-export * from './map/map.component';
-
 // About Components
 export * from './about/about.component';
 

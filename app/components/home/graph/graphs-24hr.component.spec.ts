@@ -1,9 +1,10 @@
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpModule } from '@angular/http';
 
-import { Graphs24HrComponent, WeatherDataService } from '../../../components';
+import { WeatherDataService } from '../weather-data/weather-data.service';
+import { Graphs24HrComponent } from './graphs-24hr.component';
+
 import { TimeService } from '../../../shared/time.service';
 
 describe('Graphs24HrComponent', () => {
