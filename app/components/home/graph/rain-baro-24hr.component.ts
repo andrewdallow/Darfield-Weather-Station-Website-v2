@@ -44,7 +44,7 @@ export class RainBoar24HrComponent implements OnInit {
                         useHTML: true,
                         padding: 0,
                         formatter: function() {
-                            let s: string[], units = [' mm', ' hPa'], points = this.points,
+                            let s = [], units = [' mm', ' hPa'], points = this.points,
                                 pointsLength = points.length, index: number;
 
                             for (index = 0; index < pointsLength; index += 1) {

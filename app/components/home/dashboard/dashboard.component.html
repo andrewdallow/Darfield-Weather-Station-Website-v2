@@ -7,7 +7,13 @@
                 <div class="panel-body ajaxTimmer">
                     <div class="col-xs-3 col-md-2">
                         <div class="btn-group btn-group-xs" role="group">
-                            <button *ngFor="let unit of getUnits()" ng-click="convertUnits(unit)" type="button" ng-disabled="unit === selectedUnit" class="btn btn-default">{{ unit }}</button>
+                            <button *ngFor="let unit of getUnits()"
+                                    (click)="convertUnits(unit)"
+                                    type="button"
+                                    [disabled]="unit === selectedUnit"
+                                    class="btn btn-default">
+                            {{ unit }}
+                          </button>
                         </div>
 
                     </div>

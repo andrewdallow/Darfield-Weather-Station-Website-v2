@@ -20,11 +20,26 @@ export class WeatherDataService {
     private graph24HrsData: Observable<Graph24HrsData>;
     private extremes: Extremes;
     private isUpdated: boolean = false;
+    private isConverted: boolean = false;
 
     constructor(private http: Http, private timeService: TimeService) {
         this.setRealtimeData();
         this.setExtremesData();
         this.setGraphs24HrData();
+    }
+    /**
+     * Set flag on whether to convert the data units or not.
+     * @param {boolean} isConverted true to convert, false otherwise.
+     */
+    convertUnits(isConverted: boolean): void {
+        this.isConverted = isConverted;
+    }
+    /**
+     * Get the flag on whether the data units should be converted or not.
+     * @return {boolean} [description]
+     */
+    getIsConverted(): boolean {
+        return this.isConverted;
     }
 
     /**

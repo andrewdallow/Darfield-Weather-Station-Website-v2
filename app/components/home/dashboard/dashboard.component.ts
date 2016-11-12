@@ -13,7 +13,7 @@ import { RealtimeGraphDataService } from '../../../shared/realtime-sql-data/real
 })
 
 export class DashboardComponent implements OnInit, OnDestroy {
-
+    public selectedUnit: string;
     private secondsAgo: number;
     private updateCounter: number;
     private realtimeTimer: any;
@@ -28,11 +28,21 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
 
     ngOnInit(): void {
+        this.selectedUnit = this.getUnits()[0];
         this.startTimers();
     }
 
     ngOnDestroy(): void {
         this.stopTimers();
+    }
+    convertUnits(unit: string): void {
+        this.selectedUnit = unit;
+        if (unit === this.getUnits()[0]) {
+            this.weatherDataService.convertUnits(false);
+        } else {
+            this.weatherDataService.convertUnits(true);
+        }
+
     }
     /**
      * Starts all the timers.
