@@ -113,5 +113,11 @@ export class AppSettings {
     public static get DAYS_OF_WEEK(): Array<string> {
         return ['Mon', 'Tues', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     }
+    /**
+     * Graphs page settings
+     */
+    public static get GRAPHS_TIMESCALE_BUTTONS(): Array<number> {
+        return [12, 24, 48];
+    }
 
 }

@@ -8,7 +8,6 @@ import { ReplaySubject } from 'rxjs/Rx';
 
 export class LiveWindGraphComponent implements OnInit, OnChanges {
     @Input() data: ReplaySubject<any>;
-    @Input() test: string;
     private options: Object;
     private chart: any;
     private windDirections = [
@@ -102,6 +101,7 @@ export class LiveWindGraphComponent implements OnInit, OnChanges {
             },
             tooltip: {
                 shadow: false,
+                shared: false,
                 borderWidth: 0,
                 useHTML: true,
                 formatter: function() {
@@ -159,7 +159,6 @@ export class LiveWindGraphComponent implements OnInit, OnChanges {
     updateGraph(): void {
         this.data.subscribe(
             data => {
-                let freq = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
                 let series: any;
                 let set = [
                     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -201,16 +200,9 @@ export class LiveWindGraphComponent implements OnInit, OnChanges {
             });
     }
 
-    private compaseDirection(angle: number): string {
-        let windDirections = [
-            'N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE',
-            'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'
-        ];
 
-        return windDirections[Math.floor(angle / 22.5)];
-    }
 
-    private saveInstance(chartInstance: any): void {
+    saveInstance(chartInstance: any): void {
         this.chart = chartInstance;
     }
 

@@ -24,6 +24,17 @@ export class RealtimeGraphDataService {
 
     }
 
+    mapSeries(x: Array<any>, y: Array<any>): Array<any> {
+        let series: Array<any> = [];
+        if (x.length === y.length) {
+            for (let i = 0; i < x.length; i++) {
+                series = series.concat([[x[i], y[i]]]);
+
+            }
+        }
+        return series;
+    }
+
     /**
      *Get the Request Header Options for an Http request.
      * @return {RequestOptions} opts

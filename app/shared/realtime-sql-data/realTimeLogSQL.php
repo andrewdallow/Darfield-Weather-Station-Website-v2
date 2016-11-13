@@ -36,6 +36,7 @@ $data = [
 		"humidity" => [],
 		"pressure" => [],
 		"rainFall" => [],
+		"rainRate" => [],
     ]
 ];
 
