@@ -1,39 +1,23 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-// import { AppSettings } from './config/settings';
+// import { AppSettings } from './shared/config/settings';
 
 import {
-    HomeComponent, WebcamComponent, RecentGraphsComponent,
-    HistoricGraphsComponent, RecordsComponent, NoaaReportsComponent,
     ForecastComponent, AboutComponent
-} from './components/index';
+} from './modules/index';
+
+import { HomeRoutes } from './modules/home/home.routing';
+import { WebcamRoutes } from './modules/webcam/webcam.routing';
+import { RecentGraphsRoutes } from './modules/recent-graphs/recent-graphs.routing';
+import { HistoryRoutes } from './modules/history/history.routing';
+
 
 
 const appRoutes: Routes = [
-    {
-        path: 'home',
-        component: HomeComponent,
-    },
-    {
-        path: 'webcam',
-        component: WebcamComponent,
-    },
-    {
-        path: 'graphs',
-        component: RecentGraphsComponent,
-    },
-    {
-        path: 'historic-graphs',
-        component: HistoricGraphsComponent,
-    },
-    {
-        path: 'records',
-        component: RecordsComponent,
-    },
-    {
-        path: 'noaa-style-reports',
-        component: NoaaReportsComponent,
-    },
+    ...HomeRoutes,
+    ...WebcamRoutes,
+    ...RecentGraphsRoutes,
+    ...HistoryRoutes,
     {
         path: 'forecast',
         component: ForecastComponent,
@@ -43,8 +27,8 @@ const appRoutes: Routes = [
         component: AboutComponent,
     },
     {
-        path: '',
-        redirectTo: '/home',
+        path: '*',
+        redirectTo: '',
         pathMatch: 'full'
     }
 ];

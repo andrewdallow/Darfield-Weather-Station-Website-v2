@@ -3,27 +3,23 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { CollapseModule, DropdownModule } from 'ng2-bootstrap';
 import { ChartModule } from 'angular2-highcharts';
-import { Ng2PaginationModule } from 'ng2-pagination';
 import { HttpModule } from '@angular/http';
+// import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
-import { WeatherAppComponent } from './components/core/weather-app.component';
+import { WeatherAppComponent } from './modules/core/weather-app.component';
 
 import {
-    HomeComponent, DashboardComponent,
-    TemperatureComponent, ThermometerComponent, LiveTemperatureGraphComponent,
-    LiveWindGraphComponent, WindComponent, WindVaneComponent, RainComponent,
-    LiveRainfallGraphComponent, BarometerComponent, WeatherDataService,
-    ExtremesComponent, Graphs24HrComponent, Temperature24HrComponent,
-    RainBoar24HrComponent, WebcamComponent, RecentGraphsComponent,
-    HistoricGraphsComponent, RecordsComponent, NoaaReportsComponent,
     ForecastComponent, AboutComponent
-} from './components/index';
+} from './modules/index';
 
-import { HighlighterDirective } from './shared/directives/highlighter.directive';
-import { TrendDirective } from './shared/directives/trend.directive';
-import { UnitConverterPipe } from './shared/pipes/unit-converter.pipe';
+import { HomeModule } from './modules/home/home.module';
+import { WebcamModule } from './modules/webcam/webcam.module';
+import { RecentGraphsModule } from './modules/recent-graphs/recent-graphs.module';
+import { HistoryModule } from './modules/history/history.module';
 
-import { TimeService } from './shared/time.service';
+
+import { SharedModule } from './shared/shared.module';
+
 import { routing } from './app.routing';
 declare var require: any;
 const Highcharts = require('highcharts/highstock.src');
@@ -39,48 +35,21 @@ HighchartsMore(Highcharts);
         DropdownModule,
         ChartModule,
         routing,
-        Ng2PaginationModule
+        HomeModule,
+        WebcamModule,
+        RecentGraphsModule,
+        HistoryModule,
+        SharedModule.forRoot()
     ],
     declarations: [
         WeatherAppComponent,
-        HomeComponent,
-
-        DashboardComponent,
-        TemperatureComponent,
-        ThermometerComponent,
-        LiveTemperatureGraphComponent,
-
-        WindComponent,
-        WindVaneComponent,
-        LiveWindGraphComponent,
-        BarometerComponent,
-        RainComponent,
-        LiveRainfallGraphComponent,
-
-        ExtremesComponent,
-
-        Graphs24HrComponent,
-        Temperature24HrComponent,
-        RainBoar24HrComponent,
-
-        WebcamComponent,
-        RecentGraphsComponent,
-        HistoricGraphsComponent,
-        RecordsComponent,
-        NoaaReportsComponent,
         ForecastComponent,
-        AboutComponent,
-
-        HighlighterDirective,
-        TrendDirective,
-        UnitConverterPipe
+        AboutComponent
     ],
     bootstrap: [
         WeatherAppComponent
     ],
     providers: [
-        TimeService,
-        WeatherDataService,
         Title
     ]
 })

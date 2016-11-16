@@ -1,12 +1,19 @@
 Options +FollowSymLinks
 
 <ifModule mod_rewrite.c>
+	Options Indexes FollowSymLinks
     RewriteEngine On
+	RewriteRule ^webcam/today ABC [NC,L]
+	RewriteRule ^index\.html$ - [L]
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond %{REQUEST_URI} !webcam/today
     RewriteCond %{REQUEST_URI} !index
     RewriteRule (.*) index.html [L]
+	
+	
 </ifModule>
+
 
 AddOutputFilterByType DEFLATE text/plain
 AddOutputFilterByType DEFLATE text/html

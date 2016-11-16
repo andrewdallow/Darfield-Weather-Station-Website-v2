@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable, ReplaySubject } from 'rxjs/Rx';
 
-import { AppSettings } from '../../config/settings';
+import { AppSettings } from '../../shared/config/settings';
 
 /**
  * Class representing the services to get the current weather data.

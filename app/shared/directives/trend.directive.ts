@@ -1,6 +1,6 @@
 import { Directive, ElementRef, Input, Renderer, OnChanges, SimpleChange } from '@angular/core';
 
-import { AppSettings } from '../../config/settings';
+import { AppSettings } from '../../shared/config/settings';
 /**
  * Directive: Adds 'highlight' the class of an element when a value changes
  * and is then removed after a specified time later. 'highlight' can be
