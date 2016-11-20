@@ -2,16 +2,16 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-              <div class="panel-heading">Monthly Summaries</div>
+              <div class="panel-heading">Yearly Summaries</div>
                 <div class="panel-body">
-                  <date-controls [dateType]="'monthly'"></date-controls>
+                  <date-controls [dateType]="'yearly'"></date-controls>
                   <div class="summaries">
                     <div class="row">
                       <div class="col-md-12">
                         <div class="row spacing-top-medium">
                           <div class="col-md-12">
                             <span class="very-large">
-                              {{ selectedMonth }} {{ selectedYear }}
+                              {{ selectedYear }} Summary
                             </span>
                           </div>
                         </div>
@@ -55,7 +55,7 @@
                               <div class="col-md-12">
                                 <div class="row">
                                   <div class="col-md-12 small grey">
-                                    Avg Daily High
+                                    Avg Monthly High
                                   </div>
                                 </div>
                                 <div class="row">
@@ -71,7 +71,7 @@
                               <div class="col-md-12">
                                 <div class="row">
                                   <div class="col-md-12 small grey">
-                                    Avg Daily High
+                                    Avg Monthly High
                                   </div>
                                 </div>
                                 <div class="row">
@@ -143,32 +143,14 @@
                           </div>
                           <div class="col-md-10">
                             <div class="box">
-
-                              <div class="row">
-                                <div class="col-md-12 wind">
-                                  <span class="graphTitles">High Wind Gust & Direction (km/h)</span><br><br>
-                                  <table class="wind24hr">
-                                      <tr>
-                                          <td class="small center" *ngFor="let value of data.graphData">{{ value.hWindGBear | compase }}</td>
-                                      </tr>
-                                      <tr>
-                                          <td class="wind-direction-icon center" *ngFor="let value of data.graphData"><i class="wi wi-wind from-{{ value.hWindGBear }}-deg"></i></td>
-
-                                      </tr>
-                                      <tr>
-                                          <td class="small center" *ngFor="let value of data.graphData">{{ value.highWindGust }}</td>
-                                      </tr>
-                                  </table>
+                              <div class="row" *ngIf="data">
+                                <div class="col-md-12">
+                                  <yearly-temp-chart [data]="data"></yearly-temp-chart>
                                 </div>
                               </div>
                               <div class="row" *ngIf="data">
                                 <div class="col-md-12">
-                                  <monthly-temp-chart [data]="data"></monthly-temp-chart>
-                                </div>
-                              </div>
-                              <div class="row" *ngIf="data">
-                                <div class="col-md-12">
-                                  <monthly-rainfall-chart [data]="data"></monthly-rainfall-chart>
+                                  <yearly-rainfall-chart [data]="data"></yearly-rainfall-chart>
                                 </div>
                               </div>
                             </div>

@@ -5,6 +5,23 @@
   }
 }
 
+.summaries {
+  .box {
+    margin: 20px 0;
+    outline: 1px solid $light-grey;
+    padding: 20px;
+  }
+
+  .wind {
+    .wind-direction-icon {
+      color: $wind-vane-color;
+      font-size: 30px;
+      padding: 2.6px;
+    }
+
+  }
+}
+
 .noaa {
   $noaa-text: $black;
   $noaa-border: $black;

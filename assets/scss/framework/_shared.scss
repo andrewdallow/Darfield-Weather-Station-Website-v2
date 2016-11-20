@@ -1,3 +1,7 @@
+.very-small {
+  font-size: $font-very-small;
+}
+
 .small {
   font-size: $font-small;
 }
@@ -44,6 +48,10 @@
 
 .middle {
   vertical-align: middle;
+}
+
+.spacing-top-none {
+  margin-top: 0;
 }
 
 .spacing-top-small {
@@ -101,6 +109,7 @@
 chart {
   display: block;
 }
+
 // Spinner Loader
 
 .loader {

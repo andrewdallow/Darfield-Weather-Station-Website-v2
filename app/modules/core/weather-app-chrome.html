@@ -12,23 +12,24 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar" [collapse]="isCollapsed">
                 <ul class="nav navbar-nav bold">
-                    <li><a routerLink="/" routerLinkActive="active" (click)="isCollapsed = !isCollapsed">Home</a></li>
-                    <li><a routerLink="/webcam" routerLinkActive="active" (click)="isCollapsed = !isCollapsed">Webcam</a></li>
+                    <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="" (click)="isCollapsed = !isCollapsed">Home</a></li>
+                    <li routerLinkActive="active"><a routerLink="/webcam" (click)="isCollapsed = !isCollapsed">Webcam</a></li>
                     <!--<li><a href="gauges" ng-click="navbarCollapsed = !navbarCollapsed">Gauges</a></li> -->
-                    <li><a routerLink="/graphs" routerLinkActive="active" (click)="isCollapsed = !isCollapsed">Graphs</a></li>
+                    <li routerLinkActive="active"><a routerLink="/graphs" routerLinkActive="active" (click)="isCollapsed = !isCollapsed">Graphs</a></li>
 
-                    <li dropdown [(isOpen)]="status.isopen">
+                    <li routerLinkActive="active" dropdown [(isOpen)]="status.isopen">
                         <a href="" class="simple-dropdown" dropdownToggle>History <b class="caret"></b></a>
                         <ul dropdownMenu aria-labelledby="simple-dropdown">
-                            <li><a routerLink="/history" routerLinkActive="active" (click)="isCollapsed = !isCollapsed">Historic Stats</a></li>
-                            <li><a routerLink="/records" routerLinkActive="active" (click)="isCollapsed = !isCollapsed">Records</a></li>
-                            <li><a routerLink="/noaa-style-reports" routerLinkActive="active" (click)="isCollapsed = !isCollapsed">NOAA-style Reports</a></li>
+                            <li routerLinkActive="active"><a routerLink="/history/monthly" (click)="isCollapsed = !isCollapsed">Monthly</a></li>
+                            <li routerLinkActive="active"><a routerLink="/history/yearly" (click)="isCollapsed = !isCollapsed">Yearly</a></li>
+                            <li routerLinkActive="active"><a routerLink="/history/records" (click)="isCollapsed = !isCollapsed">Records</a></li>
+                            <li routerLinkActive="active"><a routerLink="/noaa-style-reports" (click)="isCollapsed = !isCollapsed">NOAA-style Reports</a></li>
                         </ul>
                     </li>
 
 
-                    <li><a routerLink="/forecast" routerLinkActive="active" (click)="isCollapsed = !isCollapsed">Forecast</a></li>
-                    <li><a routerLink="/about" routerLinkActive="active" (click)="isCollapsed = !isCollapsed">About</a></li>
+                    <li routerLinkActive="active"><a routerLink="/forecast" (click)="isCollapsed = !isCollapsed">Forecast</a></li>
+                    <li routerLinkActive="active"><a routerLink="/about" (click)="isCollapsed = !isCollapsed">About</a></li>
                 </ul>
             </div>
         </nav>

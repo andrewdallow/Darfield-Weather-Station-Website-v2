@@ -9,22 +9,21 @@ import { HistoricData } from '../../services/historic-data.model';
 
 @Component({
     moduleId: module.id,
-    templateUrl: 'monthly.component.html',
+    templateUrl: 'yearly.component.html',
 })
-export class MonthlyComponent implements OnInit {
-
+export class YearlyComponent implements OnInit {
     public data: HistoricData;
-    public selectedMonth: string;
     public selectedYear: string;
 
     constructor(
         private titleService: Title,
         private historicDataService: HistoricDataService,
         private route: ActivatedRoute,
-        private router: Router) { }
+        private router: Router
+    ) { }
 
     ngOnInit() {
-        this.selectMonthYear();
+        this.selectYear();
     }
 
     compareMaxTemp(temp: string): number {
@@ -39,32 +38,31 @@ export class MonthlyComponent implements OnInit {
 
     compareAvgTemp(temp: string): number {
         return this.compareValue(+temp,
-            AppSettings.HISTORIC_AVG_TEMP_MONTH[this.selectedMonth.toLowerCase()]);
+            AppSettings.HISTORIC_ALLTIME_AVG['avgTemp']);
     }
     compareAvgHiTemp(temp: string): number {
         return this.compareValue(+temp,
-            AppSettings.HISTORIC_AVG_HIGH_TEMP_MONTH[this.selectedMonth.toLowerCase()]);
+            AppSettings.HISTORIC_ALLTIME_AVG['avgMaxTemp']);
     }
     compareAvgLoTemp(temp: string): number {
         return this.compareValue(+temp,
-            AppSettings.HISTORIC_AVG_LOW_TEMP_MONTH[this.selectedMonth.toLowerCase()]);
+            AppSettings.HISTORIC_ALLTIME_AVG['avgMinTemp']);
     }
     compareRainTemp(rain: string): number {
         return this.compareValue(+rain,
-            AppSettings.HISTORIC_AVG_RAIN_MONTH[this.selectedMonth.toLowerCase()]);
+            AppSettings.HISTORIC_ALLTIME_AVG['totRainFall']);
     }
     compareValue(a: number, b: number): number {
         return Math.round((a - b) * 100) / 100;
     }
-
     /**
      * Set the data for the chosen month and year.
      * @param {string} year  year of data
      * @param {string} month month of data
      */
-    private setData(year: string, month: string): void {
-        this.historicDataService.setMonthlyData(year, month);
-        this.historicDataService.monthlyData.subscribe(
+    private setData(year: string): void {
+        this.historicDataService.setYearlyData(year);
+        this.historicDataService.yearlyData.subscribe(
             (data: any) => {
                 this.data = data;
             }
@@ -74,18 +72,15 @@ export class MonthlyComponent implements OnInit {
      * Set the month an year as specified in the URL parameters and
      * then set the data.
      */
-    private selectMonthYear(): void {
+    private selectYear(): void {
         this.route.params.subscribe(
             (params: Params) => {
-                this.selectedMonth = params['month'];
                 this.selectedYear = params['year'];
-                this.titleService.setTitle('Monthly History - '
-                    + params['month'] + '-' + params['year'] + ' - '
+                this.titleService.setTitle('Yearly History - '
+                    + params['year'] + ' - '
                     + AppSettings.SITE_NAME);
-                this.setData(this.selectedYear, moment().month(this.selectedMonth).format('MM'));
+                this.setData(this.selectedYear);
             }
         );
     }
-
-
 }

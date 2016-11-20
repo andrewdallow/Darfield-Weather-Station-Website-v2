@@ -9,6 +9,8 @@ import { HighlighterDirective } from './directives/highlighter.directive';
 import { TrendDirective } from './directives/trend.directive';
 import { UnitConverterPipe } from './pipes/unit-converter.pipe';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
+import { CompaseTextPipe } from './pipes/compase-text.pipe';
+
 
 
 @NgModule({
@@ -17,7 +19,8 @@ import { CapitalizePipe } from './pipes/capitalize.pipe';
         HighlighterDirective,
         TrendDirective,
         UnitConverterPipe,
-        CapitalizePipe
+        CapitalizePipe,
+        CompaseTextPipe
     ],
     exports: [
         CommonModule,
@@ -26,7 +29,8 @@ import { CapitalizePipe } from './pipes/capitalize.pipe';
         HighlighterDirective,
         TrendDirective,
         UnitConverterPipe,
-        CapitalizePipe
+        CapitalizePipe,
+        CompaseTextPipe
     ]
 })
 
