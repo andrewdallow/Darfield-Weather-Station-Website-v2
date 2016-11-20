@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title }     from '@angular/platform-browser';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { RealtimeGraphDataService } from '../../../shared/realtime-sql-data/realtime-graph-data.service';
 import { Graph } from './graph.model';
@@ -8,16 +9,15 @@ import { AppSettings } from '../../../shared/config/settings';
 
 @Component({
     moduleId: module.id,
-    selector: 'my-app',
     templateUrl: './recent-graphs.html',
     providers: [RealtimeGraphDataService]
 })
 export class RecentGraphsComponent implements OnInit {
     public charts: any[];
-    public buttons: number[];
+    public buttons: number[] = AppSettings.GRAPHS_TIMESCALE_BUTTONS;
     public selectedButton: number;
-    public tabs: string[] = ['Compare', 'Temperature', 'Wind',
-        'Wind Rose', 'Pressure', 'Rainfall'];
+    public tabs: string[] = ['compare', 'temperature', 'wind',
+        'wind-rose', 'pressure', 'rainfall'];
     public selectedTab: string;
     public showSpinner: boolean;
     private chartInstances: any[] = [];
@@ -25,14 +25,47 @@ export class RecentGraphsComponent implements OnInit {
 
     constructor(
         private graphDataService: RealtimeGraphDataService,
-        private titleService: Title) { }
+        private titleService: Title,
+        private route: ActivatedRoute,
+        private router: Router
+    ) { }
 
     ngOnInit(): void {
+        this.showSpinner = true;
         this.titleService.setTitle('Graphs - ' + AppSettings.SITE_NAME);
-        this.selectedTab = this.tabs[0];
-        this.buttons = AppSettings.GRAPHS_TIMESCALE_BUTTONS;
-        this.initCharts();
+        this.selectTabButton();
+    }
 
+    selectTabButton(): void {
+        this.route.params.subscribe(
+            (params: Params) => {
+                this.selectedTab = params['tab'];
+                this.selectedButton = +params['hours'];
+                this.initCharts();
+            }
+        );
+    }
+
+    /**
+     * Update the currently selected tab.
+     * @param {string} tab name
+     */
+    selectTab(tab: string): void {
+        this.showSpinner = true;
+        this.router.navigate(['/graphs', tab, this.selectedButton]);
+    }
+
+    /**
+     * Initalise the charts and subscribe to the graph data service.
+     */
+    private initCharts(): void {
+        this.graphDataService.setGraphData(this.selectedButton);
+        this.graphDataService.getGraphData().subscribe(
+            (data: any) => {
+                this.data = data;
+                this.createCharts();
+            }
+        );
     }
     /**
      * Change the time span of the graphs to the given hours.
@@ -40,8 +73,7 @@ export class RecentGraphsComponent implements OnInit {
      */
     changeTimeSpan(hours: number): void {
         this.showSpinner = true;
-        this.selectedButton = hours;
-        this.graphDataService.setGraphData(hours);
+        this.router.navigate(['/graphs', this.selectedTab, hours]);
     }
     /**
      * Save an instance of the Highchart and add it to the array of charts
@@ -97,18 +129,7 @@ export class RecentGraphsComponent implements OnInit {
         return points;
     }
 
-    /**
-     * Initalise the charts and subscribe to the graph data service.
-     */
-    private initCharts(): void {
-        this.changeTimeSpan(this.buttons[0]);
-        this.graphDataService.getGraphData().subscribe(
-            (data: any) => {
-                this.data = data;
-                this.createCharts();
-            }
-        );
-    }
+
 
     /**
      * Add a chart options object to the array of all chart options.
@@ -117,14 +138,7 @@ export class RecentGraphsComponent implements OnInit {
     private addChart(chart: any): void {
         this.charts.push(chart);
     }
-    /**
-     * Update the currently selected tab.
-     * @param {string} tab name
-     */
-    selectTab(tab: string): void {
-        this.selectedTab = tab;
-        this.createCharts();
-    }
+
     /**
      * Create the charts for the currently selected tab.
      * @param {any} data graph data.
@@ -132,28 +146,28 @@ export class RecentGraphsComponent implements OnInit {
     private createCharts(): void {
         this.chartInstances = [];
         this.charts = [];
-        if (this.selectedTab === 'Compare') {
+        if (this.selectedTab === 'compare') {
             this.createAllGraphs();
-        } else if (this.selectedTab === 'Temperature') {
+        } else if (this.selectedTab === 'temperature') {
             this.addChart(
                 this.createTemperatureGraph({ height: 500 })
             );
-        } else if (this.selectedTab === 'Wind') {
+        } else if (this.selectedTab === 'wind') {
             this.addChart(
                 this.createWindGraph({ height: 500 })
             );
             this.addChart(
                 this.createWindDirectionGraph({ height: 500 })
             );
-        } else if (this.selectedTab === 'Wind Rose') {
+        } else if (this.selectedTab === 'wind-rose') {
             this.addChart(
                 this.createWindRose({ height: 500 })
             );
-        } else if (this.selectedTab === 'Pressure') {
+        } else if (this.selectedTab === 'pressure') {
             this.addChart(
                 this.createPressureGraph({ height: 500 })
             );
-        } else if (this.selectedTab === 'Rainfall') {
+        } else if (this.selectedTab === 'rainfall') {
             this.addChart(
                 this.createRainGraph({ height: 500 })
             );

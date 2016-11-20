@@ -9,7 +9,7 @@ import { AppSettings } from '../../shared/config/settings';
  */
 @Injectable()
 export class RealtimeGraphDataService {
-    private realtimeData: ReplaySubject<any> = new ReplaySubject(1);
+    private realtimeData: Observable<any>;
 
     constructor(private http: Http) { }
 
@@ -19,8 +19,7 @@ export class RealtimeGraphDataService {
 
 
     setGraphData(hours: number): void {
-        this.getData(AppSettings.REALTIME_SQL_FILE + `?hours=${hours}`)
-            .subscribe(res => this.realtimeData.next(res));
+        this.realtimeData = this.getData(AppSettings.REALTIME_SQL_FILE + `?hours=${hours}`);
 
     }
 

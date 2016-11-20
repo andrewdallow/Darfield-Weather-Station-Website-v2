@@ -3,7 +3,12 @@ import { RecentGraphsComponent } from './components/recent-graphs.component';
 
 export const RecentGraphsRoutes: Route[] = [
     {
-        path: 'graphs',
+        path: 'graphs/:tab/:hours',
         component: RecentGraphsComponent,
+    },
+    {
+        path: 'graphs',
+        redirectTo: 'graphs/compare/12',
+        pathMatch: 'full'
     }
 ];
