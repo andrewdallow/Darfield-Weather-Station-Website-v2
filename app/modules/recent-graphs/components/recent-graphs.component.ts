@@ -59,6 +59,7 @@ export class RecentGraphsComponent implements OnInit {
      * Initalise the charts and subscribe to the graph data service.
      */
     private initCharts(): void {
+        this.showSpinner = true;
         this.graphDataService.setGraphData(this.selectedButton);
         this.graphDataService.getGraphData().subscribe(
             (data: any) => {
@@ -72,7 +73,6 @@ export class RecentGraphsComponent implements OnInit {
      * @param {number} hours time span in hours
      */
     changeTimeSpan(hours: number): void {
-        this.showSpinner = true;
         this.router.navigate(['/graphs', this.selectedTab, hours]);
     }
     /**

@@ -1,1 +1,8 @@
-.graphs {}
+.graphs {
+  .tab {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+}

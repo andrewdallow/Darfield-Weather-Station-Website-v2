@@ -10,6 +10,7 @@ export class HistoricDataService {
 
     private monthly: Observable<HistoricData>;
     private yearly: Observable<HistoricData>;
+    private climate: Observable<any>;
     private records: Observable<any>;
     private validDates: Observable<any>;
 
@@ -29,9 +30,16 @@ export class HistoricDataService {
     get yearlyData(): Observable<HistoricData> {
         return this.yearly;
     }
+    get climateData(): Observable<any> {
+        return this.climate;
+    }
     setValidDates(): void {
         this.validDates = this.getData(AppSettings.HISTORIC_MONTHLY_FILE
             + '?dates=1');
+    }
+
+    setClimateData(): void {
+        this.climate = this.getData(AppSettings.HISTORIC_CLIMATE_FILE);
     }
 
     setMonthlyData(year: string, month: string): void {

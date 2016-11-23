@@ -5,6 +5,40 @@
   }
 }
 
+.climate {
+  .extreme-high {
+    background-color: $red;
+    color: $white;
+  }
+
+  .extreme-low {
+    background-color: $blue;
+    color: $white;
+  }
+
+  .table-chart {
+    border-left: 1px solid $light-grey;
+  }
+
+  .menu-item {
+    cursor: pointer;
+  }
+
+  .sub-menu {
+    list-style: none;
+  }
+
+  .sub-menu-item {
+    margin-left: 30px;
+  }
+
+  .sub-menu .active a,
+  .sub-menu .active a:hover {
+    background-color: $grey-blue;
+  }
+
+}
+
 .summaries {
   .box {
     margin: 20px 0;

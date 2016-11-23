@@ -32,6 +32,12 @@ export class Graph {
                     lineWidth: 1
                 }
             },
+            spline: {
+                marker: {
+                    enabled: false,
+                    lineWidth: 1
+                }
+            },
             areaspline: {
                 marker: {
                     enabled: false

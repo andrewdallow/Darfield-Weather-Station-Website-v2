@@ -147,18 +147,20 @@
                               <div class="row">
                                 <div class="col-md-12 wind">
                                   <span class="graphTitles">High Wind Gust & Direction (km/h)</span><br><br>
-                                  <table class="wind24hr">
-                                      <tr>
-                                          <td class="small center" *ngFor="let value of data.graphData">{{ value.hWindGBear | compase }}</td>
-                                      </tr>
-                                      <tr>
-                                          <td class="wind-direction-icon center" *ngFor="let value of data.graphData"><i class="wi wi-wind from-{{ value.hWindGBear }}-deg"></i></td>
+                                  <div class="table-responsive">
+                                    <table class="wind24hr">
+                                        <tr>
+                                            <td class="small center" *ngFor="let value of data.graphData">{{ value.hWindGBear | compase }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="wind-direction-icon center" *ngFor="let value of data.graphData"><i class="wi wi-wind from-{{ value.hWindGBear }}-deg"></i></td>
 
-                                      </tr>
-                                      <tr>
-                                          <td class="small center" *ngFor="let value of data.graphData">{{ value.highWindGust }}</td>
-                                      </tr>
-                                  </table>
+                                        </tr>
+                                        <tr>
+                                            <td class="small center" *ngFor="let value of data.graphData">{{ value.highWindGust }}</td>
+                                        </tr>
+                                    </table>
+                                  </div>
                                 </div>
                               </div>
                               <div class="row" *ngIf="data">

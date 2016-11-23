@@ -5,6 +5,7 @@ import { HistoryComponent } from './components/history.component';
 import { MonthlyComponent } from './components/monthly/monthly.component';
 import { YearlyComponent } from './components/yearly/yearly.component';
 import { RecordsComponent } from './components/records/records.component';
+import { ClimateComponent } from './components/climate/climate.component';
 
 export const HistoryRoutes: Route[] = [
     {
@@ -22,6 +23,10 @@ export const HistoryRoutes: Route[] = [
             {
                 path: 'records',
                 component: RecordsComponent
+            },
+            {
+                path: 'climate',
+                component: ClimateComponent
             },
             {
                 path: 'monthly',

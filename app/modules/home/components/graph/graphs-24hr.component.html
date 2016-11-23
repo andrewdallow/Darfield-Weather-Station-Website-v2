@@ -8,18 +8,20 @@
                     <div class="row">
                         <div class="col-md-12 hidden-xs">
                             <span class="graphTitles">High Wind Gust & Direction (km/h)</span><br><br>
-                            <table class="wind24Hr" *ngIf="graphData">
-                                <tr>
-                                    <td class="small center" *ngFor="let direction of graphData?.windGustDirText">{{ direction }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="wind-direction center" *ngFor="let point of graphData?.windGustDir"><i class="wi wi-wind from-{{ point }}-deg"></i></td>
+                            <div class="table-responsive">
+                              <table class="wind24Hr" *ngIf="graphData">
+                                  <tr>
+                                      <td class="small center" *ngFor="let direction of graphData?.windGustDirText">{{ direction }}</td>
+                                  </tr>
+                                  <tr>
+                                      <td class="wind-direction center" *ngFor="let point of graphData?.windGustDir"><i class="wi wi-wind from-{{ point }}-deg"></i></td>
 
-                                </tr>
-                                <tr>
-                                    <td class="small center" *ngFor="let speed of graphData?.windGust">{{ speed }}</td>
-                                </tr>
-                            </table>
+                                  </tr>
+                                  <tr>
+                                      <td class="small center" *ngFor="let speed of graphData?.windGust">{{ speed }}</td>
+                                  </tr>
+                              </table>
+                            </div>
                             <hr>
                         </div>
                     </div>

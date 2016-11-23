@@ -50,17 +50,8 @@ export class YearlyRainfallChartComponent implements OnInit, OnChanges {
                 crosshair: {
                     snap: false
                 },
-                labels: {
-                    enabled: true,
-                    formatter: function() {
-                        return moment(this.value, 'MM').format('MMM');
-                    }
-                },
-                tickInterval: 1,
-                min: 1,
-                step: 1,
-                max: 12,
-                tickLength: 0
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
             },
             yAxis: {
                 title: {

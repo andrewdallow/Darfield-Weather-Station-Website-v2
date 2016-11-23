@@ -46,16 +46,9 @@ export class YearlyTemperatureChartComponent implements OnInit, OnChanges {
                 enabled: false
             },
             xAxis: {
-                crosshair: {
-                    snap: false
-                },
-                labels: {
-                    enabled: false
-                },
-                min: 1,
-                step: 1,
-                max: 12,
-                tickLength: 0
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul',
+                    'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
             },
             yAxis: {
                 title: {
@@ -134,7 +127,6 @@ export class YearlyTemperatureChartComponent implements OnInit, OnChanges {
         };
     }
     ngOnChanges(): void {
-        console.log(this.data);
         this.updateGraph();
     }
 

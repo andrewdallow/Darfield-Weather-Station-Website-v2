@@ -1,5 +1,5 @@
 <div data-ads></div>
-<div class="container" id="graphs">
+<div class="container graphs">
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -26,7 +26,7 @@
                           [class.active]="selectedTab === tab"
                           (click)="selectTab(tab)"
                           role="presentation">
-                            <a>{{ tab | capitalize }}</a>
+                            <a class="tab">{{ tab | capitalize }}</a>
                           </li>
                         </ul>
                       </div>
