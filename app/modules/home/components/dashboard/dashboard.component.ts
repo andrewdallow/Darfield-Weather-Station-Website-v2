@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
 import { WeatherDataService } from '../../../../shared/weather-data/weather-data.service';
-import { AppSettings } from '../../../../shared/config/settings';
+import { SettingsService } from '../../../../shared/config/settings.service';
 import { RealtimeGraphDataService } from '../../../../shared/realtime-sql-data/realtime-graph-data.service';
 
 @Component({
@@ -14,6 +14,8 @@ import { RealtimeGraphDataService } from '../../../../shared/realtime-sql-data/r
 
 export class DashboardComponent implements OnInit, OnDestroy {
     public selectedUnit: string;
+    public graphData: any;
+    public settings: any;
     private secondsAgo: number;
     private updateCounter: number;
     private realtimeTimer: any;
@@ -24,20 +26,31 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     constructor(
         private weatherDataService: WeatherDataService,
-        private realtimeGraphDataService: RealtimeGraphDataService) { }
+        private realtimeGraphDataService: RealtimeGraphDataService,
+        private settingsService: SettingsService
+    ) { }
 
 
     ngOnInit(): void {
-        this.selectedUnit = this.getUnits()[0];
-        this.startTimers();
+        this.settingsService.config.then(
+            (config: any) => {
+                this.settings = config;
+                this.selectedUnit = config.units[0];
+                this.startTimers();
+            });
     }
 
     ngOnDestroy(): void {
         this.stopTimers();
     }
+    /**
+     * Determine if the current data need to be converted to the
+     * specfied units.
+     * @param {string} unit unit type e.g. Metric, Imperial.
+     */
     convertUnits(unit: string): void {
         this.selectedUnit = unit;
-        if (unit === this.getUnits()[0]) {
+        if (unit === this.settings.units[0]) {
             this.weatherDataService.convertUnits(false);
         } else {
             this.weatherDataService.convertUnits(true);
@@ -63,39 +76,46 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.stopTimer(this.rapidTimer);
         this.stopTimer(this.lastUpdateTimer);
     }
-    /**
-     * Get the available units of measurement from the settings file.
-     * @returns {Array<string>}
-     */
-    getUnits(): Array<string> {
-        return AppSettings.UNIT_TYPES;
-    }
 
     /**
      * Starts a timer which calls setRealtimeData at an interval set in
-     * AppSettings.REALTIME_INTERVAL, thus regularly updating the realtime
+     * settings.json, thus regularly updating the realtime
      * weather data displayed on the dashboard.
      */
     private startRealtimeTimer(): void {
-        let timespan = 2;
-        this.realtimeGraphDataService.setGraphData(timespan);
+        let timespan = this.settings.liveGraphsTimespan;
+        this.updateGraphData(timespan);
         this.realtimeTimer = Observable.interval(
-            AppSettings.REALTIME_INTERVAL * 1000).subscribe(
+            this.settings.realtimeInterval * 1000).subscribe(
             time => {
                 this.weatherDataService.setRealtimeData();
-                this.realtimeGraphDataService.setGraphData(timespan);
+                this.updateGraphData(timespan);
                 this.updateCounter = this.updateCounter + 1;
-
             });
     }
     /**
+     * Get the most recent graph data for the specified time span.
+     * @param {number} hours time span in hours
+     */
+    private updateGraphData(hours: number): void {
+        this.realtimeGraphDataService.setGraphData(hours).then(
+            () => {
+                this.realtimeGraphDataService.getGraphData().subscribe(
+                    (data: any) => {
+                        this.graphData = data;
+                    }
+                );
+            }
+        );
+    }
+    /**
      * Starts a timer which calls rapidUpdate at an interval set in
-     * AppSettings.RAPID_INTERVAL, which rapidly updates weather data on
+     * settings.json, which rapidly updates weather data on
      * the dashboard.
      */
     private startRapidTimer(): void {
         this.rapidTimer = Observable.interval(
-            AppSettings.RAPID_INTERVAL * 1000).subscribe(
+            this.settings.rapidInterval * 1000).subscribe(
             time => {
                 this.weatherDataService.rapidUpdate();
             });
@@ -104,7 +124,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
      * Starts a timer which counts the number of seconds since the realtime
      * weather data was updated, and resets when an update is detected. This
      * function also pauses updates after a specified MAXIMUM_COUNT and if the
-     * station is offline defined by MAX_OFFLINE_TIME in AppSettings.
+     * station is offline defined by MAX_OFFLINE_TIME in settings.json.
      */
     private startLastUpdateTimer(): void {
         this.lastUpdateTimer = Observable.interval(1000).subscribe(
@@ -113,15 +133,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
                     let currentTime = Date.now();
                     let time = new Date(this.weatherDataService.getRealtimeData().time);
                     if ((currentTime - time.getTime()) >=
-                        (AppSettings.MAXIMUM_OFFLINE_TIME * 1000)) {
+                        (this.settings.maxOfflineTime * 1000)) {
                         this.isOffline = true;
                         this.isPaused = true;
                         this.stopTimers();
-                    } else if (this.updateCounter >= AppSettings.MAXIMUM_COUNT) {
+                    } else if (this.updateCounter >= this.settings.maxUpdateCount) {
                         this.isPaused = true;
                         this.stopTimers();
                     } else if (this.weatherDataService.getIsUpdated()) {
                         this.resetLastUpdateTimer();
+                        this.secondsAgo = 0;
                     } else {
                         this.secondsAgo = ticks;
                     }

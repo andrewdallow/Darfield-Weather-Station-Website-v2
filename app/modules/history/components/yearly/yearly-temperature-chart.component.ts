@@ -46,6 +46,11 @@ export class YearlyTemperatureChartComponent implements OnInit, OnChanges {
                 enabled: false
             },
             xAxis: {
+                min: 0,
+                max: 11,
+                labels: {
+                    enabled: false
+                },
                 categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul',
                     'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
@@ -143,7 +148,7 @@ export class YearlyTemperatureChartComponent implements OnInit, OnChanges {
         let result: number[][] = [];
         let day: number;
         for (let entry of data.graphData) {
-            day = +moment(entry.logDate, 'YYYY-MM-DD').format('MM');
+            day = +moment(entry.logDate, 'YYYY-MM-DD').format('MM') - 1;
             result.push([day, +entry.maxTemp]);
         }
         return result;
@@ -152,7 +157,7 @@ export class YearlyTemperatureChartComponent implements OnInit, OnChanges {
         let result: number[][] = [];
         let day: number;
         for (let entry of data.graphData) {
-            day = +moment(entry.logDate, 'YYYY-MM-DD').format('MM');
+            day = +moment(entry.logDate, 'YYYY-MM-DD').format('MM') - 1;
             result.push([day, +entry.avgMaxTemp]);
         }
         return result;
@@ -162,7 +167,7 @@ export class YearlyTemperatureChartComponent implements OnInit, OnChanges {
         let result: number[][] = [];
         let day: number;
         for (let entry of data.graphData) {
-            day = +moment(entry.logDate, 'YYYY-MM-DD').format('MM');
+            day = +moment(entry.logDate, 'YYYY-MM-DD').format('MM') - 1;
             result.push([day, +entry.avgMinTemp]);
         }
         return result;
@@ -172,7 +177,7 @@ export class YearlyTemperatureChartComponent implements OnInit, OnChanges {
         let result: number[][] = [];
         let day: number;
         for (let entry of data.graphData) {
-            day = +moment(entry.logDate, 'YYYY-MM-DD').format('MM');
+            day = +moment(entry.logDate, 'YYYY-MM-DD').format('MM') - 1;
             result.push([day, +entry.minTemp]);
         }
         return result;

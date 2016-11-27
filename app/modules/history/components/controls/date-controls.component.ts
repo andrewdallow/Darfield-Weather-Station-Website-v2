@@ -8,7 +8,9 @@ import { HistoricDataService } from '../../services/historic-data.service';
     selector: 'date-controls',
     templateUrl: 'date-controls.component.html'
 })
-
+/**
+ * This class represents the lazy loaded DateControlsComponent.
+ */
 export class DateControlsComponent implements OnInit {
     @Input() dateType: string;
     public validDates: any;
@@ -93,11 +95,15 @@ export class DateControlsComponent implements OnInit {
     }
 
     private setValidDates(): void {
-        this.historicDataService.setValidDates();
-        this.historicDataService.validDatesData.subscribe(
-            (dates: any) => {
-                this.validDates = dates;
+        this.historicDataService.setValidDates().then(
+            () => {
+                this.historicDataService.validDatesData.subscribe(
+                    (dates: any) => {
+                        this.validDates = dates;
+                    }
+                );
             }
         );
+
     }
 }

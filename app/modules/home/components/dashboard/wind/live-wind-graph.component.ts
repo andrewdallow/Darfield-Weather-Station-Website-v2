@@ -1,5 +1,4 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
-import { ReplaySubject } from 'rxjs/Rx';
 
 @Component({
     selector: 'live-wind-graph',
@@ -7,7 +6,7 @@ import { ReplaySubject } from 'rxjs/Rx';
 })
 
 export class LiveWindGraphComponent implements OnInit, OnChanges {
-    @Input() data: ReplaySubject<any>;
+    @Input() data: any;
     private options: Object;
     private chart: any;
     private windDirections = [
@@ -157,47 +156,46 @@ export class LiveWindGraphComponent implements OnInit, OnChanges {
     }
 
     updateGraph(): void {
-        this.data.subscribe(
-            data => {
-                let series: any;
-                let set = [
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-                ];
+        if (this.chart) {
+            let series: any;
+            let set = [
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            ];
 
-                series = this.mapSeries(data.datasets.windDirection, data.datasets.windSpeed);
+            series = this.mapSeries(this.data.datasets.windDirection, this.data.datasets.windSpeed);
 
-                for (let entry of series) {
+            for (let entry of series) {
 
-                    if (entry[1] < 5) {
-                        set[0][Math.floor(entry[0] / 22.5)]++;
-                    } else if (entry[1] >= 5 && entry[1] < 15) {
-                        set[1][Math.floor(entry[0] / 22.5)]++;
-                    } else if (entry[1] >= 15 && entry[1] < 25) {
-                        set[2][Math.floor(entry[0] / 22.5)]++;
-                    } else if (entry[1] >= 25 && entry[1] < 35) {
-                        set[3][Math.floor(entry[0] / 22.5)]++;
-                    } else if (entry[1] >= 35 && entry[1] < 45) {
-                        set[4][Math.floor(entry[0] / 22.5)]++;
-                    } else if (entry[1] >= 45) {
-                        set[5][Math.floor(entry[0] / 22.5)]++;
-                    }
+                if (entry[1] < 5) {
+                    set[0][Math.floor(entry[0] / 22.5)]++;
+                } else if (entry[1] >= 5 && entry[1] < 15) {
+                    set[1][Math.floor(entry[0] / 22.5)]++;
+                } else if (entry[1] >= 15 && entry[1] < 25) {
+                    set[2][Math.floor(entry[0] / 22.5)]++;
+                } else if (entry[1] >= 25 && entry[1] < 35) {
+                    set[3][Math.floor(entry[0] / 22.5)]++;
+                } else if (entry[1] >= 35 && entry[1] < 45) {
+                    set[4][Math.floor(entry[0] / 22.5)]++;
+                } else if (entry[1] >= 45) {
+                    set[5][Math.floor(entry[0] / 22.5)]++;
                 }
+            }
 
-                for (let i = 0; i < set.length; i++) {
-                    for (let j = 0; j < set[i].length; j++) {
-                        set[i][j] = Math.round((set[i][j] / data.datasets.windDirection.length) * 100);
-                    }
+            for (let i = 0; i < set.length; i++) {
+                for (let j = 0; j < set[i].length; j++) {
+                    set[i][j] = Math.round((set[i][j] / this.data.datasets.windDirection.length) * 100);
                 }
+            }
 
-                for (let i = 0; i < set.length; i++) {
-                    this.chart.series[i].setData(this.mapSeries(this.windDirections, set[i]));
-                }
-            });
+            for (let i = 0; i < set.length; i++) {
+                this.chart.series[i].setData(this.mapSeries(this.windDirections, set[i]));
+            }
+        }
     }
 
 

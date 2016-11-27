@@ -1,10 +1,11 @@
-import { Directive, ElementRef, Input, Renderer, OnChanges, SimpleChange } from '@angular/core';
+import { Directive, ElementRef, Input, Renderer, OnChanges } from '@angular/core';
 
-import { AppSettings } from '../../shared/config/settings';
 /**
- * Directive: Adds 'highlight' the class of an element when a value changes
- * and is then removed after a specified time later. 'highlight' can be
- * specified in css to style this highlight.
+ * Directive: Adds the bootstrap 3 glyphicon-arrow-up, minus, or down class
+ * to the element depending on the provided trend value. 
+ *      positive numbers - glyphicon-arrow-up
+ *      negative numbers - glyphicon-arrow-down
+ *      zero numbers     - glyphicon-minus
  */
 @Directive({ selector: '[trend]' })
 export class TrendDirective implements OnChanges {

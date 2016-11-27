@@ -50,6 +50,8 @@ export class YearlyRainfallChartComponent implements OnInit, OnChanges {
                 crosshair: {
                     snap: false
                 },
+                min: 0,
+                max: 11,
                 categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
             },
@@ -125,7 +127,7 @@ export class YearlyRainfallChartComponent implements OnInit, OnChanges {
         let result: number[][] = [];
         let day: number;
         for (let entry of data.graphData) {
-            day = +moment(entry.logDate, 'YYYY-MM-DD').format('MM');
+            day = +moment(entry.logDate, 'YYYY-MM-DD').format('MM') - 1;
             result.push([day, +entry.totRainFall]);
         }
         return result;

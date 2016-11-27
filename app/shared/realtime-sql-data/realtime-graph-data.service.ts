@@ -1,34 +1,53 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Observable, ReplaySubject } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
 
-import { AppSettings } from '../../shared/config/settings';
+import { SettingsService } from '../../shared/config/settings.service';
 
 /**
- * Class representing the services to get the current weather data.
+ * Class representing the service RealtimeGraphDataService with methods for setting
+ * and reading the realtime graph data.
  */
 @Injectable()
 export class RealtimeGraphDataService {
     private realtimeData: Observable<any>;
 
-    constructor(private http: Http) { }
-
+    constructor(
+        private http: Http,
+        private settingsService: SettingsService
+    ) { }
+    /**
+     * Get the realtime graoh data
+     * @return {Observable<any>} graph data
+     */
     getGraphData(): Observable<any> {
         return this.realtimeData;
     }
 
+    /**
+     * Set the realtime graph data with the specified timespan in hours
+     * @param  {number}       hours time span
+     * @return {Promise<any>}
+     */
+    setGraphData(hours: number): Promise<any> {
 
-    setGraphData(hours: number): void {
-        this.realtimeData = this.getData(AppSettings.REALTIME_SQL_FILE + `?hours=${hours}`);
-
+        return this.settingsService.config.then(
+            (_config: any) => {
+                this.realtimeData = this.getData(_config.files.realtimeDatabase
+                    + `?hours=${hours}`);
+            });
     }
-
-    mapSeries(x: Array<any>, y: Array<any>): Array<any> {
+    /**
+     * Map the time data to the weather values.
+     * @param  {Array<any>} t time data
+     * @param  {Array<any>} y weather data
+     * @return {Array<any>}   mapped data
+     */
+    mapSeries(t: Array<any>, y: Array<any>): Array<any> {
         let series: Array<any> = [];
-        if (x.length === y.length) {
-            for (let i = 0; i < x.length; i++) {
-                series = series.concat([[x[i], y[i]]]);
-
+        if (t.length === y.length) {
+            for (let i = 0; i < t.length; i++) {
+                series = series.concat([[t[i], y[i]]]);
             }
         }
         return series;
@@ -55,7 +74,9 @@ export class RealtimeGraphDataService {
             .map((res: Response) => res.json(), this.getOptions())
             .catch(this.handleError);
     }
-
+    /**
+     * Handle HTTP error
+     */
     private handleError(error: Response | any) {
         // In a real world app, we might use a remote logging infrastructure
         let errMsg: string;

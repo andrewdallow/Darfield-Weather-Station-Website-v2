@@ -1,98 +1,95 @@
-<div class="col-xs-12 col-sm-6 col-md-4">
-    <div class="panel panel-default">
-        <div class="panel-heading">Wind</div>
-        <div class="panel-body data-panel">
+<div class="panel panel-default">
+    <div class="panel-heading">Wind</div>
+    <div class="panel-body data-panel">
 
-            <div class="row">
-                <div class="col-xs-6">
-                    <wind-vane class="wind-vane"></wind-vane>
-                </div>
-                <div class="col-xs-6">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <span highlighter="weatherDataService.getRealtimeData()?.windSpeed.value">
+        <div class="row">
+            <div class="col-xs-6">
+                <wind-vane class="wind-vane"></wind-vane>
+            </div>
+            <div class="col-xs-6">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <span [highlighter]="weatherDataService.getRealtimeData()?.windSpeed.value">
                               <span class="very-large">
                                 <span [innerHTML]="weatherDataService.getRealtimeData()?.windSpeed | unitConverter:weatherDataService.getIsConverted():'units-big'"></span>
-                              </span>
-                            </span>
-                        </div>
+                        </span>
+                        </span>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12 grey right">
-                            <span highlighter="weatherDataService.getRealtimeData()?.windGust.value">
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 grey right">
+                        <span [highlighter]="weatherDataService.getRealtimeData()?.windGust.value">
                               Gust:
-                              <span [innerHTML]="weatherDataService.getRealtimeData()?.windGust | unitConverter:weatherDataService.getIsConverted()"></span>
-                              {{ weatherDataService.getRealtimeData()?.windGustDirText }}
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="row italic spacing-top-medium">
-                <div class="col-sm-12">
-                    <span highlighter="weatherDataService.getRealtimeData()?.beaufortDesc">{{weatherDataService.getRealtimeData()?.beaufortDesc}} (B{{weatherDataService.getRealtimeData()?.beaufort}})</span>
-                </div>
-            </div>
-
-
-            <div class="row spacing-top-medium">
-                <div class="col-xs-4">
-                    <div class="row">
-                        <div class="col-xs-12">10-min Avg</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 large bold">
-                          <span highlighter="weatherDataService.getRealtimeData()?.avwindlastimediate10.value">
-                            <span [innerHTML]="weatherDataService.getRealtimeData()?.avwindlastimediate10 | unitConverter:weatherDataService.getIsConverted():'units-medium'"></span>
-                          </span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                          <span highlighter="weatherDataService.getRealtimeData()?.avwindlastimediate10.value">
-                            {{weatherDataService.getRealtimeData()?.avdir10minuteText}} ({{weatherDataService.getRealtimeData()?.avdir10minute}})
-                          </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-4 center">
-                    <div class="row">
-                        <div class="col-xs-12">1-hr Avg</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 large bold">
-                          <span highlighter="weatherDataService.getRealtimeData()?.avwindlastimediate60.value">
-                            <span [innerHTML]="weatherDataService.getRealtimeData()?.avwindlastimediate60 | unitConverter:weatherDataService.getIsConverted():'units-medium'"></span></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-4 right">
-                    <div class="row">
-                        <div class="col-xs-12">Max Gust</div>
-                    </div>
-                    <div class="row large bold">
-                        <div class="col-xs-12">
-                          <span highlighter="weatherDataService.getRealtimeData()?.windMaxValue.value">
-                            <span [innerHTML]="weatherDataService.getRealtimeData()?.windMaxValue | unitConverter:weatherDataService.getIsConverted():'units-medium'"></span>
-                          </span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12"><span highlighter="weatherDataService.getRealtimeData()?.windMaxValue.value">{{weatherDataService.getRealtimeData()?.windMaxTime}} ({{weatherDataService.getRealtimeData()?.windMaxGustDirText}})</span></div>
+                              <span [innerHTML]="weatherDataService.getRealtimeData()?.windGust | unitConverter:weatherDataService.getIsConverted()"></span> {{ weatherDataService.getRealtimeData()?.windGustDirText }}
+                        </span>
                     </div>
                 </div>
             </div>
-            <div class="row spacing-top-medium">
-                <div class="col-xs-12 center bold">Wind Rose Last Hour</div>
-                <div class="col-xs-12 spacing-top-small">
-                    <live-wind-graph [data]='data'></live-wind-graph>
-                </div>
-            </div>
-
-
-
 
         </div>
+        <div class="row italic spacing-top-medium">
+            <div class="col-sm-12">
+                <span [highlighter]="weatherDataService.getRealtimeData()?.beaufortDesc">{{weatherDataService.getRealtimeData()?.beaufortDesc}} (B{{weatherDataService.getRealtimeData()?.beaufort}})</span>
+            </div>
+        </div>
+
+
+        <div class="row spacing-top-medium">
+            <div class="col-xs-4">
+                <div class="row">
+                    <div class="col-xs-12">10-min Avg</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 large bold">
+                        <span [highlighter]="weatherDataService.getRealtimeData()?.avwindlastimediate10.value">
+                            <span [innerHTML]="weatherDataService.getRealtimeData()?.avwindlastimediate10 | unitConverter:weatherDataService.getIsConverted():'units-medium'"></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <span [highlighter]="weatherDataService.getRealtimeData()?.avwindlastimediate10.value">
+                            {{weatherDataService.getRealtimeData()?.avdir10minuteText}} ({{weatherDataService.getRealtimeData()?.avdir10minute}})
+                          </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-4 center">
+                <div class="row">
+                    <div class="col-xs-12">1-hr Avg</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 large bold">
+                        <span [highlighter]="weatherDataService.getRealtimeData()?.avwindlastimediate60.value">
+                            <span [innerHTML]="weatherDataService.getRealtimeData()?.avwindlastimediate60 | unitConverter:weatherDataService.getIsConverted():'units-medium'"></span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-4 right">
+                <div class="row">
+                    <div class="col-xs-12">Max Gust</div>
+                </div>
+                <div class="row large bold">
+                    <div class="col-xs-12">
+                        <span [highlighter]="weatherDataService.getRealtimeData()?.windMaxValue.value">
+                            <span [innerHTML]="weatherDataService.getRealtimeData()?.windMaxValue | unitConverter:weatherDataService.getIsConverted():'units-medium'"></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12"><span [highlighter]="weatherDataService.getRealtimeData()?.windMaxValue.value">{{weatherDataService.getRealtimeData()?.windMaxTime}} ({{weatherDataService.getRealtimeData()?.windMaxGustDirText}})</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="row spacing-top-medium">
+            <div class="col-xs-12 center bold">Wind Rose Last Hour</div>
+            <div class="col-xs-12 spacing-top-small">
+                <live-wind-graph [data]='data'></live-wind-graph>
+            </div>
+        </div>
+
+
+
+
     </div>
 </div>

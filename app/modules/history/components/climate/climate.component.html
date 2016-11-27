@@ -2,69 +2,63 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-              <div class="panel-heading">Month-by-Year Tables and Charts</div>
+                <div class="panel-heading">Month-by-Year Tables and Charts</div>
                 <div class="panel-body">
-                  <div class="row">
-                    <div class="col-md-3 menu">
-                      <ul class="nav nav-pills nav-stacked" >
-                          <li *ngFor="let type of dataTypes"
-                              role="presentation" [class.active]="!type.isCollapsed">
-                            <a class="menu-item"
-                            (click)="type.isCollapsed = !type.isCollapsed"
-                            >
-                              <i *ngIf="type.isCollapsed" class="fa fa-plus-square-o"></i>
-                              <i *ngIf="!type.isCollapsed" class="fa fa-minus-square-o"></i>
-                               <span class="bold">{{ type.name }}</span>
-                            </a>
-                            <ul class="nav nav-pills nav-stacked sub-menu" [collapse]="type.isCollapsed">
-                                <li [class.active]="selectedValue.name === child.name" *ngFor="let child of type.children">
-                                  <a class="menu-item sub-menu-item small"
-                                      (click)="getSelectedData(child)">
+                    <div class="row">
+                        <div class="col-md-3 menu">
+                            <ul class="nav nav-pills nav-stacked">
+                                <li *ngFor="let type of dataTypes" role="presentation" [class.active]="!type.isCollapsed">
+                                    <a class="menu-item" (click)="type.isCollapsed = !type.isCollapsed">
+                                        <i *ngIf="type.isCollapsed" class="fa fa-plus-square-o"></i>
+                                        <i *ngIf="!type.isCollapsed" class="fa fa-minus-square-o"></i>
+                                        <span class="bold">{{ type.name }}</span>
+                                    </a>
+                                    <ul class="nav nav-pills nav-stacked sub-menu" [collapse]="type.isCollapsed">
+                                        <li [class.active]="selectedValue.name === child.name" *ngFor="let child of type.children">
+                                            <a class="menu-item sub-menu-item small" (click)="getSelectedData(child)">
                                     {{ child.name }}
                                   </a>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
-                          </li>
-                      </ul>
+                        </div>
+                        <div class="col-md-9 table-chart" *ngIf="data">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h1>{{ selectedValue.name }} (<span [innerHTML]="selectedValue.unit.trim()"></span>)</h1>
+                                    <p class="small spacing-top-medium">
+                                        {{ selectedValue.description }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row spacing-top-medium">
+                                <div class="col-md-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <tr>
+                                                <th></th>
+                                                <th *ngFor="let month of months">{{ month }}</th>
+                                            </tr>
+                                            <tr *ngFor="let year of data">
+                                                <th>{{ year.name }}</th>
+                                                <td [class.extreme-high]="data.max === value" [class.extreme-low]="data.min === value" *ngFor="let value of year.data">
+                                                    {{value}}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <hr />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row spacing-top-medium">
+                                <div class="col-md-12">
+                                    <climate-chart [data]="data" [meta]="selectedValue"></climate-chart>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-9 table-chart" *ngIf="data">
-                      <div class="row">
-                        <div class="col-md-12">
-                          <h1>{{ selectedValue.name }} (<span [innerHTML]="selectedValue.unit.trim()"></span>)</h1>
-                          <p class="small spacing-top-medium">
-                            {{ selectedValue.description }}
-                          </p>
-                        </div>
-                      </div>
-                      <div class="row spacing-top-medium">
-                        <div class="col-md-12">
-                          <div class="table-responsive">
-                          <table class="table table-hover">
-                              <tr>
-                                <th></th>
-                                <th *ngFor="let month of months">{{ month }}</th>
-                              </tr>
-                              <tr *ngFor="let year of data">
-                                <th>{{ year.name }}</th>
-                                <td [class.extreme-high]="data.max === value"
-                                [class.extreme-low]="data.min === value"
-                                *ngFor="let value of year.data">
-                                  {{value}}
-                                </td>
-                              </tr>
-                          </table>
-                          <hr />
-                        </div>
-                        </div>
-                      </div>
-                      <div class="row spacing-top-medium">
-                        <div class="col-md-12">
-                          <climate-chart [data]="data" [meta]="selectedValue"></climate-chart>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-              </div>
+                </div>
             </div>
         </div>
     </div>

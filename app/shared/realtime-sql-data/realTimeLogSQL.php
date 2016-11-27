@@ -1,46 +1,44 @@
 <?php
 
-include ('../../forbidden/b_rw_details.php');
+include '../../forbidden/b_rw_details.php';
 
 date_default_timezone_set('Pacific/Auckland');
 
-
-if (filter_input(INPUT_GET, "hours")) {
-    $interval = filter_input(INPUT_GET, "hours");
+if (filter_input(INPUT_GET, 'hours')) {
+    $interval = filter_input(INPUT_GET, 'hours');
 } else {
     die("No 'hours' parameter supplied");
 }
 
-if ($interval == "") {
-    die("Invalid number of months specified");
+if ($interval == '') {
+    die('Invalid number of months specified');
 }
 
 //Connect to Weather data database
 $mysqli = new mysqli($dbhost, $dbuser, $dbpassword, $database);
 
 if ($mysqli->connect_errno) {
-    echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+    echo 'Failed to connect to MySQL: ('.$mysqli->connect_errno.') '.$mysqli->connect_error;
 }
 
-
-//Associative array for realtime date used for JSON 
+//Associative array for realtime date used for JSON
 $data = [
-    "xData" => [],
-    "datasets" => [
-		"temperature" => [],
-		"dewpoint" => [],
-		"windChill" => [],
-		"windSpeed" => [],
-		"windGust" => [],
-		"windDirection" => [],
-		"humidity" => [],
-		"pressure" => [],
-		"rainFall" => [],
-		"rainRate" => [],
-    ]
+    'xData' => [],
+    'datasets' => [
+        'temperature' => [],
+        'dewpoint' => [],
+        'windChill' => [],
+        'windSpeed' => [],
+        'windGust' => [],
+        'windDirection' => [],
+        'humidity' => [],
+        'pressure' => [],
+        'rainFall' => [],
+        'rainRate' => [],
+    ],
 ];
 
-$sql = "SELECT * FROM realtime1 WHERE datetime >= DATE_FORMAT(NOW() - INTERVAL " . $interval . " HOUR, '%Y-%m-%d %H:%i:%s');";
+$sql = 'SELECT * FROM realtime1 WHERE datetime >= DATE_FORMAT(NOW() - INTERVAL '.$interval." HOUR, '%Y-%m-%d %H:%i:%s');";
 
 //Quary Realtime table
 $result = $mysqli->query($sql);
@@ -50,7 +48,7 @@ $timezone = 60 * 60 * 12 * 1000;
 if ($result) {
     while ($row = mysqli_fetch_assoc($result)) {
         $time = new DateTime($row['dateTime']);
-        $data['xData'][] = $time->getTimestamp() * 1000;
+        $data['xData'][] = $time->getTimestamp() * 1000 + $timezone;
 
         $data['datasets']['temperature'][] = (float) $row['temp'];
         $data['datasets']['dewpoint'][] = (float) $row['dew'];
@@ -60,17 +58,17 @@ if ($result) {
         $data['datasets']['windGust'][] = (float) $row['gust'];
 
         $data['datasets']['windDirection'][] = (float) $row['windDir'];
-        
+
         $data['datasets']['humidity'][] = (float) $row['hum'];
-        $data['datasets']['pressure'][] = (float) $row['baro'];        
+        $data['datasets']['pressure'][] = (float) $row['baro'];
 
         $data['datasets']['rainFall'][] = (float) $row['rFall'];
-		$data['datasets']['rainRate'][] = (float) $row['rRate'];
+        $data['datasets']['rainRate'][] = (float) $row['rRate'];
     }
     /* free result set */
     $result->close();
 } else {
-    echo "Error: " . $sql . "<br>" . $mysqli->error;
+    echo 'Error: '.$sql.'<br>'.$mysqli->error;
 }
 $mysqli->close();
 

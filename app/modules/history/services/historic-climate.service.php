@@ -6,11 +6,13 @@ class HistoricData
 {
     // Database connection
     private $db;
-    private $table = 'dayfile';
+    private $table;
     private $dates;
 
     public function __construct()
     {
+        global $dayfile;
+        $this->table = $dayfile;
         $this->db = new Db();
     }
   /**
@@ -72,6 +74,7 @@ class HistoricData
               .'ROUND(MAX(`HighWindGust`), 1) AS `highestWindGust`, '
               .'ROUND(MAX(`TotWindRun`), 1) AS `highestWindRun`, '
               .'ROUND(MIN(`TotWindRun`), 1) AS `lowestWindRun`, '
+              .'ROUND(AVG(`TotWindRun`), 1) AS `averageDailyWindRun`, '
               .'ROUND(MAX(`MaxPress`), 1) AS `highestPressure`, '
               .'ROUND(MIN(`MinPress`), 1) AS `lowestPressure`, '
               .'ROUND(MAX(`HighDewPoint`), 1) AS `highestDewpoint`, '

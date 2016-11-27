@@ -1,4 +1,8 @@
 .graphs {
+  .sk-circle .sk-child:before {
+    background-color: $black;
+  }
+
   .tab {
     &:hover {
       cursor: pointer;

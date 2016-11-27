@@ -5,45 +5,45 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Recent Graphs</div>
                 <div class="panel-body">
-
                     <div class="row">
                         <div class="col-md-12">
                             <div class="btn-group btn-group-lg" role="group">
-                                <button *ngFor="let button of buttons"
-                                  class="btn btn-default"
-                                  [class.active]="selectedButton === button"
-                                  type="button"
-                                  (click)="changeTimeSpan(button)">
+                                <button *ngFor="let button of buttons" class="btn btn-default" [class.active]="selectedButton === button" type="button" (click)="changeTimeSpan(button)">
                                   {{ button }} Hrs
                                 </button>
                             </div>
                         </div>
                     </div>
                     <div class="row spacing-top-large">
-                      <div class="col-md-12">
-                        <ul class="nav nav-tabs nav-justified">
-                          <li *ngFor="let tab of tabs"
-                          [class.active]="selectedTab === tab"
-                          (click)="selectTab(tab)"
-                          role="presentation">
-                            <a class="tab">{{ tab | capitalize }}</a>
-                          </li>
-                        </ul>
-                      </div>
+                        <div class="col-md-12">
+                            <ul class="nav nav-tabs nav-justified">
+                                <li *ngFor="let tab of tabs" [class.active]="selectedTab === tab" (click)="selectTab(tab)" role="presentation">
+                                    <a class="tab">{{ tab | capitalize }}</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-
-
-                    <div class="row spacing-top-large" >
-                        <div class="col-md-12" >
+                    <div class="row spacing-top-large">
+                        <div class="col-md-12">
                             <div class="loader" *ngIf="showSpinner">
-                                <svg class="circular" viewBox="25 25 50 50">
-                                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
-                                </svg>
+                                <div class="sk-circle">
+                                    <div class="sk-circle1 sk-child"></div>
+                                    <div class="sk-circle2 sk-child"></div>
+                                    <div class="sk-circle3 sk-child"></div>
+                                    <div class="sk-circle4 sk-child"></div>
+                                    <div class="sk-circle5 sk-child"></div>
+                                    <div class="sk-circle6 sk-child"></div>
+                                    <div class="sk-circle7 sk-child"></div>
+                                    <div class="sk-circle8 sk-child"></div>
+                                    <div class="sk-circle9 sk-child"></div>
+                                    <div class="sk-circle10 sk-child"></div>
+                                    <div class="sk-circle11 sk-child"></div>
+                                    <div class="sk-circle12 sk-child"></div>
+                                </div>
                             </div>
                             <div *ngIf="!showSpinner">
                                 <chart *ngFor="let chart of charts" [options]="chart" (load)="saveInstance($event.context)" (mousemove)="graphCombo($event)"></chart>
                             </div>
-
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 .forecast {
-  .forecast-row {
-    padding-bottom: 30px;
+  .sk-circle .sk-child:before {
+    background-color: $black;
   }
 
   .text {
@@ -8,21 +8,21 @@
     float: none;
   }
 
-  .temperature {
-    display: block;
-    width: 100%;
+  .high {
+    color: $high-temp;
+  }
 
-    .high {
-      color: $high-temp;
-    }
-
-    .low {
-      color: $low-temp;
-    }
+  .low {
+    color: $low-temp;
   }
 
   .day {
     display: block;
     width: 100%;
+  }
+
+  img {
+    display: block;
+    margin: 0 auto;
   }
 }

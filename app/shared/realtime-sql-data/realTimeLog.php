@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-include ('/var/www/vhosts/darfield-weather.co.nz/httpsdocs/forbidden/b_rw_details.php');
+include '/var/www/vhosts/darfield-weather.co.nz/httpsdocs/forbidden/b_rw_details.php';
 
 $param_retainVal = 48;
 $param_retainUnit = 'hour';
@@ -16,15 +16,15 @@ $SITE['source'] = '/var/www/vhosts/darfield-weather.co.nz/httpsdocs/data/realtim
 
 //Connect to Weather data database
 $mysqli = new mysqli($dbhost, $dbuser, $dbpassword, $database);
-$param_table = "realtime1";
+$param_table = 'realtime1';
 $CreateQuery = "CREATE TABLE $param_table (dateTime datetime NOT NULL,"
-        . "temp decimal(5,1),hum varchar(3),dew decimal(5,1),"
-        . "wind decimal(5,1),windDir varchar(3),gust decimal(5,1),"
-        . "gustDir varchar(3),baro decimal(6,2),rFall decimal(4,1), rRate decimal(4,1), windChill decimal(5,1),"
-        . "PRIMARY KEY(dateTime))";
+        .'temp decimal(5,1),hum varchar(3),dew decimal(5,1),'
+        .'wind decimal(5,1),windDir varchar(3),gust decimal(5,1),'
+        .'gustDir varchar(3),baro decimal(6,2),rFall decimal(4,1), rRate decimal(4,1), windChill decimal(5,1),'
+        .'PRIMARY KEY(dateTime))';
 
 if ($mysqli->connect_errno) {
-    echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+    echo 'Failed to connect to MySQL: ('.$mysqli->connect_errno.') '.$mysqli->connect_error;
 }
 
 if ($param_retainVal > 0) {
@@ -36,7 +36,6 @@ if ($param_retainVal > 0) {
     if (!$mysqli->query($DeleteEntries)) {
         echo "Error: Failed to delete records:$lf $DeleteEntries $lf";
         echo $mysqli->error + $lf;
-        
     } else {
         echo "done.$lf";
     }
@@ -47,7 +46,7 @@ $jsonData = file_get_contents($SITE['source']);
 
 if ($jsonData) {
     //Convert JSON object to PHP associtive array
-    $data = json_decode($jsonData, TRUE);
+    $data = json_decode($jsonData, true);
 
     // check if the table is available
     $res = $mysqli->query("SHOW TABLES LIKE '$param_table'");
@@ -61,33 +60,33 @@ if ($jsonData) {
     //$time = strptime($data.time, '%d-%h-$G %k:%M');
     $time = DateTime::createFromFormat('j/M/Y H:i', $data['time']);
 
-    if (!($mysqli->query("SET time_zone='+12:00'"))) {
-        die("ERROR - TZ Statement");
-    }
+    // if (!($mysqli->query("SET time_zone='+12:00'"))) {
+    //     die("ERROR - TZ Statement");
+    // }
 
     //Extract the array values
-    $dateTime = $time->format("Y-m-d H:i:s");
-    $temp = $data['outTemp']["value"];
-    $hum = $data['humidity']["value"];
-    $dew = $data['dewpoint']["value"];
-    $wind = $data['windSpeed']["value"];
+    $dateTime = $time->format('Y-m-d H:i:s');
+    $temp = $data['outTemp']['value'];
+    $hum = $data['humidity']['value'];
+    $dew = $data['dewpoint']['value'];
+    $wind = $data['windSpeed']['value'];
     $windDir = $data['windDir'];
-    $gust = $data['windGust']["value"];
+    $gust = $data['windGust']['value'];
     $gustDir = $data['windGustDir'];
-    $baro = $data['barometer']["value"];
-    $rFall = $data['rainSumDay']["value"];
-	$rRate = $data['rainRate']["value"];
-    $windChill = $data['windchill']["value"];
+    $baro = $data['barometer']['value'];
+    $rFall = $data['rainSumDay']['value'];
+    $rRate = $data['rainRate']['value'];
+    $windChill = $data['windchill']['value'];
 
     $sql = "INSERT INTO $param_table (dateTime, temp, hum, dew,"
-            . " wind, windDir, gust, gustDir, baro, rFall, rRate, windChill)"
-            . " VALUES ('$dateTime', '$temp', '$hum', '$dew', '$wind', '$windDir',"
-            . " $gust, $gustDir, $baro, $rFall, $rRate, $windChill)";
+            .' wind, windDir, gust, gustDir, baro, rFall, rRate, windChill)'
+            ." VALUES ('$dateTime', '$temp', '$hum', '$dew', '$wind', '$windDir',"
+            ." $gust, $gustDir, $baro, $rFall, $rRate, $windChill)";
 
-    if ($mysqli->query($sql) === TRUE) {
-        echo "New record created successfully";
+    if ($mysqli->query($sql) === true) {
+        echo 'New record created successfully';
     } else {
-        echo "Error: " . $sql . "<br>" . $mysqli->error;
+        echo 'Error: '.$sql.'<br>'.$mysqli->error;
     }
 } else {
     echo $SITE['source'] + ' does not exist.';

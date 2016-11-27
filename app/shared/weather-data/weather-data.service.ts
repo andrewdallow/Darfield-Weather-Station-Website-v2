@@ -3,7 +3,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import * as moment from 'moment';
 
-import { AppSettings } from '../config/settings';
+import { SettingsService } from '../../shared/config/settings.service';
 
 import { RealtimeData } from '../data-schemes/realtime-data';
 import { Graph24HrsData } from '../data-schemes/graphs-24hr-data';
@@ -21,11 +21,19 @@ export class WeatherDataService {
     private extremes: Extremes;
     private isUpdated: boolean = false;
     private isConverted: boolean = false;
+    private settings: any;
 
-    constructor(private http: Http) {
-        this.setRealtimeData();
-        this.setExtremesData();
-        this.setGraphs24HrData();
+    constructor(
+        private http: Http,
+        private settingsService: SettingsService
+    ) {
+        this.settingsService.config.then(
+            (_config: any) => {
+                this.settings = _config.files;
+                this.setRealtimeData();
+                this.setExtremesData();
+            });
+
     }
     /**
      * Set flag on whether to convert the data units or not.
@@ -46,23 +54,30 @@ export class WeatherDataService {
      * Set the Realtime weather data.
      */
     setRealtimeData(): void {
-        this.getData(AppSettings.REALTIME_FILE).subscribe(
+        this.getData(this.settings.realtime).subscribe(
             data => {
                 if (this.realtimeData === undefined) {
                     this.realtimeData = data;
                     this.realtimeData.time = moment(this.realtimeData.time,
                         'DD/MMM/YYYY HH:mm').format('DD-MMM-YYYY HH:mm:ss');
                 } else {
-                    let currentTime = new Date(this.realtimeData.time);
-                    let latestTime = new Date(data.time);
-                    if (latestTime > currentTime) {
-                        this.realtimeData = data;
-                        this.realtimeData.time = moment(this.realtimeData.time,
-                            'dd/MMM/YYYY HH:mm').format('DD-MMM-YYYY HH:mm:ss');
-                        this.isUpdated = true;
-                    } else {
-                        this.isUpdated = false;
-                    }
+                    this.getRapidData().subscribe(
+                        rapidData => {
+                            if (((+rapidData.time) * 1000) > Date.parse(this.realtimeData.time)
+                                || Date.parse(data.time) > Date.parse(this.realtimeData.time)) {
+                                data.time = moment(data.time, 'DD/MMM/YYYY HH:mm')
+                                    .format('DD-MMM-YYYY HH:mm:ss');
+                                rapidData.time = moment(moment.unix(+rapidData.time))
+                                    .format('DD-MMM-YYYY HH:mm:ss');
+                                if (Date.parse(data.time) > Date.parse(rapidData.time)) {
+                                    rapidData.time = data.time;
+                                    this.isUpdated = true;
+                                }
+                                this.realtimeData = this.updateData(data, rapidData);
+                            } else {
+                                this.isUpdated = false;
+                            }
+                        });
                 }
             }
         );
@@ -71,7 +86,7 @@ export class WeatherDataService {
      * Set the Extremes weather data.
      */
     setExtremesData(): void {
-        this.getData(AppSettings.EXTREMES_FILE).subscribe(
+        this.getData(this.settings.extremes).subscribe(
             data => {
                 this.extremes = data;
             }
@@ -80,27 +95,30 @@ export class WeatherDataService {
     /**
      * Set the 24Hr Graphs weather data.
      */
-    setGraphs24HrData(): void {
-        this.graph24HrsData = this.getData(AppSettings.GRAPHS24HR_FILE);
+    setGraphs24HrData(): Promise<any> {
+        return this.settingsService.config.then(
+            (_config: any) => {
+                this.graph24HrsData = this.getData(_config.files.graphs24Hr);
+            });
+
     }
 
     /**
-     * Returns the realtime json data specified by REALTIME_FILE in AppSettings.
+     * Returns the realtime json data specified by the settings file.
      * @return {Observable<RealtimeData>} - realtime weather data
      */
     getRealtimeData(): RealtimeData {
         return this.realtimeData;
     }
     /**
-     * Returns the extremes json data specified by EXTREMES_FILE in AppSettings.
+     * Returns the extremes json data specified by settings file.
      * @return {Observable<Extremes>} - extremes weather data
      */
     getExtremesData(): Extremes {
         return this.extremes;
     }
     /**
-     * Returns the 24Hr Graph json data specified by GRAPHS24HR_FILE in
-     * AppSettings.
+     * Returns the 24Hr Graph json data specified by settings file.
      * @return {Observable<Graph24HrsData>} - Graphs 24Hr weather data
      */
     getGraphs24HrData(): Observable<Graph24HrsData> {
@@ -114,23 +132,20 @@ export class WeatherDataService {
      * @param {RapidUpdateData} newData - most recent data
      * @return {RealtimeData} - updated realtime data
      */
-    rapidUpdate():
-        void {
+    rapidUpdate(): void {
         this.getRapidData().subscribe(
             rapidData => {
-                if (this.realtimeData !== undefined) {
-                    let currentTime = new Date(this.realtimeData.time);
-                    let time = parseFloat(rapidData.time) * 1000;
-                    if (time > currentTime.getTime()) {
-                        rapidData.time = moment(time).format('DD-MMM-YYYY HH:mm:ss');
-                        this.realtimeData = this.updateData(this.realtimeData, rapidData);
-                        this.isUpdated = true;
-                    } else {
-                        this.isUpdated = false;
-                    }
+                if (((+rapidData.time) * 1000) > Date.parse(this.realtimeData.time)) {
+                    rapidData.time = moment(moment.unix(+rapidData.time))
+                        .format('DD-MMM-YYYY HH:mm:ss');
+                    this.realtimeData = this.updateData(this.realtimeData, rapidData);
+                    this.isUpdated = true;
+                } else {
+                    this.isUpdated = false;
                 }
             });
     }
+
     /**
      *
      */
@@ -139,11 +154,11 @@ export class WeatherDataService {
     }
     /**
      * Returns the rapid update json data specified by RAPID_UPDATE_FILE in
-     * AppSettings.
+     * the settings file.
      * @return {Observable<RapidUpdateData>} - Graphs 24Hr weather data
      */
     private getRapidData(): Observable<RapidUpdateData> {
-        return this.getData(AppSettings.RAPID_UPDATE_FILE);
+        return this.getData(this.settings.now);
     }
     /**
      * Iterate over data and update it with newData.

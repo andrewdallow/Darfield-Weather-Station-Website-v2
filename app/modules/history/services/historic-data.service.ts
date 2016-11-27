@@ -2,9 +2,12 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
-import { AppSettings } from '../../../shared/config/settings';
+import { SettingsService } from '../../../shared/config/settings.service';
 import { HistoricData } from './historic-data.model';
-
+/**
+ * This class provides the HistoricDataService with methods to read and set the
+ * historic data.
+ */
 @Injectable()
 export class HistoricDataService {
 
@@ -14,7 +17,9 @@ export class HistoricDataService {
     private records: Observable<any>;
     private validDates: Observable<any>;
 
-    constructor(private http: Http) { }
+    constructor(private http: Http,
+        private settingsService: SettingsService
+    ) { }
 
     get validDatesData(): Observable<any> {
         return this.validDates;
@@ -33,26 +38,43 @@ export class HistoricDataService {
     get climateData(): Observable<any> {
         return this.climate;
     }
-    setValidDates(): void {
-        this.validDates = this.getData(AppSettings.HISTORIC_MONTHLY_FILE
-            + '?dates=1');
+    setValidDates(): Promise<any> {
+        return this.settingsService.config.then(
+            (_config: any) => {
+                this.validDates = this.getData(_config.files.historicData
+                    + '?dates=1');
+            });
     }
 
-    setClimateData(): void {
-        this.climate = this.getData(AppSettings.HISTORIC_CLIMATE_FILE);
+    setClimateData(): Promise<any> {
+        return this.settingsService.config.then(
+            (_config: any) => {
+                this.climate = this.getData(_config.files.climateData);
+            });
     }
 
-    setMonthlyData(year: string, month: string): void {
-        this.monthly = this.getData(AppSettings.HISTORIC_MONTHLY_FILE
-            + '?year=' + year + '&month=' + month);
+    setMonthlyData(year: string, month: string): Promise<any> {
+        return this.settingsService.config.then(
+            (_config: any) => {
+                this.monthly = this.getData(_config.files.historicData
+                    + '?year=' + year + '&month=' + month);
+            });
+
     }
-    setYearlyData(year: string): void {
-        this.yearly = this.getData(AppSettings.HISTORIC_MONTHLY_FILE
-            + '?year=' + year);
+    setYearlyData(year: string): Promise<any> {
+        return this.settingsService.config.then(
+            (_config: any) => {
+                this.yearly = this.getData(_config.files.historicData
+                    + '?year=' + year);
+            });
+
     }
 
-    setRecordsData(): void {
-        this.records = this.getData(AppSettings.HISTORIC_RECORDS);
+    setRecordsData(): Promise<any> {
+        return this.settingsService.config.then(
+            (_config: any) => {
+                this.records = this.getData(_config.files.records);
+            });
     }
 
     /**

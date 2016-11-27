@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+import { SettingsService } from './config/settings.service';
 import { WeatherDataService } from './weather-data/weather-data.service';
 
 import { HighlighterDirective } from './directives/highlighter.directive';
@@ -38,7 +39,7 @@ export class SharedModule {
     static forRoot(): ModuleWithProviders {
         return {
             ngModule: SharedModule,
-            providers: [WeatherDataService]
+            providers: [WeatherDataService, SettingsService]
         };
     }
 }

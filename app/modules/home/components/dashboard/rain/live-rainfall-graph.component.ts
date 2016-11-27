@@ -1,5 +1,4 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
-import { ReplaySubject } from 'rxjs/Rx';
 
 @Component({
     selector: 'live-rainfall-graph',
@@ -7,7 +6,7 @@ import { ReplaySubject } from 'rxjs/Rx';
 })
 
 export class LiveRainfallGraphComponent implements OnInit, OnChanges {
-    @Input() data: ReplaySubject<any>;
+    @Input() data: any;
     private options: Object;
     private chart: any;
 
@@ -98,12 +97,11 @@ export class LiveRainfallGraphComponent implements OnInit, OnChanges {
     }
 
     updateGraph(): void {
-        this.data.subscribe(
-            data => {
-                this.chart.series[0].setData(
-                    this.mapSeries(data.xData, data.datasets.rainRate)
-                );
-            });
+        if (this.chart) {
+            this.chart.series[0].setData(
+                this.mapSeries(this.data.xData, this.data.datasets.rainRate)
+            );
+        }
     }
 
     saveInstance(chartInstance: any): void {

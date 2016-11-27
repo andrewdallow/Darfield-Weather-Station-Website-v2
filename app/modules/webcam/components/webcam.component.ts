@@ -4,7 +4,7 @@ import { Router, ActivatedRoute }   from '@angular/router';
 import { Location }                 from '@angular/common';
 import * as moment from 'moment';
 
-import { AppSettings } from '../../../shared/config/settings';
+import { SettingsService } from '../../../shared/config/settings.service';
 import { WebcamFilesService } from '../services/webcam-files.service';
 
 interface Image {
@@ -21,8 +21,8 @@ interface Image {
 })
 export class WebcamComponent implements OnInit {
     public selectedImage: Image = {
-        path: 'data/webcam_img/webcamimage0.jpg',
-        time: Date.now() / 1000
+        path: '',
+        time: 0
     };
     public sliderModel: any = { value: 0, min: 0, max: 10 };
     public groupedImages: Array<any> = [[], [], [], [], [], [], []];
@@ -37,16 +37,20 @@ export class WebcamComponent implements OnInit {
         private webcamFileService: WebcamFilesService,
         private router: Router,
         private route: ActivatedRoute,
-        private location: Location
+        private location: Location,
+        private settingsService: SettingsService
     ) { }
 
 
     ngOnInit(): void {
-        this.titleService.setTitle('Webcam - ' + AppSettings.SITE_NAME);
-        for (let day of this.daysAgo) {
-            this.days.push(this.daysAgoName(day));
-        }
-        this.getWebcamImages();
+        this.settingsService.config.then(
+            (_config: any) => {
+                this.titleService.setTitle('Webcam - ' + _config.siteName);
+                for (let day of this.daysAgo) {
+                    this.days.push(this.daysAgoName(day));
+                }
+                this.getWebcamImages();
+            });
     }
 
 
@@ -55,12 +59,16 @@ export class WebcamComponent implements OnInit {
      * stores it in the webcamImages Array.
      */
     getWebcamImages(): void {
-        this.webcamFileService.getFileNames()
-            .then((files: any) => {
-                this.webcamImages = files;
-                this.groupImages();
-                this.setLandingDay();
+        this.webcamFileService.setFileNames().then(
+            () => {
+                this.webcamFileService.getFileNames()
+                    .then((files: any) => {
+                        this.webcamImages = files;
+                        this.groupImages();
+                        this.setLandingDay();
+                    });
             });
+
     }
     /**
      * Changes the selected webcam image and time corresponding to the
@@ -124,8 +132,8 @@ export class WebcamComponent implements OnInit {
     gotoDay(day: string): void {
         this.selectedDay = day;
         this.sliderModel.max = this.groupedImages[this.days.indexOf(this.selectedDay)].length - 1;
-        this.sliderModel.value = 0;
-        this.changeImage(0);
+        this.sliderModel.value = this.sliderModel.max;
+        this.changeImage(this.sliderModel.max);
         this.router.navigate(['/webcam', this.selectedDay]);
 
 

@@ -2,186 +2,186 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-              <div class="panel-heading">Monthly Summaries</div>
+                <div class="panel-heading">Monthly Summaries</div>
                 <div class="panel-body">
-                  <date-controls [dateType]="'monthly'"></date-controls>
-                  <div class="summaries">
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="row spacing-top-medium">
-                          <div class="col-md-12">
-                            <span class="very-large">
+                    <date-controls [dateType]="'monthly'"></date-controls>
+                    <div class="summaries">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row spacing-top-medium">
+                                    <div class="col-md-12">
+                                        <span class="very-large">
                               {{ selectedMonth }} {{ selectedYear }}
                             </span>
-                          </div>
-                        </div>
-                        <div class="row" *ngIf="data">
-                          <div class="col-md-2">
-                            <div class="box">
-
-                            <div class="row">
-                              <div class="col-md-12">
-                                <div class="row">
-                                  <div class="col-md-12 small grey">
-                                    Avg Temperature
-                                  </div>
-                                </div>
-                                <div class="row">
-                                  <div class="col-md-12 large">
-                                    {{ data.stats.avgTemp }}<span class="units-medium">&deg;C</span>
-                                    <span class="small glyphicon" [trend]="compareAvgTemp(data.stats.avgTemp)"></span>
-                                    <span class="small grey">{{compareAvgTemp(data.stats.avgTemp)}}</span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row spacing-top-large">
-                              <div class="col-md-12">
-                                <div class="row">
-                                  <div class="col-md-12 small grey">
-                                    Highest Temperature
-                                  </div>
-                                </div>
-                                <div class="row">
-                                  <div class="col-md-12 large">
-                                    {{ data.stats.maxTemp }}<span class="units-medium">&deg;C</span>
-                                    <span class="small glyphicon" [trend]="compareMaxTemp(data.stats.maxTemp)"></span>
-                                    <span class="small grey">{{compareMaxTemp(data.stats.maxTemp)}}</span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row spacing-top-large">
-                              <div class="col-md-12">
-                                <div class="row">
-                                  <div class="col-md-12 small grey">
-                                    Avg Daily High
-                                  </div>
-                                </div>
-                                <div class="row">
-                                  <div class="col-md-12 large">
-                                    {{ data.stats.avgMaxTemp }}<span class="units-medium">&deg;C</span>
-                                    <span class="small glyphicon" [trend]="compareAvgHiTemp(data.stats.avgMaxTemp)"></span>
-                                    <span class="small grey">{{compareAvgHiTemp(data.stats.avgMaxTemp)}}</span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row spacing-top-large">
-                              <div class="col-md-12">
-                                <div class="row">
-                                  <div class="col-md-12 small grey">
-                                    Avg Daily High
-                                  </div>
-                                </div>
-                                <div class="row">
-                                  <div class="col-md-12 large">
-                                    {{ data.stats.avgMinTemp }}<span class="units-medium">&deg;C</span>
-                                    <span class="small glyphicon" [trend]="compareAvgLoTemp(data.stats.avgMinTemp)"></span>
-                                    <span class="small grey">{{compareAvgLoTemp(data.stats.avgMinTemp)}}</span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row spacing-top-large">
-                              <div class="col-md-12">
-                                <div class="row">
-                                  <div class="col-md-12 small grey">
-                                    Lowest Temperature
-                                  </div>
-                                </div>
-                                <div class="row">
-                                  <div class="col-md-12 large">
-                                    {{ data.stats.minTemp }}<span class="units-medium">&deg;C</span>
-                                    <span class="small glyphicon" [trend]="compareMinTemp(data.stats.minTemp)"></span>
-                                    <span class="small grey">{{compareMinTemp(data.stats.minTemp)}}</span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row spacing-top-large">
-                              <div class="col-md-12">
-                                <div class="row">
-                                  <div class="col-md-12 small grey">
-                                    Total Rain
-                                  </div>
-                                </div>
-                                <div class="row">
-                                  <div class="col-md-12 large">
-                                    {{ data.stats.totRainFall }} <span class="units-medium">mm</span>
                                     </div>
                                 </div>
-                                <div class="row">
-                                  <div class="col-md-12 spacing-top-none">
-                                    <span class="small glyphicon" [trend]="compareRainTemp(data.stats.totRainFall)"></span>
-                                    <span class="small grey">{{compareRainTemp(data.stats.totRainFall)}} mm</span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row spacing-top-large">
-                              <div class="col-md-12">
-                                <div class="row">
-                                  <div class="col-md-12 small grey">
-                                    High Wind Gust
-                                  </div>
-                                </div>
-                                <div class="row">
-                                  <div class="col-md-12 large">
-                                    <span class="units-medium">{{ data.stats.hWindGBear | compase }}</span> {{ data.stats.highWindGust }} <span class="units-medium">km/h</span>
+                                <div class="row" *ngIf="data">
+                                    <div class="col-md-2">
+                                        <div class="box">
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-12 small grey">
+                                                            Avg Temperature
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12 large">
+                                                            {{ data.stats.avgTemp }}<span class="units-medium">&deg;C</span>
+                                                            <span class="small glyphicon" [trend]="compareAvgTemp(data.stats.avgTemp)"></span>
+                                                            <span class="small grey">{{compareAvgTemp(data.stats.avgTemp)}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row spacing-top-large">
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-12 small grey">
+                                                            Highest Temperature
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12 large">
+                                                            {{ data.stats.maxTemp }}<span class="units-medium">&deg;C</span>
+                                                            <span class="small glyphicon" [trend]="compareMaxTemp(data.stats.maxTemp)"></span>
+                                                            <span class="small grey">{{compareMaxTemp(data.stats.maxTemp)}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row spacing-top-large">
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-12 small grey">
+                                                            Avg Daily High
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12 large">
+                                                            {{ data.stats.avgMaxTemp }}<span class="units-medium">&deg;C</span>
+                                                            <span class="small glyphicon" [trend]="compareAvgHiTemp(data.stats.avgMaxTemp)"></span>
+                                                            <span class="small grey">{{compareAvgHiTemp(data.stats.avgMaxTemp)}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row spacing-top-large">
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-12 small grey">
+                                                            Avg Daily High
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12 large">
+                                                            {{ data.stats.avgMinTemp }}<span class="units-medium">&deg;C</span>
+                                                            <span class="small glyphicon" [trend]="compareAvgLoTemp(data.stats.avgMinTemp)"></span>
+                                                            <span class="small grey">{{compareAvgLoTemp(data.stats.avgMinTemp)}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row spacing-top-large">
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-12 small grey">
+                                                            Lowest Temperature
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12 large">
+                                                            {{ data.stats.minTemp }}<span class="units-medium">&deg;C</span>
+                                                            <span class="small glyphicon" [trend]="compareMinTemp(data.stats.minTemp)"></span>
+                                                            <span class="small grey">{{compareMinTemp(data.stats.minTemp)}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row spacing-top-large">
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-12 small grey">
+                                                            Total Rain
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12 large">
+                                                            {{ data.stats.totRainFall }} <span class="units-medium">mm</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12 spacing-top-none">
+                                                            <span class="small glyphicon" [trend]="compareRain(data.stats.totRainFall)"></span>
+                                                            <span class="small grey">{{compareRain(data.stats.totRainFall)}} mm</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row spacing-top-large">
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-12 small grey">
+                                                            High Wind Gust
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12 large">
+                                                            <span class="units-medium">{{ data.stats.hWindGBear | compase }}</span> {{ data.stats.highWindGust }} <span class="units-medium">km/h</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <span class="small glyphicon" [trend]="compareGust(data.stats.highWindGust)"></span>
+                                                            <span class="small grey">{{compareGust(data.stats.highWindGust)}} km/h</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="box">
+
+                                            <div class="row">
+                                                <div class="col-md-12 wind">
+                                                    <span class="graphTitles">High Wind Gust & Direction (km/h)</span><br><br>
+                                                    <div class="table-responsive">
+                                                        <table class="wind24hr">
+                                                            <tr>
+                                                                <td class="small center" *ngFor="let value of data.graphData">{{ value.hWindGBear | compase }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="wind-direction-icon center" *ngFor="let value of data.graphData"><i class="wi wi-wind from-{{ value.hWindGBear }}-deg"></i></td>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="small center" *ngFor="let value of data.graphData">{{ value.highWindGust }}</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row" *ngIf="data">
+                                                <div class="col-md-12">
+                                                    <monthly-temp-chart [data]="data"></monthly-temp-chart>
+                                                </div>
+                                            </div>
+                                            <div class="row" *ngIf="data">
+                                                <div class="col-md-12">
+                                                    <monthly-rainfall-chart [data]="data"></monthly-rainfall-chart>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
-                                <div class="row">
-                                  <div class="col-md-12">
-                                    <span class="small glyphicon" [trend]="compareGust(data.stats.highWindGust)"></span>
-                                    <span class="small grey">{{compareGust(data.stats.highWindGust)}} km/h</span>
-                                  </div>
-                                </div>
-                              </div>
                             </div>
-                          </div>
-                          </div>
-                          <div class="col-md-10">
-                            <div class="box">
-
-                              <div class="row">
-                                <div class="col-md-12 wind">
-                                  <span class="graphTitles">High Wind Gust & Direction (km/h)</span><br><br>
-                                  <div class="table-responsive">
-                                    <table class="wind24hr">
-                                        <tr>
-                                            <td class="small center" *ngFor="let value of data.graphData">{{ value.hWindGBear | compase }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="wind-direction-icon center" *ngFor="let value of data.graphData"><i class="wi wi-wind from-{{ value.hWindGBear }}-deg"></i></td>
-
-                                        </tr>
-                                        <tr>
-                                            <td class="small center" *ngFor="let value of data.graphData">{{ value.highWindGust }}</td>
-                                        </tr>
-                                    </table>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="row" *ngIf="data">
-                                <div class="col-md-12">
-                                  <monthly-temp-chart [data]="data"></monthly-temp-chart>
-                                </div>
-                              </div>
-                              <div class="row" *ngIf="data">
-                                <div class="col-md-12">
-                                  <monthly-rainfall-chart [data]="data"></monthly-rainfall-chart>
-                                </div>
-                              </div>
-                            </div>
-
-                          </div>
                         </div>
-                      </div>
                     </div>
-                  </div>
 
-              </div>
+                </div>
             </div>
         </div>
     </div>

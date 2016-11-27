@@ -1,21 +1,16 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
-import { ReplaySubject } from 'rxjs/Rx';
+import { Component, Input, OnChanges } from '@angular/core';
 
 @Component({
     selector: 'live-temperature-graph',
     template: '<chart [options]="options" (load)="saveInstance($event.context)"></chart>'
 })
 
-export class LiveTemperatureGraphComponent implements OnInit, OnChanges {
-    @Input() data: ReplaySubject<any>;
+export class LiveTemperatureGraphComponent implements OnChanges {
+    @Input() data: any;
     private options: Object;
     private chart: any;
 
     constructor() {
-    }
-
-    ngOnInit(): void {
-
         this.options = {
             chart: {
                 backgroundColor: 'rgba(0,0,0,0)',
@@ -92,17 +87,18 @@ export class LiveTemperatureGraphComponent implements OnInit, OnChanges {
         };
     }
 
+
     ngOnChanges(): void {
         this.updateGraph();
     }
 
     updateGraph(): void {
-        this.data.subscribe(
-            data => {
-                this.chart.series[0].setData(
-                    this.mapSeries(data.xData, data.datasets.temperature)
-                );
-            });
+        if (this.chart) {
+            this.chart.series[0].setData(
+                this.mapSeries(this.data.xData, this.data.datasets.temperature)
+            );
+        }
+
     }
 
     saveInstance(chartInstance: any): void {

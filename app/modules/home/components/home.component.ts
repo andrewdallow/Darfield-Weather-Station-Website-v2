@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title }     from '@angular/platform-browser';
 
-import { AppSettings } from '../../../shared/config/settings';
+import { SettingsService } from '../../../shared/config/settings.service';
 
 @Component({
     moduleId: module.id,
@@ -10,9 +10,14 @@ import { AppSettings } from '../../../shared/config/settings';
 })
 
 export class HomeComponent implements OnInit {
-    constructor(private titleService: Title) { }
+    constructor(private titleService: Title,
+        private settingsService: SettingsService
+    ) { }
 
     ngOnInit(): void {
-        this.titleService.setTitle('Home - ' + AppSettings.SITE_NAME);
+        this.settingsService.config.then(
+            (_config) => {
+                this.titleService.setTitle('Home - ' + _config.siteName);
+            });
     }
 }

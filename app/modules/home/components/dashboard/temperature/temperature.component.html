@@ -1,98 +1,94 @@
-<div class="data-panel col-xs-12 col-sm-6 col-md-4">
-    <div class="panel panel-default">
-        <div class="panel-heading">Temperature</div>
-        <div class="panel-body data-panel">
+<div class="panel panel-default">
+    <div class="panel-heading">Temperature</div>
+    <div class="panel-body data-panel">
 
 
-            <div class="row">
-                <div class="col-xs-6">
-                    <span class="very-large"
-                    highlighter="{{weatherDataService.getRealtimeData()?.outTemp.value}}"
-                    [innerHTML]="weatherDataService.getRealtimeData()?.outTemp | unitConverter:weatherDataService.getIsConverted():'units-big'">
+        <div class="row">
+            <div class="col-xs-6">
+                <span class="very-large" [highlighter]="weatherDataService.getRealtimeData()?.outTemp.value" [innerHTML]="weatherDataService.getRealtimeData()?.outTemp | unitConverter:weatherDataService.getIsConverted():'units-big'">
                   </span>
-                  <div>
+                <div>
 
-                  </div>
                 </div>
             </div>
-            <div class="row grey center">
-                <div class="col-xs-6">
-                    <span highlighter="weatherDataService.getRealtimeData()?.tempchangehour.value">
+        </div>
+        <div class="row grey center">
+            <div class="col-xs-6">
+                <span [highlighter]="weatherDataService.getRealtimeData()?.tempchangehour.value">
                         <span class="glyphicon" trend="{{weatherDataService.getRealtimeData()?.tempchangehour.value}}"></span>
-                        <span [innerHTML]="weatherDataService.getRealtimeData()?.tempchangehour | unitConverter:weatherDataService.getIsConverted()"></span>
-                    </span>
-                </div>
+                <span [innerHTML]="weatherDataService.getRealtimeData()?.tempchangehour | unitConverter:weatherDataService.getIsConverted()"></span>
+                </span>
             </div>
-            <div class="row spacing-top-medium">
-                <div class="col-xs-4 thermometer">
-                    <thermometer></thermometer>
-                </div>
-                <div class="col-xs-8 high-low ">
-                    <div class="row high indent">
-                        <div class="col-xs-6">
-                            <div class="row">
-                                <div class="col-xs-12">High</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-12 large bold"><span highlighter="weatherDataService.getRealtimeData()?.tempMaxValueT.value">
+        </div>
+        <div class="row spacing-top-medium">
+            <div class="col-xs-4 thermometer">
+                <thermometer></thermometer>
+            </div>
+            <div class="col-xs-8 high-low ">
+                <div class="row high indent">
+                    <div class="col-xs-6">
+                        <div class="row">
+                            <div class="col-xs-12">High</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 large bold"><span [highlighter]="weatherDataService.getRealtimeData()?.tempMaxValueT.value">
                                   <span [innerHTML]="weatherDataService.getRealtimeData()?.tempMaxValueT | unitConverter:weatherDataService.getIsConverted():'units-medium'"></span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-12"><span highlighter="weatherDataService.getRealtimeData()?.tempMaxValueT.value">{{weatherDataService.getRealtimeData()?.tempMaxTimeT}}</span></div>
+                                </span>
                             </div>
                         </div>
-                        <div class="col-xs-6 low">
-                            <div class="row">
-                                <div class="col-xs-12">Low</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-12 large bold"><span highlighter="weatherDataService.getRealtimeData()?.tempMinValueT.value">
+                        <div class="row">
+                            <div class="col-xs-12"><span [highlighter]="weatherDataService.getRealtimeData()?.tempMaxValueT.value">{{weatherDataService.getRealtimeData()?.tempMaxTimeT}}</span></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 low">
+                        <div class="row">
+                            <div class="col-xs-12">Low</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 large bold"><span [highlighter]="weatherDataService.getRealtimeData()?.tempMinValueT.value">
                                   <span [innerHTML]="weatherDataService.getRealtimeData()?.tempMinValueT | unitConverter:weatherDataService.getIsConverted():'units-medium'"></span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-12"><span highlighter="weatherDataService.getRealtimeData()?.tempMinValueT.value">{{weatherDataService.getRealtimeData()?.tempMinTimeT}}</span></div>
+                                </span>
                             </div>
                         </div>
-
+                        <div class="row">
+                            <div class="col-xs-12"><span [highlighter]="weatherDataService.getRealtimeData()?.tempMinValueT.value">{{weatherDataService.getRealtimeData()?.tempMinTimeT}}</span></div>
+                        </div>
                     </div>
 
-
                 </div>
+
+
             </div>
-            <div class="row">
-                <div class="col-xs-4">
-                    Humidity: <span class="medium" highlighter="weatherDataService.getRealtimeData()?.humidity.value">{{weatherDataService.getRealtimeData()?.humidity.value}}<span [innerHTML]="weatherDataService.getRealtimeData()?.humidity.unit"></span></span>
-                </div>
-                <div class="col-xs-4 extraData">
-                    Windchill:
-                    <span class="medium" highlighter="weatherDataService.getRealtimeData()?.windchill.value">
-                      <span [innerHTML]="weatherDataService.getRealtimeData()?.windchill | unitConverter:weatherDataService.getIsConverted()"></span>
-                  </span>
-                </div>
-                <div class="col-xs-4 extraData">
-                    Dewpoint:
-                    <span class="medium" highlighter="weatherDataService.getRealtimeData()?.dewpoint.value">
-                      <span [innerHTML]="weatherDataService.getRealtimeData()?.dewpoint | unitConverter:weatherDataService.getIsConverted()"></span>
-                  </span>
-                </div>
-            </div>
-            <div class="row bold center spacing-top-medium">
-                <div class="col-xs-12">Temperature last hour</div>
-            </div>
-
-            <div class="row graph">
-                <div class="col-xs-12">
-                    <live-temperature-graph [data]='data'></live-temperature-graph>
-                </div>
-            </div>
-
-
-
-
         </div>
+        <div class="row">
+            <div class="col-xs-4">
+                Humidity: <span class="medium" [highlighter]="weatherDataService.getRealtimeData()?.humidity.value">{{weatherDataService.getRealtimeData()?.humidity.value}}<span [innerHTML]="weatherDataService.getRealtimeData()?.humidity.unit"></span></span>
+            </div>
+            <div class="col-xs-4 extraData">
+                Windchill:
+                <span class="medium" [highlighter]="weatherDataService.getRealtimeData()?.windchill.value">
+                      <span [innerHTML]="weatherDataService.getRealtimeData()?.windchill | unitConverter:weatherDataService.getIsConverted()"></span>
+                </span>
+            </div>
+            <div class="col-xs-4 extraData">
+                Dewpoint:
+                <span class="medium" [highlighter]="weatherDataService.getRealtimeData()?.dewpoint.value">
+                      <span [innerHTML]="weatherDataService.getRealtimeData()?.dewpoint | unitConverter:weatherDataService.getIsConverted()"></span>
+                </span>
+            </div>
+        </div>
+        <div class="row bold center spacing-top-medium">
+            <div class="col-xs-12">Temperature last hour</div>
+        </div>
+
+        <div class="row graph">
+            <div class="col-xs-12">
+                <live-temperature-graph [data]="data"></live-temperature-graph>
+            </div>
+        </div>
+
+
+
+
     </div>
 </div>

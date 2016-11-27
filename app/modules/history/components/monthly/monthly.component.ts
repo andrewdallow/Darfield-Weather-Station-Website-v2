@@ -3,7 +3,7 @@ import { Title }     from '@angular/platform-browser';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import * as moment from 'moment';
 
-import { AppSettings } from '../../../../shared/config/settings';
+import { SettingsService } from '../../../../shared/config/settings.service';
 import { HistoricDataService } from '../../services/historic-data.service';
 import { HistoricData } from '../../services/historic-data.model';
 
@@ -11,48 +11,105 @@ import { HistoricData } from '../../services/historic-data.model';
     moduleId: module.id,
     templateUrl: 'monthly.component.html',
 })
+/**
+ * Handles the display of the historic monthly page.
+ */
 export class MonthlyComponent implements OnInit {
 
     public data: HistoricData;
     public selectedMonth: string;
     public selectedYear: string;
+    private settings: any;
+    private siteName: string;
 
     constructor(
         private titleService: Title,
         private historicDataService: HistoricDataService,
         private route: ActivatedRoute,
-        private router: Router) { }
+        private router: Router,
+        private settingsService: SettingsService
+    ) { }
 
     ngOnInit() {
-        this.selectMonthYear();
+        this.settingsService.config.then(
+            (config: any) => {
+                this.siteName = config.siteName;
+                this.settings = config.historicData;
+                this.selectMonthYear();
+            }
+        );
     }
-
+    /**
+     * Compare specified temperature to the alltime maximum temperature.
+     * @param  {string} temp temperature value
+     * @return {number}      the difference between the temp and alltime max.
+     */
     compareMaxTemp(temp: string): number {
         return this.compareValue(+temp, +this.data.alltime.maxTemp);
     }
+    /**
+     * Compare specified temperature to the alltime minimum temperature.
+     * @param  {string} temp temperature value
+     * @return {number}      the difference between the temp and alltime min.
+     */
     compareMinTemp(temp: string): number {
         return this.compareValue(+temp, +this.data.alltime.minTemp);
     }
+    /**
+     * Compare specified wind gust to the alltime maximum wind gust.
+     * @param  {string} speed wind speed value
+     * @return {number}      the difference between the wind speed and alltime max.
+     */
     compareGust(speed: string): number {
         return this.compareValue(+speed, +this.data.alltime.highWindGust);
     }
-
+    /**
+     * Compare specified temperature to the monthly normal temperature.
+     * @param  {string} temp temperature value
+     * @return {number}      the difference between the temp and monthly normal.
+     */
     compareAvgTemp(temp: string): number {
         return this.compareValue(+temp,
-            AppSettings.HISTORIC_AVG_TEMP_MONTH[this.selectedMonth.toLowerCase()]);
+            this.settings
+                .averageMonthlyTemperature[this.selectedMonth.toLowerCase()]);
     }
+    /**
+     * Compare specified temperature to the monthly normal temperature high.
+     * @param  {string} temp temperature value
+     * @return {number}      the difference between the temp and monthly normal high.
+     */
     compareAvgHiTemp(temp: string): number {
         return this.compareValue(+temp,
-            AppSettings.HISTORIC_AVG_HIGH_TEMP_MONTH[this.selectedMonth.toLowerCase()]);
+            this.settings
+                .averageMonthlyHighTemperature[this.selectedMonth.toLowerCase()]);
     }
+    /**
+     * Compare specified temperature to the monthly normal temperature low.
+     * @param  {string} temp temperature value
+     * @return {number}      the difference between the temp and monthly normal low.
+     */
     compareAvgLoTemp(temp: string): number {
         return this.compareValue(+temp,
-            AppSettings.HISTORIC_AVG_LOW_TEMP_MONTH[this.selectedMonth.toLowerCase()]);
+            this.settings
+                .averageMonthlyLowTemperature[this.selectedMonth.toLowerCase()]);
     }
-    compareRainTemp(rain: string): number {
+    /**
+     * Compare specified temperature to the monthly normal rainfall total.
+     * @param  {string} rain rainfall value
+     * @return {number}      the difference between the rainfall
+     *                       and monthly normal total.
+     */
+    compareRain(rain: string): number {
         return this.compareValue(+rain,
-            AppSettings.HISTORIC_AVG_RAIN_MONTH[this.selectedMonth.toLowerCase()]);
+            this.settings
+                .averageMonthlyRain[this.selectedMonth.toLowerCase()]);
     }
+    /**
+     * Calculate the difference between two numbers to 0.1 precision.
+     * @param  {number} a first number
+     * @param  {number} b second number
+     * @return {number}   difference between a and b.
+     */
     compareValue(a: number, b: number): number {
         return Math.round((a - b) * 100) / 100;
     }
@@ -63,10 +120,13 @@ export class MonthlyComponent implements OnInit {
      * @param {string} month month of data
      */
     private setData(year: string, month: string): void {
-        this.historicDataService.setMonthlyData(year, month);
-        this.historicDataService.monthlyData.subscribe(
-            (data: any) => {
-                this.data = data;
+        this.historicDataService.setMonthlyData(year, month).then(
+            () => {
+                this.historicDataService.monthlyData.subscribe(
+                    (data: any) => {
+                        this.data = data;
+                    }
+                );
             }
         );
     }
@@ -81,8 +141,9 @@ export class MonthlyComponent implements OnInit {
                 this.selectedYear = params['year'];
                 this.titleService.setTitle('Monthly History - '
                     + params['month'] + '-' + params['year'] + ' - '
-                    + AppSettings.SITE_NAME);
-                this.setData(this.selectedYear, moment().month(this.selectedMonth).format('MM'));
+                    + this.siteName);
+                this.setData(this.selectedYear,
+                    moment().month(this.selectedMonth).format('MM'));
             }
         );
     }

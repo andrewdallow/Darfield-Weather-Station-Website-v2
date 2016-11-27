@@ -6,7 +6,8 @@ interface Measurement {
 }
 
 @Pipe({
-    name: 'unitConverter'
+    name: 'unitConverter',
+    pure: false
 })
 /**
  * Transform given measure from metric to imperial or vice versa, but

@@ -5,7 +5,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { RealtimeGraphDataService } from '../../../shared/realtime-sql-data/realtime-graph-data.service';
 import { Graph } from './graph.model';
 import { Windrose } from '../../../shared/models/windrose.model';
-import { AppSettings } from '../../../shared/config/settings';
+import { SettingsService } from '../../../shared/config/settings.service';
 
 @Component({
     moduleId: module.id,
@@ -14,7 +14,7 @@ import { AppSettings } from '../../../shared/config/settings';
 })
 export class RecentGraphsComponent implements OnInit {
     public charts: any[];
-    public buttons: number[] = AppSettings.GRAPHS_TIMESCALE_BUTTONS;
+    public buttons: number[];
     public selectedButton: number;
     public tabs: string[] = ['compare', 'temperature', 'wind',
         'wind-rose', 'pressure', 'rainfall'];
@@ -27,13 +27,18 @@ export class RecentGraphsComponent implements OnInit {
         private graphDataService: RealtimeGraphDataService,
         private titleService: Title,
         private route: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        private settingsService: SettingsService
     ) { }
 
     ngOnInit(): void {
         this.showSpinner = true;
-        this.titleService.setTitle('Graphs - ' + AppSettings.SITE_NAME);
-        this.selectTabButton();
+        this.settingsService.config.then(
+            (_config) => {
+                this.titleService.setTitle('Graphs - ' + _config.siteName);
+                this.buttons = _config.recentGraphsTimescales;
+                this.selectTabButton();
+            });
     }
 
     selectTabButton(): void {
@@ -60,13 +65,17 @@ export class RecentGraphsComponent implements OnInit {
      */
     private initCharts(): void {
         this.showSpinner = true;
-        this.graphDataService.setGraphData(this.selectedButton);
-        this.graphDataService.getGraphData().subscribe(
-            (data: any) => {
-                this.data = data;
-                this.createCharts();
+        this.graphDataService.setGraphData(this.selectedButton).then(
+            () => {
+                this.graphDataService.getGraphData().subscribe(
+                    (data: any) => {
+                        this.data = data;
+                        this.createCharts();
+                    }
+                );
             }
         );
+
     }
     /**
      * Change the time span of the graphs to the given hours.

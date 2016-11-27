@@ -3,7 +3,7 @@ import { Title }     from '@angular/platform-browser';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import * as moment from 'moment';
 
-import { AppSettings } from '../../../../shared/config/settings';
+import { SettingsService } from '../../../../shared/config/settings.service';
 import { HistoricDataService } from '../../services/historic-data.service';
 import { HistoricData } from '../../services/historic-data.model';
 
@@ -11,19 +11,32 @@ import { HistoricData } from '../../services/historic-data.model';
     moduleId: module.id,
     templateUrl: 'yearly.component.html',
 })
+/**
+ * Handles the display and interaction of the historic yearly page.
+ */
 export class YearlyComponent implements OnInit {
     public data: HistoricData;
     public selectedYear: string;
+    private settings: any;
+    private siteName: string;
 
     constructor(
         private titleService: Title,
         private historicDataService: HistoricDataService,
         private route: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        private settingsService: SettingsService
     ) { }
 
     ngOnInit() {
-        this.selectYear();
+        this.settingsService.config.then(
+            (config: any) => {
+                this.siteName = config.siteName;
+                this.settings = config.historicData;
+                this.selectYear();
+            }
+        );
+
     }
 
     compareMaxTemp(temp: string): number {
@@ -38,19 +51,19 @@ export class YearlyComponent implements OnInit {
 
     compareAvgTemp(temp: string): number {
         return this.compareValue(+temp,
-            AppSettings.HISTORIC_ALLTIME_AVG['avgTemp']);
+            this.settings.alltimeYearlyAverage['avgTemp']);
     }
     compareAvgHiTemp(temp: string): number {
         return this.compareValue(+temp,
-            AppSettings.HISTORIC_ALLTIME_AVG['avgMaxTemp']);
+            this.settings.alltimeYearlyAverage['avgMaxTemp']);
     }
     compareAvgLoTemp(temp: string): number {
         return this.compareValue(+temp,
-            AppSettings.HISTORIC_ALLTIME_AVG['avgMinTemp']);
+            this.settings.alltimeYearlyAverage['avgMinTemp']);
     }
     compareRainTemp(rain: string): number {
         return this.compareValue(+rain,
-            AppSettings.HISTORIC_ALLTIME_AVG['totRainFall']);
+            this.settings.alltimeYearlyAverage['totRainFall']);
     }
     compareValue(a: number, b: number): number {
         return Math.round((a - b) * 100) / 100;
@@ -61,12 +74,16 @@ export class YearlyComponent implements OnInit {
      * @param {string} month month of data
      */
     private setData(year: string): void {
-        this.historicDataService.setYearlyData(year);
-        this.historicDataService.yearlyData.subscribe(
-            (data: any) => {
-                this.data = data;
+        this.historicDataService.setYearlyData(year).then(
+            () => {
+                this.historicDataService.yearlyData.subscribe(
+                    (data: any) => {
+                        this.data = data;
+                    }
+                );
             }
         );
+
     }
     /**
      * Set the month an year as specified in the URL parameters and
@@ -78,7 +95,7 @@ export class YearlyComponent implements OnInit {
                 this.selectedYear = params['year'];
                 this.titleService.setTitle('Yearly History - '
                     + params['year'] + ' - '
-                    + AppSettings.SITE_NAME);
+                    + this.siteName);
                 this.setData(this.selectedYear);
             }
         );

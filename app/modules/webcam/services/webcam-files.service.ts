@@ -1,16 +1,35 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 
-import { AppSettings } from '../../../shared/config/settings';
+import { SettingsService } from '../../../shared/config/settings.service';
 
-
+/**
+ * This class provides the WebcamFilesService with methods to read and set the
+ * list of webcam files.
+ */
 @Injectable()
 export class WebcamFilesService {
+    private fileList: Promise<any>;
 
-    constructor(private http: Http) { }
-
+    constructor(private http: Http,
+        private settingsService: SettingsService
+    ) { }
+    /**
+     * Get the list of all webcam file paths and names
+     * @return {Promise<any>} list of paths and names
+     */
     getFileNames(): Promise<any> {
-        return this.getFileList(AppSettings.WEBCAM_FILENAME);
+        return this.fileList;
+    }
+    /**
+     * Set the list of all webcam file paths and names
+     * @return {Promise<any>}
+     */
+    setFileNames(): Promise<any> {
+        return this.settingsService.config.then(
+            (_config: any) => {
+                this.fileList = this.getFileList(_config.files.webcamImageList);
+            });
     }
 
     /**
@@ -23,9 +42,11 @@ export class WebcamFilesService {
             .then((res: Response) => res.json())
             .catch(this.handleError);
     }
-
+    /**
+     * Handle HTTP error
+     */
     private handleError(error: any): Promise<any> {
-        console.error('An error occurred', error); // for demo purposes only
+        console.error('Error in retrieving webcam files', error); // for demo purposes only
         return Promise.reject(error.message || error);
     }
 }

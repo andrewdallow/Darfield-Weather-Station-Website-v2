@@ -1,55 +1,59 @@
 <!-- dashboard.html handles the layout of the dashboard panes -->
 <div class="container dashboard">
-    <div class="row">
-
-        <div class="col-xs-12">
-            <div class="panel panel-default">
-                <div class="panel-body ajaxTimmer">
-                    <div class="col-xs-3 col-md-2">
-                        <div class="btn-group btn-group-xs" role="group">
-                            <button *ngFor="let unit of getUnits()"
-                                    (click)="convertUnits(unit)"
-                                    type="button"
-                                    [disabled]="unit === selectedUnit"
-                                    class="btn btn-default">
+    <div *ngIf="settings">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-body ajaxTimmer">
+                        <div class="col-xs-3 col-md-2">
+                            <div class="btn-group btn-group-xs" role="group">
+                                <button *ngFor="let unit of settings.units" (click)="convertUnits(unit)" type="button" [disabled]="unit === selectedUnit" class="btn btn-default">
                             {{ unit }}
                           </button>
+                            </div>
+
+                        </div>
+                        <div class="col-xs-3 col-md-2">
+                            <span class="label label-success" *ngIf="!isOffline">Online</span>
+                            <span class="label label-danger" *ngIf="isOffline">Offline</span>
+                        </div>
+                        <div class="col-xs-6 col-sm-5">
+                            <span>Updated: <span [highlighter]="weatherDataService.getRealtimeData()?.time">{{ weatherDataService.getRealtimeData()?.time }}</span> <span class=" ng-hide">({{ secondsAgo }} sec ago)</span></span>
                         </div>
 
-                    </div>
-                    <div class="col-xs-3 col-md-2">
-                        <span class="label label-success" *ngIf="!isOffline">Online</span>
-                        <span class="label label-danger" *ngIf="isOffline">Offline</span>
-                    </div>
-                    <div class="col-xs-6 col-sm-5">
-                        <span>Updated: {{ weatherDataService.getRealtimeData()?.time }} <span class=" ng-hide">({{ secondsAgo }} sec ago)</span></span>
-                    </div>
-
-                    <div class="col-md-2 col-xs-12">
-                        <div class="btn-group btn-group-xs" role="group" *ngIf="isPaused">
-                            <button type="button" class="btn btn-default" (click)="startTimers()">Updates Stopped. Click to Restart</button>
+                        <div class="col-md-2 col-xs-12">
+                            <div class="btn-group btn-group-xs" role="group" *ngIf="isPaused">
+                                <button type="button" class="btn btn-default" (click)="startTimers()">Updates Stopped. Click to Restart</button>
+                            </div>
                         </div>
                     </div>
+
+
                 </div>
-
-
             </div>
         </div>
-        <temperature [data]='realtimeGraphDataService.getGraphData()'></temperature>
-        <wind [data]='realtimeGraphDataService.getGraphData()'></wind>
-
-
-        <div class="col-xs-12 col-sm-12 col-md-4">
-            <div class="row">
-                <div class="col-md-12">
-                    <rain [data]='realtimeGraphDataService.getGraphData()'></rain>
-                </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <temperature [data]='graphData'></temperature>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <barometer></barometer>
-                </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <wind [data]='graphData'></wind>
+            </div>
 
+
+            <div class="col-xs-12 col-sm-12 col-md-4">
+                <div class="row">
+                    <div class="col-md-12">
+                        <rain [data]='graphData'></rain>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <barometer></barometer>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
+</div>

@@ -8,16 +8,12 @@ import { HttpModule } from '@angular/http';
 
 import { WeatherAppComponent } from './modules/core/weather-app.component';
 
-import {
-    ForecastComponent, AboutComponent
-} from './modules/index';
-
 import { HomeModule } from './modules/home/home.module';
 import { WebcamModule } from './modules/webcam/webcam.module';
 import { RecentGraphsModule } from './modules/recent-graphs/recent-graphs.module';
 import { HistoryModule } from './modules/history/history.module';
-
-
+import { ForecastModule } from './modules/forecast/forecast.module';
+import { AboutModule } from './modules/about/about.module';
 import { SharedModule } from './shared/shared.module';
 
 import { routing } from './app.routing';
@@ -39,12 +35,12 @@ HighchartsMore(Highcharts);
         WebcamModule,
         RecentGraphsModule,
         HistoryModule,
+        ForecastModule,
+        AboutModule,
         SharedModule.forRoot()
     ],
     declarations: [
-        WeatherAppComponent,
-        ForecastComponent,
-        AboutComponent
+        WeatherAppComponent
     ],
     bootstrap: [
         WeatherAppComponent

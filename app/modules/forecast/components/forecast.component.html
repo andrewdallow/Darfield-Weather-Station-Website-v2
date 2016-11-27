@@ -1,0 +1,58 @@
+<div class="container forecast">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">7-day Forecast</div>
+                <div class="panel-body">
+                    <div class="row" *ngIf="forecastData">
+                        <div class="col-md-12">
+                            <div class="loader" *ngIf="isLoading">
+                                <div class="sk-circle">
+                                    <div class="sk-circle1 sk-child"></div>
+                                    <div class="sk-circle2 sk-child"></div>
+                                    <div class="sk-circle3 sk-child"></div>
+                                    <div class="sk-circle4 sk-child"></div>
+                                    <div class="sk-circle5 sk-child"></div>
+                                    <div class="sk-circle6 sk-child"></div>
+                                    <div class="sk-circle7 sk-child"></div>
+                                    <div class="sk-circle8 sk-child"></div>
+                                    <div class="sk-circle9 sk-child"></div>
+                                    <div class="sk-circle10 sk-child"></div>
+                                    <div class="sk-circle11 sk-child"></div>
+                                    <div class="sk-circle12 sk-child"></div>
+                                </div>
+                            </div>
+                            <div class="row" *ngFor="let forecast of forecastData">
+
+                                <div class="col-xs-12 col-sm-6 col-md-6 spacing-top-large" *ngFor="let halfDay of forecast.txt_forecast, let even = even, let odd = odd">
+                                    <div class="row ">
+                                        <div class="col-xs-3 col-sm-3 col-md-3 ">
+                                            <span class="day center">{{ halfDay.title }}</span>
+                                            <img [src]="getIcon(halfDay)" alt="{{ getIconText(halfDay)}}">
+                                            <span class="day small center">{{ getIconText(halfDay) }}</span>
+                                            <span class="day high small center" *ngIf="even">{{ halfDay.temp }}&deg;C</span>
+                                            <span class="day low small center" *ngIf="odd">{{ halfDay.temp }}&deg;C</span>
+
+                                        </div>
+                                        <div class="col-xs-9 col-sm-9 col-md-9 ">
+                                            <span class="text">{{ halfDay.fcttext_metric }}</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row spacing-top-large">
+                        <div class="col-md-12">
+                            <p>Forecast from <a href="http://www.wunderground.com/q/zmw:00000.10.93781">WeatherUnderground</a> for Darfield.</p>
+                            <p>Animated forecast icons courtesy of <a href="http://www.meteotreviglio.com/">www.meteotreviglio.com</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -6,13 +6,15 @@ class HistoricData
 {
     // Database connection
     private $db;
-    private $table = 'dayfile';
+    private $table;
     private $month;
     private $year;
     private $dates;
 
     public function __construct()
     {
+        global $dayfile;
+        $this->table = $dayfile;
         $this->db = new Db();
         $this->getParams();
     }

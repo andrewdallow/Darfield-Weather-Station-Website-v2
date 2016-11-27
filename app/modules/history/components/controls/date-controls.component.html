@@ -1,30 +1,23 @@
 <div class="date-controls">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="btn-group btn-group-lg" role="group">
-        <button class="btn btn-default"
-        *ngFor="let year of validDates"
-        [class.active]="selectedYear === getYear(year.logDate)"
-        (click)="gotoYear(getYear(year.logDate))">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="btn-group btn-group-lg" role="group">
+                <button class="btn btn-default" *ngFor="let year of validDates" [class.active]="selectedYear === getYear(year.logDate)" (click)="gotoYear(getYear(year.logDate))">
           {{getYear(year.logDate)}}
         </button>
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="row spacing-top-medium" *ngIf="dateType === 'monthly'">
-    <div class="col-md-12">
-      <button class="btn btn-default" (click)="previousMonth()"><i class="fa fa-angle-left fa-1x" aria-hidden="true"></i></button>
+    <div class="row spacing-top-medium" *ngIf="dateType === 'monthly'">
+        <div class="col-md-12">
+            <button class="btn btn-default" (click)="previousMonth()"><i class="fa fa-angle-left fa-1x" aria-hidden="true"></i></button>
 
-      <div class="btn-group" role="group" >
-        <button class="btn btn-default"
-        *ngFor="let month of monthNames"
-        [class.active]="selectedMonth === month"
-        [class.disabled]="!isValidMonth(selectedYear, month)"
-        (click)="gotoMonth(month)">
+            <div class="btn-group" role="group">
+                <button class="btn btn-default" *ngFor="let month of monthNames" [class.active]="selectedMonth === month" [class.disabled]="!isValidMonth(selectedYear, month)" (click)="gotoMonth(month)">
           {{ month }}
         </button>
-      </div>
-      <button class="btn btn-default" (click)="nextMonth()"><i class="fa fa-angle-right fa-1x" aria-hidden="true"></i></button>
+            </div>
+            <button class="btn btn-default" (click)="nextMonth()"><i class="fa fa-angle-right fa-1x" aria-hidden="true"></i></button>
+        </div>
     </div>
-  </div>
 </div>
