@@ -1,4 +1,5 @@
-<div data-ads></div>
+<google-ads></google-ads>
+
 <div class="container webcam">
     <div class="row">
         <div class="col-md-12">
@@ -20,28 +21,50 @@
                     <div class="row spacing-top-large">
                         <div class="col-md-12 center">
                             <figure>
-                                <img class="image img-responsive img-rounded" [src]="selectedImage?.path">
+                                <div class="image-container">
+                                    <img class="image img-responsive img-rounded" [src]="selectedImage?.path" (load)="timelapse($event)">
+                                    <div class="overlay" *ngIf="isLoading">
+                                        <div class="sk-circle">
+                                            <div class="sk-circle1 sk-child"></div>
+                                            <div class="sk-circle2 sk-child"></div>
+                                            <div class="sk-circle3 sk-child"></div>
+                                            <div class="sk-circle4 sk-child"></div>
+                                            <div class="sk-circle5 sk-child"></div>
+                                            <div class="sk-circle6 sk-child"></div>
+                                            <div class="sk-circle7 sk-child"></div>
+                                            <div class="sk-circle8 sk-child"></div>
+                                            <div class="sk-circle9 sk-child"></div>
+                                            <div class="sk-circle10 sk-child"></div>
+                                            <div class="sk-circle11 sk-child"></div>
+                                            <div class="sk-circle12 sk-child"></div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <figcaption class="grey spacing-top-medium">
                                     Images are taken every 5 minutes during daylight hours only.<br> Click a day above and move the slider below to change images.
                                 </figcaption>
-
                             </figure>
+                        </div>
+                    </div>
+                    <div class="row spacing-top-medium">
+                        <div class="col-md-offset-1 col-md-10 center">
+                            <social-share></social-share>
                         </div>
                     </div>
                     <hr>
                     <div class="row">
-                        <div class="col-xs-offset-2 col-md-offset-2 col-xs-8  col-md-8 center">
+                        <div class="col-xs-12 col-sm-offset-1 col-md-offset-2 col-sm-1 col-md-1 col-lg-1 center">
+                            <a class="player-icons" (click)="play()">
+                                <i class="fa fa-play-circle-o fa-5x" aria-hidden="true" *ngIf="isPaused"></i>
+                                <i class="fa fa-pause-circle-o fa-5x" aria-hidden="true" *ngIf="!isPaused"></i>
+                            </a>
+                        </div>
+                        <div class="col-sm-offset-1 col-md-offset-0 col-xs-12 col-sm-7 col-md-7 col-lg-7 center">
                             <p>{{formatTime(selectedImage?.time)}}</p>
                             <input type="range" name="image-slider" [(ngModel)]="sliderModel.value" min="{{sliderModel.min}}" max="{{sliderModel.max}}" (ngModelChange)="changeImage(sliderModel.value)">
                         </div>
                     </div>
-
-
-
                 </div>
-
-
-
             </div>
         </div>
     </div>

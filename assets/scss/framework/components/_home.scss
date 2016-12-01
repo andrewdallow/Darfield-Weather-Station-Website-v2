@@ -4,16 +4,33 @@
   }
   // Dashboard Layout
   .dashboard {
+    .social {
+      @media (min-width : 300px) {
+        padding-top: 20px;
+      }
+      @media (min-width : 992px) {
+        padding-top: 0;
+      }
+
+    }
+
     .data-panel {
-      height: 520px;
+      height: $large-panel-height;
     }
 
     .data-panel-rain {
-      height: 360px;
+      height: $rain-panel-height;
     }
 
     .data-panel-pressure {
-      height: 97px;
+      height: $pressure-panel-height;
+      @media (min-width:992px) {
+        height: $rain-panel-height;
+      }
+      @media (min-width:1200px) {
+        height: $pressure-panel-height;
+      }
+
     }
 
     .thermometer {

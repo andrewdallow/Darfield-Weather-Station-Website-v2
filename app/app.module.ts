@@ -4,7 +4,6 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { CollapseModule, DropdownModule } from 'ng2-bootstrap';
 import { ChartModule } from 'angular2-highcharts';
 import { HttpModule } from '@angular/http';
-// import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { WeatherAppComponent } from './modules/core/weather-app.component';
 

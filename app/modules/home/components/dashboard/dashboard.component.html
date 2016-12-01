@@ -21,7 +21,10 @@
                             <span>Updated: <span [highlighter]="weatherDataService.getRealtimeData()?.time">{{ weatherDataService.getRealtimeData()?.time }}</span> <span class=" ng-hide">({{ secondsAgo }} sec ago)</span></span>
                         </div>
 
-                        <div class="col-md-2 col-xs-12">
+                        <div class="col-md-3 col-xs-12 center social">
+                            <div *ngIf="!isPaused">
+                                <social-share></social-share>
+                            </div>
                             <div class="btn-group btn-group-xs" role="group" *ngIf="isPaused">
                                 <button type="button" class="btn btn-default" (click)="startTimers()">Updates Stopped. Click to Restart</button>
                             </div>
@@ -33,22 +36,20 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                 <temperature [data]='graphData'></temperature>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                 <wind [data]='graphData'></wind>
             </div>
 
 
-            <div class="col-xs-12 col-sm-12 col-md-4">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-sm-12 col-md-6 col-lg-12">
                         <rain [data]='graphData'></rain>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-sm-12 col-md-6 col-lg-12">
                         <barometer></barometer>
                     </div>
 

@@ -4,6 +4,25 @@
     margin: 0 auto;
   }
 
+  .image-container {
+    position: relative;
+    display: inline-block;
+  }
+
+  .image-container .overlay {
+    color: $white;
+    display: block;
+    height: 100%;
+    left: 46%;
+    position: absolute;
+    top: -20%;
+    width: 100%;
+  }
+
+  .player-icons {
+    cursor: pointer;
+  }
+
   .thumbnail {
     &:hover {
       border-color: $blue;

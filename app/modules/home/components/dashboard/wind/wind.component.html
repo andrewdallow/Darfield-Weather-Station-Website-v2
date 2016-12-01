@@ -82,7 +82,7 @@
             </div>
         </div>
         <div class="row spacing-top-medium">
-            <div class="col-xs-12 center bold">Wind Rose Last Hour</div>
+            <div class="col-xs-12 center bold">Wind Rose Last {{ settings?.liveGraphsTimespan }}-hours</div>
             <div class="col-xs-12 spacing-top-small">
                 <live-wind-graph [data]='data'></live-wind-graph>
             </div>

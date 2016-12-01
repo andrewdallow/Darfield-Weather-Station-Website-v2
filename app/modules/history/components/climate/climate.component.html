@@ -1,8 +1,18 @@
+<google-ads></google-ads>
 <div class="container climate">
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Month-by-Year Tables and Charts</div>
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-6">
+                            Month-by-Year Tables and Charts
+                        </div>
+                        <div class="col-md-6 right">
+                            <social-share></social-share>
+                        </div>
+                    </div>
+                </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-3 menu">
@@ -25,7 +35,7 @@
                         </div>
                         <div class="col-md-9 table-chart" *ngIf="data">
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-8">
                                     <h1>{{ selectedValue.name }} (<span [innerHTML]="selectedValue.unit.trim()"></span>)</h1>
                                     <p class="small spacing-top-medium">
                                         {{ selectedValue.description }}

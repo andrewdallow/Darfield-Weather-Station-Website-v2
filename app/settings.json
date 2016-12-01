@@ -2,8 +2,9 @@
     "siteName": "Darfield Weather Station",
     "location": {
         "name": "Darfield, New Zealand",
-        "longitude": "172.067933",
-        "lattitude": "-43.483031"
+        "longitude": 172.067933,
+        "lattitude": -43.483031,
+        "mapZoom": 12
     },
     "units": ["Metric", "Imperial"],
     "files": {
@@ -23,6 +24,13 @@
     "maxOfflineTime": 18000,
     "liveGraphsTimespan": 3,
     "recentGraphsTimescales": [12, 24, 48],
+    "social": {
+        "facebook": "https://www.facebook.com/DarfieldWeatherStation/",
+        "twitter": {
+            "link": "https://twitter.com/DarfieldWeather",
+            "username": "@DarfieldWeather"
+        }
+    },
     "forecast": {
         "wuUrl": "https://api.wunderground.com/api/",
         "wuApiKey": "14667b9989cff64d",

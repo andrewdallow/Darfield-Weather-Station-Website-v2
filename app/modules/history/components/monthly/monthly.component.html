@@ -1,26 +1,37 @@
+<google-ads></google-ads>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Monthly Summaries</div>
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-6">
+                            Monthly Summaries
+                        </div>
+                        <div class="col-md-6 right">
+                            <social-share></social-share>
+                        </div>
+                    </div>
+                </div>
                 <div class="panel-body">
                     <date-controls [dateType]="'monthly'"></date-controls>
                     <div class="summaries">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="row spacing-top-medium">
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <span class="very-large">
                               {{ selectedMonth }} {{ selectedYear }}
                             </span>
                                     </div>
                                 </div>
                                 <div class="row" *ngIf="data">
-                                    <div class="col-md-2">
-                                        <div class="box">
 
+                                    <div class="col-md-12 col-lg-2" *ngIf="data?.graphData.length !== 0">
+                                        <div class="box">
                                             <div class="row">
-                                                <div class="col-md-12">
+
+                                                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-12 spacing-bottom-large">
                                                     <div class="row">
                                                         <div class="col-md-12 small grey">
                                                             Avg Temperature
@@ -34,9 +45,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row spacing-top-large">
-                                                <div class="col-md-12">
+                                                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-12 spacing-bottom-large">
                                                     <div class="row">
                                                         <div class="col-md-12 small grey">
                                                             Highest Temperature
@@ -50,9 +59,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row spacing-top-large">
-                                                <div class="col-md-12">
+                                                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-12 spacing-bottom-large">
                                                     <div class="row">
                                                         <div class="col-md-12 small grey">
                                                             Avg Daily High
@@ -66,9 +73,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row spacing-top-large">
-                                                <div class="col-md-12">
+                                                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-12 spacing-bottom-large">
                                                     <div class="row">
                                                         <div class="col-md-12 small grey">
                                                             Avg Daily High
@@ -82,9 +87,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row spacing-top-large">
-                                                <div class="col-md-12">
+                                                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-12 spacing-bottom-large">
                                                     <div class="row">
                                                         <div class="col-md-12 small grey">
                                                             Lowest Temperature
@@ -98,9 +101,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row spacing-top-large">
-                                                <div class="col-md-12">
+                                                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-12 spacing-bottom-large">
                                                     <div class="row">
                                                         <div class="col-md-12 small grey">
                                                             Total Rain
@@ -118,9 +119,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row spacing-top-large">
-                                                <div class="col-md-12">
+                                                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-12">
                                                     <div class="row">
                                                         <div class="col-md-12 small grey">
                                                             High Wind Gust
@@ -141,23 +140,23 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-10">
+                                    <div class="col-md-12 col-lg-10" *ngIf="data?.graphData.length !== 0">
                                         <div class="box">
 
                                             <div class="row">
                                                 <div class="col-md-12 wind">
                                                     <span class="graphTitles">High Wind Gust & Direction (km/h)</span><br><br>
                                                     <div class="table-responsive">
-                                                        <table class="wind24hr">
+                                                        <table>
                                                             <tr>
-                                                                <td class="small center" *ngFor="let value of data.graphData">{{ value.hWindGBear | compase }}</td>
+                                                                <td class="center table-month" *ngFor="let value of data.graphData">{{ value.hWindGBear | compase }}</td>
                                                             </tr>
                                                             <tr>
-                                                                <td class="wind-direction-icon center" *ngFor="let value of data.graphData"><i class="wi wi-wind from-{{ value.hWindGBear }}-deg"></i></td>
+                                                                <td class="wind-direction-icon center table-month" *ngFor="let value of data.graphData"><i class="wi wi-wind from-{{ value.hWindGBear }}-deg"></i></td>
 
                                                             </tr>
                                                             <tr>
-                                                                <td class="small center" *ngFor="let value of data.graphData">{{ value.highWindGust }}</td>
+                                                                <td class="center table-month" *ngFor="let value of data.graphData">{{ value.highWindGust }}</td>
                                                             </tr>
                                                         </table>
                                                     </div>

@@ -41,16 +41,21 @@
 
 .summaries {
   .box {
-    margin: 20px 0;
+    margin: 10px 0;
     outline: 1px solid $light-grey;
     padding: 20px;
   }
 
   .wind {
+    font-size: 10px;
+
     .wind-direction-icon {
       color: $wind-vane-color;
       font-size: 30px;
-      padding: 2.6px;
+    }
+
+    .table-month {
+      width: 28.6px;
     }
 
   }

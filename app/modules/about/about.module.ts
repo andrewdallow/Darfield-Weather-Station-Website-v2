@@ -7,6 +7,7 @@ import { AboutComponent } from './components/about.component';
 @NgModule({
     imports: [
         SharedModule
+
     ],
     declarations: [
         AboutComponent

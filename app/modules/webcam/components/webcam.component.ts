@@ -2,10 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Title }     from '@angular/platform-browser';
 import { Router, ActivatedRoute }   from '@angular/router';
 import { Location }                 from '@angular/common';
+
 import * as moment from 'moment';
+declare var window: any;
+declare var FB: any;
 
 import { SettingsService } from '../../../shared/config/settings.service';
 import { WebcamFilesService } from '../services/webcam-files.service';
+
 
 interface Image {
     path: string;
@@ -17,13 +21,15 @@ interface Image {
 @Component({
     moduleId: module.id,
     selector: 'webcam',
-    templateUrl: './webcam.component.html'
+    templateUrl: './webcam.component.html',
 })
 export class WebcamComponent implements OnInit {
     public selectedImage: Image = {
         path: '',
         time: 0
     };
+    public isPaused: boolean = true;
+    public isLoading: boolean;
     public sliderModel: any = { value: 0, min: 0, max: 10 };
     public groupedImages: Array<any> = [[], [], [], [], [], [], []];
     public daysAgo: Array<number> = [0, 1, 2, 3, 4, 5, 6];
@@ -39,10 +45,13 @@ export class WebcamComponent implements OnInit {
         private route: ActivatedRoute,
         private location: Location,
         private settingsService: SettingsService
-    ) { }
+    ) {
+
+    }
 
 
     ngOnInit(): void {
+
         this.settingsService.config.then(
             (_config: any) => {
                 this.titleService.setTitle('Webcam - ' + _config.siteName);
@@ -51,6 +60,31 @@ export class WebcamComponent implements OnInit {
                 }
                 this.getWebcamImages();
             });
+    }
+
+
+    timelapse(event?: any): void {
+        this.isLoading = false;
+        if (!this.isPaused) {
+            let nextImage: number = this.sliderModel.value + 1;
+            let numImages = this.groupedImages[this.days.indexOf(this.selectedDay)].length;
+
+            if (nextImage >= numImages) {
+                nextImage = 0;
+            }
+            setTimeout(() => {
+                this.changeImage(nextImage);
+                this.sliderModel.value = nextImage;
+            }, 100);
+        }
+
+
+    }
+
+
+    public play(): void {
+        this.isPaused = !this.isPaused;
+        this.timelapse();
     }
 
 
@@ -77,6 +111,8 @@ export class WebcamComponent implements OnInit {
      */
     changeImage(index: number): void {
         let file = this.groupedImages[this.days.indexOf(this.selectedDay)][index];
+        this.isLoading = true;
+
         this.selectedImage.path = this.getUrl(file.name.replace('-thm', ''));
         this.selectedImage.time = file.time + this.timeOffset;
     }
@@ -130,6 +166,9 @@ export class WebcamComponent implements OnInit {
         this.selectedDay = day;
     }
     gotoDay(day: string): void {
+        if (!this.isPaused) {
+            this.isPaused = !this.isPaused;
+        }
         this.selectedDay = day;
         this.sliderModel.max = this.groupedImages[this.days.indexOf(this.selectedDay)].length - 1;
         this.sliderModel.value = this.sliderModel.max;

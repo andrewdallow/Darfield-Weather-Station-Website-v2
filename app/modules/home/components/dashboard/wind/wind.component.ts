@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { ReplaySubject } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
+
 import { WeatherDataService } from '../../../../../shared/weather-data/weather-data.service';
+import { SettingsService } from '../../../../../shared/config/settings.service';
 
 
 @Component({
@@ -10,7 +12,16 @@ import { WeatherDataService } from '../../../../../shared/weather-data/weather-d
 })
 
 export class WindComponent {
-    @Input() data: ReplaySubject<any>;
+    @Input() data: Observable<any>;
+    public settings: any;
+
     constructor(
-        private weatherDataService: WeatherDataService) { }
+        private weatherDataService: WeatherDataService,
+        private settingsService: SettingsService
+    ) {
+        this.settingsService.config.then(
+            (_config: any) => {
+                this.settings = _config;
+            });
+    }
 }

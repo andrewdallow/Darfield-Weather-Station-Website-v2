@@ -50,6 +50,10 @@
   vertical-align: middle;
 }
 
+.spacing-none {
+  margin: 0;
+}
+
 .spacing-top-none {
   margin-top: 0;
 }
@@ -64,6 +68,14 @@
 
 .spacing-top-large {
   margin-top: 30px;
+}
+
+.spacing-bottom-medium {
+  margin-bottom: 10px;
+}
+
+.spacing-bottom-large {
+  margin-bottom: 30px;
 }
 
 .grey {

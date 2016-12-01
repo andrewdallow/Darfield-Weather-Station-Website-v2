@@ -1,5 +1,6 @@
+<div id="fb-root"></div>
 <header>
-    <div class="container">
+    <div class="container navigation">
         <nav class="navbar navbar-inverse nav" role="navigation">
             <div class="navbar-header" role="navigation">
                 <button type="button" class="navbar-toggle" (click)="isCollapsed = !isCollapsed">
@@ -34,9 +35,6 @@
                             <li routerLinkActive="active">
                                 <a routerLink="/history/climate" (click)="isCollapsed = !isCollapsed">Climate Tables</a>
                             </li>
-                            <li routerLinkActive="active">
-                                <a routerLink="/noaa-style-reports" (click)="isCollapsed = !isCollapsed">NOAA-style Reports</a>
-                            </li>
                         </ul>
                     </li>
                     <li routerLinkActive="active">
@@ -44,6 +42,18 @@
                     </li>
                     <li routerLinkActive="active">
                         <a routerLink="/about" (click)="isCollapsed = !isCollapsed">About</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right social">
+                    <li class="facebook">
+                        <a href="{{ social?.facebook }}" target="_blank">
+                            <i class="fa fa-facebook-square fa-lg" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li class="twitter">
+                        <a href="{{ social?.twitter.link }}" target="_blank">
+                            <i class="fa fa-twitter fa-lg" aria-hidden="true"></i>
+                        </a>
                     </li>
                 </ul>
             </div>

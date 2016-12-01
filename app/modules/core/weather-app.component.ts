@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 
 import { SettingsService } from '../../shared/config/settings.service';
 
-
 @Component({
     moduleId: module.id,
     selector: 'weather-app',
@@ -16,13 +15,17 @@ export class WeatherAppComponent {
     public isCollapsed: boolean = true;
     public status: { isopen: boolean } = { isopen: false };
     public stationName: string;
+    public social: any;
+
     constructor(private settingsService: SettingsService) {
         this.settingsService.config.then(
             (config: any) => {
                 this.stationName = config.siteName;
+                this.social = config.social;
             }
         );
     }
+
     /**
      * Toggles a dropdown menu when a specified link or button
      * is clicked. Relies on ng2-bootstrap.
@@ -32,12 +35,10 @@ export class WeatherAppComponent {
         $event.preventDefault();
         $event.stopPropagation();
         this.status.isopen = !this.status.isopen;
-        console.log(this.status.isopen);
     }
 
     public isDropdown(subLinks: Array<any>): boolean {
         if (subLinks.length !== 0) {
-            console.log(subLinks);
             return true;
         }
         return false;

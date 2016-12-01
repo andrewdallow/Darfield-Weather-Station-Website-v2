@@ -3,12 +3,12 @@
     <div class="panel-body data-panel-pressure">
 
         <div class="row">
-            <div class="col-xs-8 very-large">
+            <div class="col-xs-9 very-large">
                 <span [highlighter]="weatherDataService.getRealtimeData()?.barometer.value">
                   <span [innerHTML]="weatherDataService.getRealtimeData()?.barometer | unitConverter:weatherDataService.getIsConverted():'units-big'"></span>
                 </span>
             </div>
-            <div class="col-xs-4 grey spacing-top-large">
+            <div class="col-xs-3 grey spacing-top-large">
                 <span [highlighter]="weatherDataService.getRealtimeData()?.barometerTrendData.value">
                   <span class="glyphicon" trend="{{ weatherDataService.getRealtimeData()?.barometerTrendData.value }}"></span>
                 <span [innerHTML]="weatherDataService.getRealtimeData()?.barometerTrendData | unitConverter:weatherDataService.getIsConverted()"></span>
