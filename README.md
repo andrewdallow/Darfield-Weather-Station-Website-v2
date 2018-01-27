@@ -22,7 +22,7 @@ updated on the fly. The website also makes use of bootstrap 3 css styling.
 
 ## License ##
 
-    Copyright 2015 Andrew Dallow
+    Copyright 2016 Andrew Dallow
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
